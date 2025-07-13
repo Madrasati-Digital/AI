@@ -1,1 +1,78 @@
+/* تنسيقات عامة للجسم الصفحة */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif; /* نوع خط افتراضي */
+    background-color: #f4f4f4; /* لون خلفية خفيف */
+    color: #333; /* لون نص افتراضي */
+}
+
+/* تنسيقات الهيدر (الجزء العلوي من الصفحة) */
+header {
+    background-color: #333; /* خلفية داكنة للهيدر */
+    padding: 15px 20px; /* مسافة داخلية (padding) */
+    position: relative; /* مهم جداً ليكون مرجعاً للعناصر المطلقة بداخله */
+    min-height: 60px; /* ارتفاع أدنى للهيدر */
+    /* أزلنا display: flex; من هنا لنتجنب التعارض مع position: absolute للعناصر الداخلية */
+}
+
+/* تنسيقات حاوية الاسم لضمان وضعها في الزاوية العلوية اليسرى */
+.name-container {
+    position: absolute; /* يجعل العنصر يطفو ويتحرك بحرية داخل الـ header */
+    top: 15px; /* يبعد 15 بكسل من الأعلى */
+    left: 20px; /* يبعد 20 بكسل من اليسار */
+}
+
+/* تنسيقات الاسم نفسه */
+.name-container h1 {
+    color: #fff; /* لون أبيض للاسم */
+    margin: 0; /* إزالة الهوامش الافتراضية للعنوان */
+    font-size: 2em; /* حجم خط أكبر للاسم */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* إضافة ظل للنص لجعله مميزاً */
+    letter-spacing: 1px; /* تباعد بين الحروف */
+}
+
+/* تنسيقات شريط التنقل (Navigation Bar) */
+nav {
+    position: absolute; /* يجعل شريط التنقل يطفو */
+    top: 50%; /* لمحاذاته في منتصف الارتفاع بالنسبة للهيدر */
+    right: 20px; /* يبعد 20 بكسل من اليمين */
+    transform: translateY(-50%); /* يرفع شريط التنقل بنصف ارتفاعه ليصبح في المنتصف تماماً */
+}
+
+nav ul {
+    list-style: none; /* إزالة النقاط الافتراضية للقائمة */
+    margin: 0;
+    padding: 0;
+    display: flex; /* يجعل عناصر القائمة تظهر بجانب بعضها البعض */
+}
+
+nav ul li {
+    margin-left: 30px; /* مسافة بين كل خيار تنقل والآخر */
+}
+
+nav ul li a {
+    text-decoration: none; /* إزالة التسطير الافتراضي للروابط */
+    color: #fff; /* لون النص الافتراضي للروابط (أبيض) */
+    font-size: 1.1em; /* حجم الخط */
+    font-weight: bold; /* جعل الخط سميكاً */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* إضافة تأثير انتقال سلس للتغييرات */
+}
+
+/* تأثير عند تحريك مؤشر الفأرة (Hover Effect) */
+nav ul li a:hover {
+    color: #00bcd4; /* تغيير لون النص عند التمرير (لون أزرق فاتح مميز) */
+    text-decoration: underline; /* إضافة تسطير عند التمرير */
+}
+
+/* تنسيقات مؤقتة للأقسام لتجربة الروابط */
+section {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+h2 {
+    text-align: center;
+    color: #555;
+    margin-top: 50px;
+}
 
