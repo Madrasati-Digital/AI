@@ -10,12 +10,12 @@ body {
 header {
     background-color: #333; /* خلفية داكنة للهيدر */
     padding: 15px 20px; /* مسافة داخلية (padding) */
-    position: relative; /* مهم جداً ليكون مرجعاً للعناصر المطلقة بداخله */
+    position: relative; /* مهم جداً ليكون مرجعاً للعناصر المطلقة بداخله (الاسم وشريط التنقل) */
     min-height: 60px; /* ارتفاع أدنى للهيدر */
-    /* أزلنا display: flex; من هنا لنتجنب التعارض مع position: absolute للعناصر الداخلية */
+    /* تم إزالة display: flex; من هنا لضمان عمل position: absolute للعناصر الداخلية بشكل صحيح */
 }
 
-/* تنسيقات حاوية الاسم لضمان وضعها في الزاوية العلوية اليسرى */
+/* تنسيقات حاوية الاسم - لتحقيق المهمة 1: الاسم في الزاوية العلوية اليسرى */
 .name-container {
     position: absolute; /* يجعل العنصر يطفو ويتحرك بحرية داخل الـ header */
     top: 15px; /* يبعد 15 بكسل من الأعلى */
@@ -31,19 +31,19 @@ header {
     letter-spacing: 1px; /* تباعد بين الحروف */
 }
 
-/* تنسيقات شريط التنقل (Navigation Bar) */
+/* تنسيقات شريط التنقل - لتحقيق المهمة 2: 4 خيارات وتأثير الـ hover */
 nav {
     position: absolute; /* يجعل شريط التنقل يطفو */
     top: 50%; /* لمحاذاته في منتصف الارتفاع بالنسبة للهيدر */
     right: 20px; /* يبعد 20 بكسل من اليمين */
-    transform: translateY(-50%); /* يرفع شريط التنقل بنصف ارتفاعه ليصبح في المنتصف تماماً */
+    transform: translateY(-50%); /* يرفع شريط التنقل بنصف ارتفاعه ليصبح في المنتصف تماماً عمودياً */
 }
 
 nav ul {
     list-style: none; /* إزالة النقاط الافتراضية للقائمة */
     margin: 0;
     padding: 0;
-    display: flex; /* يجعل عناصر القائمة تظهر بجانب بعضها البعض */
+    display: flex; /* يجعل عناصر القائمة تظهر بجانب بعضها البعض أفقياً */
 }
 
 nav ul li {
@@ -55,24 +55,24 @@ nav ul li a {
     color: #fff; /* لون النص الافتراضي للروابط (أبيض) */
     font-size: 1.1em; /* حجم الخط */
     font-weight: bold; /* جعل الخط سميكاً */
-    transition: color 0.3s ease, text-decoration 0.3s ease; /* إضافة تأثير انتقال سلس للتغييرات */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* إضافة تأثير انتقال سلس للتغييرات عند الـ hover */
 }
 
-/* تأثير عند تحريك مؤشر الفأرة (Hover Effect) */
+/* تأثير عند تحريك مؤشر الفأرة (Hover Effect) للمهمة 2 */
 nav ul li a:hover {
     color: #00bcd4; /* تغيير لون النص عند التمرير (لون أزرق فاتح مميز) */
     text-decoration: underline; /* إضافة تسطير عند التمرير */
 }
 
-/* تنسيقات مؤقتة للأقسام لتجربة الروابط */
+/* تنسيقات مؤقتة للأقسام (يمكن إزالتها أو تعديلها لاحقاً عند ملء المحتوى الفعلي) */
 section {
     padding: 20px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
+    box-sizing: border-box; /* لضمان أن الـ padding لا يزيد من عرض العنصر الكلي */
 }
 h2 {
     text-align: center;
     color: #555;
     margin-top: 50px;
 }
-
