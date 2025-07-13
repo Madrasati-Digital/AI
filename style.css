@@ -11,14 +11,14 @@ header {
     padding: 10px 20px;
     border-bottom: 1px solid #ddd;
     display: flex;
-    justify-content: flex-end; /* لمحاذاة الروابط إلى اليمين */
+    justify-content: flex-start; /* محاذاة شريط التنقل إلى اليسار */
     align-items: center;
-    position: fixed; /* لجعل الهيدر ثابتًا في أعلى الصفحة */
+    position: fixed;
     width: 100%;
     top: 0;
     left: 0;
-    box-sizing: border-box; /* لضمان أن العرض يشمل الحشوة */
-    z-index: 1000; /* لضمان أن الهيدر يظهر فوق المحتوى الآخر */
+    box-sizing: border-box;
+    z-index: 1000;
 }
 
 nav ul {
@@ -26,53 +26,63 @@ nav ul {
     margin: 0;
     padding: 0;
     display: flex;
+    padding-left: 10px; /* لضمان وجود مسافة من حافة اليسار في الهيدر */
 }
 
 nav ul li {
-    margin-left: 20px; /* مسافة بين عناصر القائمة */
+    margin-right: 20px; /* مسافة بين عناصر القائمة في الهيدر */
+    margin-left: 0; /* تأكد من عدم وجود margin-left غير مرغوب فيه */
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #007bff; /* لون الروابط أزرق */
+    color: #007bff;
     font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+/* تأثير الـ hover للمهمة 2 */
+nav ul li a:hover {
+    color: #0056b3;
+    text-decoration: underline;
 }
 
 /* تصميم قسم "About Me" */
 .about-section {
     padding: 100px 20px 20px; /* ضبط الحشوة العلوية ليتجنب الهيدر الثابت */
-    max-width: 800px; /* عرض أقصى للقسم */
-    margin: 20px auto; /* توسيط القسم في الصفحة */
+    max-width: 800px;
+    margin: 20px auto;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ظل خفيف للقسم */
-    border-radius: 8px; /* حواف دائرية */
-    text-align: center; /* توسيط محتوى هذا القسم ككل */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center; /* لتوسيط كل من الصورة والاسم وعنوان "About Me" */
 }
 
-.profile-header {
-    display: flex;
-    flex-direction: column; /* ترتيب الصورة والاسم عموديًا */
-    align-items: center; /* توسيط الصورة والاسم أفقيًا */
-    margin-bottom: 20px; /* مسافة أسفل قسم الصورة والاسم */
+.profile-main-content { /* الحاوية الجديدة للصورة والاسم في قسم About Me */
+    margin-bottom: 20px;
+}
+
+.profile-image-container {
+    margin-bottom: 15px; /* مسافة بين الصورة والاسم */
 }
 
 .profile-image {
-    width: 150px; /* حجم الصورة المطلوب */
+    width: 150px;
     height: 150px;
-    border-radius: 50%; /* لجعل الصورة دائرية */
-    object-fit: cover; /* لملء المساحة دون تشويه */
-    border: 3px solid #007bff; /* إطار حول الصورة */
-    margin-bottom: 10px; /* مسافة بين الصورة والاسم */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
 }
 
-.profile-header h1 {
-    font-size: 24px; /* حجم خط اسم "Rashed Alhashmi" */
-    margin: 0; /* إزالة الهوامش الافتراضية */
+.profile-name-in-about { /* تنسيق اسم Rashed Alhashmi في قسم About Me */
+    font-size: 28px; /* حجم الخط كما في الصورة الجديدة */
     color: #333;
+    margin: 0; /* إزالة أي هوامش افتراضية */
+    margin-bottom: 30px; /* مسافة بين الاسم وعنوان About Me */
 }
 
 .about-content {
-    text-align: left; /* إعادة محاذاة نص "About Me" إلى اليسار */
+    text-align: left; /* نص فقرات "About Me" يكون محاذيًا لليسار */
 }
 
 .about-content h2 {
@@ -82,14 +92,69 @@ nav ul li a {
 }
 
 .about-content p {
-    font-size: 16px; /* حجم خط نص الفقرة */
-    line-height: 1.6; /* تباعد الأسطر */
+    font-size: 16px;
+    line-height: 1.6;
     margin-bottom: 0;
 }
 
-/* تصميم الأقسام الاحتياطية (placeholder sections) */
+/* تنسيقات قسم المهارات الجديد (من المهمة 4) */
+.skills-section {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.skills-section h2 {
+    font-size: 28px;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+.skills-category {
+    margin-bottom: 20px;
+}
+
+.skills-category h3 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.skills-category ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.skills-category li {
+    background-color: #e9f5ff;
+    color: #007bff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 15px;
+    white-space: nowrap;
+    border: 1px solid #cceeff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.skills-category li i {
+    color: #0056b3;
+}
+
+/* الأقسام الاحتياطية */
 .section-placeholder {
-    height: 300px; /* ارتفاع للأقسام القادمة */
+    height: 300px;
     padding-top: 80px;
     max-width: 800px;
     margin: 20px auto;
