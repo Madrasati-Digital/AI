@@ -1,78 +1,106 @@
-/* تنسيقات عامة للجسم الصفحة */
 body {
+    font-family: Arial, sans-serif;
     margin: 0;
-    font-family: Arial, sans-serif; /* نوع خط افتراضي */
-    background-color: #f4f4f4; /* لون خلفية خفيف */
-    color: #333; /* لون نص افتراضي */
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-/* تنسيقات الهيدر (الجزء العلوي من الصفحة) */
 header {
-    background-color: #333; /* خلفية داكنة للهيدر */
-    padding: 15px 20px; /* مسافة داخلية (padding) */
-    position: relative; /* مهم جداً ليكون مرجعاً للعناصر المطلقة بداخله (الاسم وشريط التنقل) */
-    min-height: 60px; /* ارتفاع أدنى للهيدر */
-    /* تم إزالة display: flex; من هنا لضمان عمل position: absolute للعناصر الداخلية بشكل صحيح */
-}
-
-/* تنسيقات حاوية الاسم - لتحقيق المهمة 1: الاسم في الزاوية العلوية اليسرى */
-.name-container {
-    position: absolute; /* يجعل العنصر يطفو ويتحرك بحرية داخل الـ header */
-    top: 15px; /* يبعد 15 بكسل من الأعلى */
-    left: 20px; /* يبعد 20 بكسل من اليسار */
-}
-
-/* تنسيقات الاسم نفسه */
-.name-container h1 {
-    color: #fff; /* لون أبيض للاسم */
-    margin: 0; /* إزالة الهوامش الافتراضية للعنوان */
-    font-size: 2em; /* حجم خط أكبر للاسم */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* إضافة ظل للنص لجعله مميزاً */
-    letter-spacing: 1px; /* تباعد بين الحروف */
-}
-
-/* تنسيقات شريط التنقل - لتحقيق المهمة 2: 4 خيارات وتأثير الـ hover */
-nav {
-    position: absolute; /* يجعل شريط التنقل يطفو */
-    top: 50%; /* لمحاذاته في منتصف الارتفاع بالنسبة للهيدر */
-    right: 20px; /* يبعد 20 بكسل من اليمين */
-    transform: translateY(-50%); /* يرفع شريط التنقل بنصف ارتفاعه ليصبح في المنتصف تماماً عمودياً */
+    background-color: #fff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end; /* لمحاذاة الروابط إلى اليمين */
+    align-items: center;
+    position: fixed; /* لجعل الهيدر ثابتًا في أعلى الصفحة */
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box; /* لضمان أن العرض يشمل الحشوة */
+    z-index: 1000; /* لضمان أن الهيدر يظهر فوق المحتوى الآخر */
 }
 
 nav ul {
-    list-style: none; /* إزالة النقاط الافتراضية للقائمة */
+    list-style: none;
     margin: 0;
     padding: 0;
-    display: flex; /* يجعل عناصر القائمة تظهر بجانب بعضها البعض أفقياً */
+    display: flex;
 }
 
 nav ul li {
-    margin-left: 30px; /* مسافة بين كل خيار تنقل والآخر */
+    margin-left: 20px; /* مسافة بين عناصر القائمة */
 }
 
 nav ul li a {
-    text-decoration: none; /* إزالة التسطير الافتراضي للروابط */
-    color: #fff; /* لون النص الافتراضي للروابط (أبيض) */
-    font-size: 1.1em; /* حجم الخط */
-    font-weight: bold; /* جعل الخط سميكاً */
-    transition: color 0.3s ease, text-decoration 0.3s ease; /* إضافة تأثير انتقال سلس للتغييرات عند الـ hover */
+    text-decoration: none;
+    color: #007bff; /* لون الروابط أزرق */
+    font-weight: bold;
 }
 
-/* تأثير عند تحريك مؤشر الفأرة (Hover Effect) للمهمة 2 */
-nav ul li a:hover {
-    color: #00bcd4; /* تغيير لون النص عند التمرير (لون أزرق فاتح مميز) */
-    text-decoration: underline; /* إضافة تسطير عند التمرير */
+/* تصميم قسم "About Me" */
+.about-section {
+    padding: 100px 20px 20px; /* ضبط الحشوة العلوية ليتجنب الهيدر الثابت */
+    max-width: 800px; /* عرض أقصى للقسم */
+    margin: 20px auto; /* توسيط القسم في الصفحة */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ظل خفيف للقسم */
+    border-radius: 8px; /* حواف دائرية */
+    text-align: center; /* توسيط محتوى هذا القسم ككل */
 }
 
-/* تنسيقات مؤقتة للأقسام (يمكن إزالتها أو تعديلها لاحقاً عند ملء المحتوى الفعلي) */
-section {
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    box-sizing: border-box; /* لضمان أن الـ padding لا يزيد من عرض العنصر الكلي */
+.profile-header {
+    display: flex;
+    flex-direction: column; /* ترتيب الصورة والاسم عموديًا */
+    align-items: center; /* توسيط الصورة والاسم أفقيًا */
+    margin-bottom: 20px; /* مسافة أسفل قسم الصورة والاسم */
 }
-h2 {
+
+.profile-image {
+    width: 150px; /* حجم الصورة المطلوب */
+    height: 150px;
+    border-radius: 50%; /* لجعل الصورة دائرية */
+    object-fit: cover; /* لملء المساحة دون تشويه */
+    border: 3px solid #007bff; /* إطار حول الصورة */
+    margin-bottom: 10px; /* مسافة بين الصورة والاسم */
+}
+
+.profile-header h1 {
+    font-size: 24px; /* حجم خط اسم "Rashed Alhashmi" */
+    margin: 0; /* إزالة الهوامش الافتراضية */
+    color: #333;
+}
+
+.about-content {
+    text-align: left; /* إعادة محاذاة نص "About Me" إلى اليسار */
+}
+
+.about-content h2 {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.about-content p {
+    font-size: 16px; /* حجم خط نص الفقرة */
+    line-height: 1.6; /* تباعد الأسطر */
+    margin-bottom: 0;
+}
+
+/* تصميم الأقسام الاحتياطية (placeholder sections) */
+.section-placeholder {
+    height: 300px; /* ارتفاع للأقسام القادمة */
+    padding-top: 80px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     text-align: center;
     color: #555;
-    margin-top: 50px;
+}
+
+.section-placeholder h2 {
+    font-size: 20px;
+    color: #007bff;
 }
