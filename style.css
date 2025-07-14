@@ -4,6 +4,7 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
+    overflow-x: hidden; /* لمنع أي تمرير أفقي غير مرغوب فيه */
 }
 
 /* تعديلات الهيدر ليضم الاسم في اليسار والتنقل في اليمين (للمهمة 1) */
@@ -361,52 +362,62 @@ nav ul li a i {
     background-color: #0056b3;
 }
 
-/* Media Queries للتصميم المتجاوب (هذا الجزء هو الذي سنركز على تعديله) */
+/* Media Queries للتصميم المتجاوب */
 @media (max-width: 768px) {
+    /* قواعد الهيدر لتكون ثابتة ومتقاربة */
     header {
-        flex-direction: row; /* جعل العناصر (الاسم والتنقل) جنب بعضها مرة أخرى */
-        justify-content: space-between; /* توزيع الاسم لليسار والتنقل لليمين */
-        align-items: center;    /* توسيط عمودي */
-        padding: 10px;          /* حشوة كافية */
-        height: auto;           /* ارتفاع تلقائي */
-        position: fixed;       /* جعل الهيدر ثابتاً عند التمرير */
+        flex-direction: row; /* العناصر جنباً إلى جنب */
+        justify-content: space-between; /* توزيع الاسم والتنقل */
+        align-items: center;
+        padding: 8px 10px; /* تقليل الحشوة للهيدر نفسه */
+        position: fixed; /* يبقى ثابتاً */
+        width: 100%;
         top: 0;
         left: 0;
-        width: 100%;
-        box-sizing: border-box; /* لضمان عدم تجاوز العرض */
+        box-sizing: border-box;
+        z-index: 1000;
+        min-height: 50px; /* ضمان ارتفاع أدنى للهيدر */
     }
 
     .site-title h1 {
-        font-size: 16px; /* تصغير حجم خط الاسم بشكل أكبر */
+        font-size: 15px; /* تصغير خط الاسم أكثر */
         margin: 0;
-        white-space: nowrap; /* منع انقسام الاسم إلى سطرين */
-        overflow: hidden; /* إخفاء أي جزء زائد إذا كان الاسم طويلاً جداً */
-        text-overflow: ellipsis; /* إضافة نقاط (...) إذا تم اقتطاع الاسم */
-        padding-right: 10px; /* مسافة بسيطة بين الاسم والتنقل */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-shrink: 0; /* منع الاسم من الانكماش */
+        padding-right: 5px; /* مسافة أقل بين الاسم والتنقل */
     }
 
     nav {
-        width: auto; /* السماح لشريط التنقل بأن يأخذ العرض الذي يحتاجه فقط */
+        flex-grow: 1; /* السماح لشريط التنقل بشغل المساحة المتبقية */
+        width: auto; /* يضبط عرضه تلقائياً */
+        overflow-x: auto; /* إضافة شريط تمرير أفقي للتنقل إذا كانت الكلمات كثيرة */
+        -webkit-overflow-scrolling: touch; /* لتحسين التمرير على iOS */
+        padding-left: 5px; /* حشوة من اليسار للتنقل */
     }
 
     nav ul {
-        flex-direction: row; /* جعل عناصر القائمة جنب بعضها مرة أخرى */
-        justify-content: flex-end; /* محاذاة عناصر القائمة لليمين */
+        flex-direction: row; /* عناصر القائمة جنباً إلى جنب */
+        justify-content: flex-end; /* محاذاة لليمين */
         padding: 0;
         margin: 0;
+        flex-wrap: nowrap; /* منع انقسام العناصر لأسطر جديدة */
+        align-items: center;
     }
 
     nav ul li {
-        margin: 0 5px; /* مسافة أفقية بسيطة بين عناصر القائمة */
+        margin: 0 3px; /* تقليل المسافة بين عناصر القائمة */
+        flex-shrink: 0; /* منع عنصر القائمة من الانكماش */
     }
 
     nav ul li a {
-        padding: 5px 8px; /* تقليل الحشوة لجعل الروابط أصغر */
-        font-size: 12px; /* تصغير حجم الخط لروابط التنقل */
-        white-space: nowrap; /* منع انقسام نص الرابط */
-        display: flex; /* للحفاظ على الأيقونة والنص جنب بعضهما */
+        padding: 4px 6px; /* تقليل حشوة الروابط أكثر */
+        font-size: 11px; /* تصغير خط الروابط أكثر */
+        white-space: nowrap;
+        display: flex;
         align-items: center;
-        gap: 3px; /* تقليل المسافة بين الأيقونة والنص */
+        gap: 2px; /* تقليل المسافة بين الأيقونة والنص */
     }
 
     /* تعديل padding-top للأقسام لتجنب التداخل مع الهيدر الثابت */
@@ -414,23 +425,19 @@ nav ul li a i {
     .skills-section,
     .projects-section,
     .recommendations-section {
-        padding-top: 70px; /* زيادة الحشوة العلوية للسماح بظهور الهيدر الثابت بالكامل */
-        margin-top: 0; /* إعادة تعيين الهامش العلوي */
+        padding-top: 60px; /* زيادة الحشوة العلوية للسماح بظهور الهيدر الثابت بالكامل */
+        margin-top: 0;
     }
 
-    /* حافظ على هذه التعديلات لبطاقات المشاريع والتوصيات */
+    /* ضمان أن بطاقات المشاريع والتوصيات تتكيف بشكل جيد */
     .project-card,
     .recommendation-card {
-        max-width: 95%;
+        max-width: 95%; /* قد تحتاج إلى ضبط هذا الرقم أكثر في بعض الحالات */
         margin: 10px auto;
     }
 
-    /* حافظ على هذه التعديلات لفقرات About Me */
+    /* ضبط أقصى عرض للفقرات في About Me لسهولة القراءة */
     .about-content p {
         max-width: 95%;
-    }
-
-    body {
-        overflow-x: hidden; /* للحفاظ على عدم ظهور شريط تمرير أفقي */
     }
 }
