@@ -357,3 +357,72 @@ nav ul li a i {
 .submit-button:hover {
     background-color: #0056b3;
 }
+
+/* Media Queries للتصميم المتجاوب (هذا الجزء هو الذي سنركز على تعديله) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Stack Rashed Alhashmi title and nav bar vertically */
+        align-items: center;    /* Center both the title and nav bar horizontally */
+        padding: 10px;          /* Adjusted padding */
+        height: auto;           /* Allow height to adjust based on content */
+        position: static;       /* Remove fixed positioning for mobile to allow scrolling (optional, can be fixed if needed for design) */
+    }
+
+    .site-title {
+        width: 100%; /* Make the site title container take full width */
+        text-align: center; /* Center the h1 inside site-title */
+        margin-bottom: 10px; /* Space between title and nav */
+    }
+
+    .site-title h1 {
+        font-size: 22px; /* Slightly smaller font for mobile title */
+    }
+
+    nav {
+        width: 100%; /* Make nav take full width */
+    }
+
+    nav ul {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: center;    /* Center nav items horizontally */
+        padding: 0;             /* Remove default ul padding */
+    }
+
+    nav ul li {
+        margin: 5px 0; /* Vertical spacing between nav items */
+        width: 100%;   /* Ensure each list item takes full width for centering */
+        text-align: center; /* Center text within each list item */
+    }
+
+    nav ul li a {
+        display: block; /* Make the link a block to take full width of li */
+        padding: 8px 0; /* Adjust padding for block links */
+        box-sizing: border-box; /* Include padding in width calculation */
+    }
+
+    /* Adjust padding-top for sections to account for non-fixed header */
+    .about-section,
+    .skills-section,
+    .projects-section,
+    .recommendations-section {
+        padding-top: 20px; /* Adjust as header is not fixed or smaller */
+        margin-top: 10px;
+    }
+
+    /* Ensure project and recommendation cards fit */
+    .project-card,
+    .recommendation-card {
+        max-width: 95%; /* Adjust max-width for smaller screens */
+        margin: 10px auto;
+    }
+
+    /* Adjust about text max-width for better readability on small screens */
+    .about-content p {
+        max-width: 95%;
+    }
+
+    /* Optional: Hide scrollbar if it's the issue causing cutoff, but this is a temporary fix */
+    body {
+        overflow-x: hidden;
+    }
+}
