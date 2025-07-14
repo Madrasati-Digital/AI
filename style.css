@@ -6,39 +6,51 @@ body {
     color: #333;
 }
 
+/* تعديلات الهيدر ليضم الاسم في اليسار والتنقل في اليمين (للمهمة 1) */
 header {
     background-color: #fff;
-    padding: 10px 20px;
+    padding: 10px 20px; /* حشوة موحدة للهيدر */
     border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: flex-start; /* محاذاة شريط التنقل إلى اليسار */
-    align-items: center;
-    position: fixed;
+    display: flex; /* لترتيب العناصر (الاسم وشريط التنقل) أفقياً */
+    justify-content: space-between; /* يدفع الاسم لليسار وشريط التنقل لليمين */
+    align-items: center; /* توسيط العناصر عمودياً */
+    position: fixed; /* يبقى الهيدر ثابتاً عند التمرير */
     width: 100%;
     top: 0;
     left: 0;
-    box-sizing: border-box;
-    z-index: 1000;
+    box-sizing: border-box; /* لضمان أن الحشوة لا تزيد من عرض الهيدر */
+    z-index: 1000; /* ليبقى الهيدر فوق المحتوى الآخر */
+}
+
+/* تنسيق اسم الموقع في الهيدر (المهمة 1) */
+.site-title h1 {
+    font-size: 24px; /* حجم الخط لاسم الموقع */
+    color: #007bff; /* لون مميز لاسم الموقع */
+    margin: 0; /* إزالة الهوامش الافتراضية */
+    /* Padding-left تم دمجه في padding الهيدر الكلي */
 }
 
 nav ul {
     list-style: none;
     margin: 0;
-    padding: 0;
-    display: flex;
-    padding-left: 10px; /* لضمان وجود مسافة من حافة اليسار في الهيدر */
+    padding: 0; /* إزالة الحشوة من الـ ul حيث تم التحكم بها في الهيدر */
+    display: flex; /* لجعل عناصر القائمة أفقية */
 }
 
 nav ul li {
-    margin-right: 20px; /* مسافة بين عناصر القائمة في الهيدر */
-    margin-left: 0; /* تأكد من عدم وجود margin-left غير مرغوب فيه */
+    margin-left: 20px; /* مسافة بين عناصر القائمة في الهيدر (المهمة 2) */
+    /* تم تغيير margin-right إلى margin-left ليتناسب مع flow من اليمين لليسار إذا كانت اللغة العربية */
 }
 
+/* تنسيق روابط التنقل (للمهمة 2) */
 nav ul li a {
     text-decoration: none;
     color: #007bff;
     font-weight: bold;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* تأثير الانتقال السلس */
+    display: flex; /* لتوسيط الأيقونة والنص داخل الرابط */
+    align-items: center; /* توسيط عمودي للأيقونة والنص */
+    gap: 5px; /* مسافة بين الأيقونة والنص (للمهمة 8) */
 }
 
 /* تأثير الـ hover للمهمة 2 */
@@ -46,6 +58,12 @@ nav ul li a:hover {
     color: #0056b3;
     text-decoration: underline;
 }
+
+/* تنسيق الأيقونة داخل روابط التنقل (للمهمة 8) */
+nav ul li a i {
+    color: #007bff; /* لون الأيقونة */
+}
+
 
 /* تصميم قسم "About Me" */
 .about-section {
@@ -154,8 +172,8 @@ nav ul li a:hover {
 
 /* الأقسام الاحتياطية */
 .section-placeholder {
-    height: 300px;
-    padding-top: 80px;
+    height: 300px; /* يمكن تعديل الارتفاع حسب الحاجة عند إضافة المحتوى الفعلي */
+    padding-top: 80px; /* لضمان ظهور العنوان أسفل الهيدر الثابت */
     max-width: 800px;
     margin: 20px auto;
     background-color: #fff;
