@@ -295,3 +295,65 @@ nav ul li a i {
     color: #777;
     margin-bottom: 0;
 }
+
+/* تنسيقات نموذج إضافة التوصية (للمهام 7 و 9) */
+.add-recommendation-form-container {
+    background-color: #f8f8f8; /* خلفية أفتح للنموذج */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 40px; /* مسافة بين التوصيات والنموذج */
+    max-width: 600px; /* عرض النموذج */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left; /* لجعل محتوى النموذج محاذيًا لليسار */
+}
+
+.add-recommendation-form-container h3 {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 25px;
+    text-align: center; /* توسيط عنوان النموذج */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block; /* لجعل العنوان يظهر في سطر خاص به */
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* لضمان أن الحشوة لا تزيد من العرض */
+}
+
+.form-group textarea {
+    resize: vertical; /* للسماح بتغيير حجم مربع النص عمودياً */
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block; /* لجعل الزر يأخذ عرضاً كاملاً إذا أردت */
+    margin: 0 auto; /* توسيط الزر */
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
