@@ -1,9 +1,61 @@
+// 1. إعدادات Firebase الخاصة بك (تم دمجها الآن)
+const firebaseConfig = {
+  apiKey: "AIzaSyDHUK8CG8FcJ-GJfvoP0NkosPfd1iFHugw",
+  authDomain: "my-personal-project-25.firebaseapp.com",
+  projectId: "my-personal-project-25",
+  storageBucket: "my-personal-project-25.firebasestorage.app",
+  messagingSenderId: "121788883138",
+  appId: "1:121788883138:web:dcac92ffbba06a10eb9b5b",
+  measurementId: "G-PCF78XM5W5"
+};
+
+// 2. تهيئة Firebase
+firebase.initializeApp(firebaseConfig);
+
+// 3. الحصول على مرجع لقاعدة بيانات Firestore
+const db = firebase.firestore();
+
 document.addEventListener('DOMContentLoaded', function() {
-    // الحصول على عناصر النموذج والحاوية
     const recommendationForm = document.getElementById('recommendationForm');
     const recommendationsContainer = document.querySelector('.recommendations-container');
 
-    // وظيفة لإنشاء بطاقة توصية جديدة
+    // الحصول على عناصر التنبيه المخصصة (تأكد من وجودها في HTML)
+    const customAlert = document.getElementById('custom-alert');
+    const alertMessage = document.getElementById('alert-message');
+    const closeButton = document.querySelector('.close-button');
+    const alertOkButton = document.getElementById('alert-ok-button');
+
+
+    // وظيفة لإظهار التنبيه المخصص
+    function showCustomAlert(message) {
+        if (customAlert) { // التأكد من وجود العنصر
+            alertMessage.textContent = message;
+            customAlert.style.display = 'flex'; // استخدام flex لإظهاره وتوسيعه
+        } else {
+            alert(message); // إذا لم يكن هناك تنبيه مخصص، استخدم تنبيه المتصفح
+        }
+    }
+
+    // وظيفة لإخفاء التنبيه المخصصة
+    function hideCustomAlert() {
+        if (customAlert) {
+            customAlert.style.display = 'none';
+        }
+    }
+
+    // إضافة مستمعي الأحداث لأزرار الإغلاق والتأكيد في التنبيه المخصص
+    if (closeButton) closeButton.addEventListener('click', hideCustomAlert);
+    if (alertOkButton) alertOkButton.addEventListener('click', hideCustomAlert);
+    if (customAlert) {
+        customAlert.addEventListener('click', function(event) {
+            if (event.target === customAlert) {
+                hideCustomAlert();
+            }
+        });
+    }
+
+
+    // وظيفة لإنشاء بطاقة توصية جديدة (تُستخدم لعرض التوصيات من Firestore)
     function createRecommendationCard(name, title, text) {
         const card = document.createElement('div');
         card.classList.add('recommendation-card');
@@ -26,8 +78,30 @@ document.addEventListener('DOMContentLoaded', function() {
         return card;
     }
 
+    // وظيفة لجلب التوصيات من Firestore وعرضها
+    async function fetchRecommendations() {
+        // مسح الحاوية أولاً لمنع التكرار عند إعادة الجلب
+        recommendationsContainer.innerHTML = '';
+
+        try {
+            // جلب التوصيات من مجموعة 'recommendations' في Firestore
+            // و ترتيبها حسب الطابع الزمني (timestamp) الأحدث أولاً
+            const snapshot = await db.collection('recommendations').orderBy('timestamp', 'desc').get();
+
+            // إنشاء بطاقة لكل توصية وعرضها
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const card = createRecommendationCard(data.name, data.title, data.text);
+                recommendationsContainer.appendChild(card);
+            });
+        } catch (error) {
+            console.error("Error fetching recommendations: ", error);
+            showCustomAlert('Failed to load recommendations. Please try again later.'); // رسالة خطأ عند الجلب
+        }
+    }
+
     // الاستماع لحدث إرسال النموذج
-    recommendationForm.addEventListener('submit', function(event) {
+    recommendationForm.addEventListener('submit', async function(event) {
         event.preventDefault(); // منع السلوك الافتراضي للنموذج (إعادة تحميل الصفحة)
 
         // الحصول على قيم المدخلات
@@ -37,20 +111,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // التحقق من أن حقول الاسم والنص ليست فارغة
         if (name.trim() === '' || text.trim() === '') {
-            alert('Please fill in your name and recommendation text.');
+            showCustomAlert('Please fill in your name and recommendation text.');
             return; // إيقاف الوظيفة إذا كانت الحقول فارغة
         }
 
-        // إنشاء بطاقة توصية جديدة
-        const newRecommendationCard = createRecommendationCard(name, title, text);
+        try {
+            // حفظ التوصية في Firestore
+            await db.collection('recommendations').add({
+                name: name,
+                title: title,
+                text: text,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp() // لتسجيل وقت الإرسال
+            });
 
-        // إضافة البطاقة الجديدة إلى حاوية التوصيات (المهمة 7)
-        recommendationsContainer.appendChild(newRecommendationCard);
+            // مسح حقول النموذج بعد الإرسال
+            recommendationForm.reset();
 
-        // مسح حقول النموذج بعد الإرسال
-        recommendationForm.reset();
+            // إعادة جلب وعرض التوصيات لتضمين الجديدة
+            await fetchRecommendations();
 
-        // عرض رسالة التأكيد (المهمة 9)
-        alert('Thank you for your recommendation! It has been added successfully.');
+            showCustomAlert('Thank you for your recommendation! It has been added successfully and is now live!');
+
+        } catch (error) {
+            console.error("Error adding document: ", error);
+            showCustomAlert('Failed to add recommendation. Please check your internet connection or try again later.');
+        }
     });
+
+    // جلب وعرض التوصيات عند تحميل الصفحة لأول مرة
+    fetchRecommendations();
 });
