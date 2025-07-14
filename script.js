@@ -125,8 +125,10 @@ document.addEventListener('DOMContentLoaded', function() {
             recommendationForm.reset();
             await fetchRecommendations(false); 
 
-            showCustomAlert('Thank you for your recommendation! It has been added successfully and is now live!');
-
+            showCustomAlert(
+            "Thank you so much for your heartfelt recommendation! We've added it with love."
+            "شكرًا جزيلًا لتوصيتك النابعة من القلب! لقد أضفناها بكل حب."
+            );
         } catch (error) {
             console.error("Error adding document: ", error);
             showCustomAlert('Failed to add recommendation. Please check your internet connection or try again later. (Error: ' + error.message + ')');
