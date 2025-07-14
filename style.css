@@ -379,19 +379,24 @@ nav ul li a i {
         min-height: 50px; /* ضمان ارتفاع أدنى للهيدر */
     }
 
+    .site-title {
+        flex-basis: 40%; /* تخصيص مساحة أكبر للاسم */
+        min-width: 100px; /* ضمان حد أدنى لعرض الاسم */
+        padding-right: 5px; /* مسافة بين الاسم والتنقل */
+        box-sizing: border-box;
+    }
+
     .site-title h1 {
-        font-size: 15px; /* تصغير خط الاسم أكثر */
+        font-size: 14px; /* تصغير خط الاسم أكثر */
         margin: 0;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        flex-shrink: 0; /* منع الاسم من الانكماش */
-        padding-right: 5px; /* مسافة أقل بين الاسم والتنقل */
     }
 
     nav {
-        flex-grow: 1; /* السماح لشريط التنقل بشغل المساحة المتبقية */
-        width: auto; /* يضبط عرضه تلقائياً */
+        flex-basis: 60%; /* تخصيص مساحة أكبر للتنقل */
+        min-width: 180px; /* ضمان حد أدنى لعرض التنقل */
         overflow-x: auto; /* إضافة شريط تمرير أفقي للتنقل إذا كانت الكلمات كثيرة */
         -webkit-overflow-scrolling: touch; /* لتحسين التمرير على iOS */
         padding-left: 5px; /* حشوة من اليسار للتنقل */
@@ -413,7 +418,7 @@ nav ul li a i {
 
     nav ul li a {
         padding: 4px 6px; /* تقليل حشوة الروابط أكثر */
-        font-size: 11px; /* تصغير خط الروابط أكثر */
+        font-size: 10px; /* تصغير خط الروابط أكثر */
         white-space: nowrap;
         display: flex;
         align-items: center;
