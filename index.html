@@ -105,12 +105,32 @@
             </div>
 
             <div class="recommendation-card">
-                <p>"We are pleased to extend our sincere thanks and appreciation for your diligent efforts and that of your distinguished team. [span_0](start_span)Your remarkable achievement of **Rank 1 (repeated)** in case management and customer satisfaction performance indicators for 2024 truly reflects your commitment to enhancing customer experience and providing excellent services."</p>
+                <p>"We are pleased to extend our sincere thanks and appreciation for your diligent efforts and that of your distinguished team. Your remarkable achievement of **Rank 1 (repeated)** in case management and customer satisfaction performance indicators for 2024 truly reflects your commitment to enhancing customer experience and providing excellent services."</p>
                 <h4>Dr. Mohammed Abdul Hamid Al-Askar</h4>
                 <p class="recommender-title">General Manager, Department of Government Enablement (TAMM)</p>
             </div>
         </div>
+
+        <div class="add-recommendation-form-container">
+            <h3>Leave a Recommendation</h3>
+            <form id="recommendationForm">
+                <div class="form-group">
+                    <label for="recommender-name">Your Name:</label>
+                    <input type="text" id="recommender-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="recommender-title-org">Your Title/Company (Optional):</label>
+                    <input type="text" id="recommender-title-org">
+                </div>
+                <div class="form-group">
+                    <label for="recommendation-text">Your Recommendation:</label>
+                    <textarea id="recommendation-text" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Submit Recommendation</button>
+            </form>
+        </div>
     </section>
 
+    <script src="script.js"></script>
 </body>
 </html>
