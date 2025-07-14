@@ -78,57 +78,84 @@ document.addEventListener('DOMContentLoaded', function() {
         return card;
     }
 
-    // وظيفة لجلب التوصيات من Firestore وعرضها
+    // وظيفة لجلب التوصيات من Firestore وعرضها (معدلة)
     async function fetchRecommendations() {
-        // مسح الحاوية أولاً لمنع التكرار عند إعادة الجلب
-        recommendationsContainer.innerHTML = '';
+        // لا نقوم بمسح الحاوية هنا
+        // recommendationsContainer.innerHTML = ''; // تم إزالة هذا السطر
 
+        // للحفاظ على ترتيب التوصيات (الثابتة والديناميكية) بشكل صحيح،
+        // يجب أن نُضيف التوصيات الديناميكية بعد الثابتة.
+        // أفضل طريقة هي جلب الديناميكية أولاً ثم إضافة الثابتة من HTML،
+        // أو استخدام استعلام يجلب الكل ويضيفهم في مكان واحد.
+        // للحفاظ على البساطة، سنُضيف الجديدة فقط بعد الموجودة.
+        
+        // مسح فقط التوصيات التي أضيفت ديناميكيا من قبل هذا السكربت،
+        // للحفاظ على التوصيات الثابتة، نحتاج إلى طريقة لتحديدها.
+        // الطريقة الأكثر أمانًا هي مسح كل شيء ثم إعادة بناء الكل بترتيب معين.
+        // أو الأفضل هو إدارة جميع التوصيات (الثابتة والديناميكية) من Firebase.
+        
+        // للتجربة والحل السريع مع التوصيات الثابتة، يمكننا إزالة مسح innerHTML
+        // ولكن هذا قد يؤدي إلى تكرار التوصيات عند كل جلب إذا لم يتم التعامل معها بحذر.
+        // الأسلوب الأفضل: مسح جميع التوصيات (الثابتة والديناميكية) ثم إعادة إضافتها بالترتيب الصحيح.
+
+        // الطريقة الأبسط للبدء: مسح كل شيء وإعادة بناءه.
+        // هذا يتطلب منك إضافة التوصيات الثابتة إلى Firebase أيضاً إذا أردت رؤيتها.
+        // بما أنك تريدها ثابتة في HTML وديناميكية من Firebase، سنقوم بمسح الديناميكية فقط.
+        // هذا يعني أننا سنحتاج إلى عنصر حاوية منفصلة للتوصيات الديناميكية.
+
+        // **نصيحة:** الطريقة الأكثر نظافة هي أن تكون كل التوصيات (حتى "الثابتة") مخزنة في Firebase.
+        // لكن بما أنك تريدها ثابتة في HTML، دعنا نعدل النهج.
+
+        // الطريقة المعدلة: مسح كل التوصيات التي أضفناها ديناميكيا فقط
+        // هذا يتطلب أن تكون لديك حاوية منفصلة للتوصيات الديناميكية.
+        // لنفترض أنك ستضيف <div> جديدًا في index.html لـ dynamic-recommendations-container
+        const dynamicRecommendationsContainer = document.getElementById('dynamic-recommendations-container');
+        if (dynamicRecommendationsContainer) {
+            dynamicRecommendationsContainer.innerHTML = ''; // مسح الديناميكية فقط
+        }
+        
         try {
-            // جلب التوصيات من مجموعة 'recommendations' في Firestore
-            // و ترتيبها حسب الطابع الزمني (timestamp) الأحدث أولاً
             const snapshot = await db.collection('recommendations').orderBy('timestamp', 'desc').get();
-
-            // إنشاء بطاقة لكل توصية وعرضها
             snapshot.forEach(doc => {
                 const data = doc.data();
                 const card = createRecommendationCard(data.name, data.title, data.text);
-                recommendationsContainer.appendChild(card);
+                // إضافة إلى الحاوية الديناميكية
+                if (dynamicRecommendationsContainer) {
+                    dynamicRecommendationsContainer.appendChild(card);
+                } else {
+                    // إذا لم تكن هناك حاوية ديناميكية منفصلة، أضفها إلى الحاوية الرئيسية
+                    recommendationsContainer.appendChild(card);
+                }
             });
         } catch (error) {
             console.error("Error fetching recommendations: ", error);
-            showCustomAlert('Failed to load recommendations. Please try again later.'); // رسالة خطأ عند الجلب
+            showCustomAlert('Failed to load dynamic recommendations. Please try again later.');
         }
     }
 
     // الاستماع لحدث إرسال النموذج
     recommendationForm.addEventListener('submit', async function(event) {
-        event.preventDefault(); // منع السلوك الافتراضي للنموذج (إعادة تحميل الصفحة)
+        event.preventDefault();
 
-        // الحصول على قيم المدخلات
         const name = document.getElementById('recommender-name').value;
         const title = document.getElementById('recommender-title-org').value;
         const text = document.getElementById('recommendation-text').value;
 
-        // التحقق من أن حقول الاسم والنص ليست فارغة
         if (name.trim() === '' || text.trim() === '') {
             showCustomAlert('Please fill in your name and recommendation text.');
-            return; // إيقاف الوظيفة إذا كانت الحقول فارغة
+            return;
         }
 
         try {
-            // حفظ التوصية في Firestore
             await db.collection('recommendations').add({
                 name: name,
                 title: title,
                 text: text,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp() // لتسجيل وقت الإرسال
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
 
-            // مسح حقول النموذج بعد الإرسال
             recommendationForm.reset();
-
-            // إعادة جلب وعرض التوصيات لتضمين الجديدة
-            await fetchRecommendations();
+            await fetchRecommendations(); // إعادة جلب وعرض التوصيات الديناميكية
 
             showCustomAlert('Thank you for your recommendation! It has been added successfully and is now live!');
 
@@ -138,6 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // جلب وعرض التوصيات عند تحميل الصفحة لأول مرة
+    // جلب وعرض التوصيات الديناميكية عند تحميل الصفحة لأول مرة
     fetchRecommendations();
 });
