@@ -369,21 +369,22 @@ nav ul li a i {
         flex-direction: row; /* العناصر جنباً إلى جنب */
         justify-content: space-between; /* توزيع الاسم والتنقل */
         align-items: center;
-        padding: 8px 10px; /* تقليل الحشوة للهيدر نفسه */
+        padding: 5px 10px; /* تقليل الحشوة للهيدر نفسه */
         position: fixed; /* يبقى ثابتاً */
         width: 100%;
         top: 0;
         left: 0;
         box-sizing: border-box;
         z-index: 1000;
-        min-height: 50px; /* ضمان ارتفاع أدنى للهيدر */
+        min-height: 40px; /* ضمان ارتفاع أدنى للهيدر */
     }
 
     .site-title {
-        flex-basis: 40%; /* تخصيص مساحة أكبر للاسم */
-        min-width: 100px; /* ضمان حد أدنى لعرض الاسم */
+        flex-basis: auto; /* السماح للمحتوى بتحديد العرض الأساسي */
+        flex-grow: 0; /* لا تسمح للنمو */
+        flex-shrink: 1; /* اسمح بالانكماش إذا لزم الأمر */
+        min-width: 0; /* يسمح للعنصر بأن يصبح أصغر من محتواه */
         padding-right: 5px; /* مسافة بين الاسم والتنقل */
-        box-sizing: border-box;
     }
 
     .site-title h1 {
@@ -395,8 +396,9 @@ nav ul li a i {
     }
 
     nav {
-        flex-basis: 60%; /* تخصيص مساحة أكبر للتنقل */
-        min-width: 180px; /* ضمان حد أدنى لعرض التنقل */
+        flex-grow: 1; /* السماح لشريط التنقل بشغل المساحة المتبقية */
+        flex-shrink: 1; /* السماح بالانكماش */
+        min-width: 0; /* يسمح للعنصر بأن يصبح أصغر من محتواه */
         overflow-x: auto; /* إضافة شريط تمرير أفقي للتنقل إذا كانت الكلمات كثيرة */
         -webkit-overflow-scrolling: touch; /* لتحسين التمرير على iOS */
         padding-left: 5px; /* حشوة من اليسار للتنقل */
@@ -412,17 +414,17 @@ nav ul li a i {
     }
 
     nav ul li {
-        margin: 0 3px; /* تقليل المسافة بين عناصر القائمة */
+        margin: 0 2px; /* تقليل المسافة بين عناصر القائمة */
         flex-shrink: 0; /* منع عنصر القائمة من الانكماش */
     }
 
     nav ul li a {
-        padding: 4px 6px; /* تقليل حشوة الروابط أكثر */
+        padding: 3px 5px; /* تقليل حشوة الروابط أكثر */
         font-size: 10px; /* تصغير خط الروابط أكثر */
         white-space: nowrap;
         display: flex;
         align-items: center;
-        gap: 2px; /* تقليل المسافة بين الأيقونة والنص */
+        gap: 1px; /* تقليل المسافة بين الأيقونة والنص */
     }
 
     /* تعديل padding-top للأقسام لتجنب التداخل مع الهيدر الثابت */
@@ -430,7 +432,7 @@ nav ul li a i {
     .skills-section,
     .projects-section,
     .recommendations-section {
-        padding-top: 60px; /* زيادة الحشوة العلوية للسماح بظهور الهيدر الثابت بالكامل */
+        padding-top: 50px; /* زيادة الحشوة العلوية للسماح بظهور الهيدر الثابت بالكامل */
         margin-top: 0;
     }
 
@@ -444,5 +446,34 @@ nav ul li a i {
     /* ضبط أقصى عرض للفقرات في About Me لسهولة القراءة */
     .about-content p {
         max-width: 95%;
+    }
+}
+
+/* إضافة نقطة توقف إضافية للهواتف الأصغر جداً */
+@media (max-width: 480px) {
+    header {
+        padding: 5px; /* حشوة أقل جداً للهيدر */
+        min-height: 35px; /* ارتفاع أقل للهيدر */
+    }
+
+    .site-title h1 {
+        font-size: 12px; /* تصغير خط الاسم لأقصى حد */
+    }
+
+    nav ul li {
+        margin: 0 1px; /* مسافة أقل جداً بين العناصر */
+    }
+
+    nav ul li a {
+        padding: 2px 3px; /* حشوة أقل جداً للروابط */
+        font-size: 9px; /* تصغير خط الروابط لأقصى حد */
+        gap: 0px; /* إزالة المسافة بين الأيقونة والنص */
+    }
+
+    .about-section,
+    .skills-section,
+    .projects-section,
+    .recommendations-section {
+        padding-top: 45px; /* ضبط الحشوة العلوية بناءً على ارتفاع الهيدر الجديد */
     }
 }
