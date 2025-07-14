@@ -48,17 +48,19 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: #007bff;
-    font-weight: bold;
-    transition: color 0.3s ease, text-decoration 0.3s ease; /* تأثير الانتقال السلس */
+    font-weight: bold; /* يمكنك تركه bold أو تغييره إلى normal حسب ما تفضله للخط الأساسي */
+    transition: color 0.3s ease, text-decoration 0.3s ease, transform 0.3s ease; /* أضف 'transform' للـ transition */
     display: flex; /* لتوسيط الأيقونة والنص داخل الرابط */
     align-items: center; /* توسيط عمودي للأيقونة والنص */
     gap: 5px; /* مسافة بين الأيقونة والنص (للمهمة 8) */
 }
 
-/* تأثير الـ hover للمهمة 2 */
+/* تأثير الـ hover للمهمة 2: يكبر ويصبح تحته خط */
 nav ul li a:hover {
     color: #0056b3;
     text-decoration: underline;
+    transform: scale(1.1); /* يكبر العنصر بنسبة 10% */
+    /* إذا أردت أن يصبح bold فقط عند الهوفر، ضع font-weight: bold; هنا وأزله من nav ul li a */
 }
 
 /* تنسيق الأيقونة داخل روابط التنقل (للمهمة 8) */
