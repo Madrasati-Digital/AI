@@ -27,7 +27,6 @@ header {
     font-size: 24px; /* حجم الخط لاسم الموقع */
     color: #007bff; /* لون مميز لاسم الموقع */
     margin: 0; /* إزالة الهوامش الافتراضية */
-    /* Padding-left تم دمجه في padding الهيدر الكلي */
 }
 
 nav ul {
@@ -38,8 +37,7 @@ nav ul {
 }
 
 nav ul li {
-    margin-left: 20px; /* مسافة بين عناصر القائمة في الهيدر (المهمة 2) */
-    /* تم تغيير margin-right إلى margin-left ليتناسب مع flow من اليمين لليسار إذا كانت اللغة العربية */
+    margin-left: 20px; /* مسافة بين عناصر القائمة في الهيدر */
 }
 
 /* تنسيق روابط التنقل (للمهمة 2) */
@@ -65,7 +63,7 @@ nav ul li a i {
 }
 
 
-/* تصميم قسم "About Me" */
+/* تصميم قسم "About Me" (المهمة 3) */
 .about-section {
     padding: 100px 20px 20px; /* ضبط الحشوة العلوية ليتجنب الهيدر الثابت */
     max-width: 800px;
@@ -93,14 +91,14 @@ nav ul li a i {
 }
 
 .profile-name-in-about { /* تنسيق اسم Rashed Alhashmi في قسم About Me */
-    font-size: 28px; /* حجم الخط كما في الصورة الجديدة */
+    font-size: 28px;
     color: #333;
-    margin: 0; /* إزالة أي هوامش افتراضية */
-    margin-bottom: 30px; /* مسافة بين الاسم وعنوان About Me */
+    margin: 0;
+    margin-bottom: 30px;
 }
 
 .about-content {
-    text-align: center; /* نص فقرات "About Me" يكون محاذيًا لليسار */
+    text-align: center; /* تم التعديل هنا: نص وفقرات "About Me" ستكون في المنتصف */
 }
 
 .about-content h2 {
@@ -113,9 +111,14 @@ nav ul li a i {
     font-size: 16px;
     line-height: 1.6;
     margin-bottom: 0;
+    /* لإظهار الفقرة في المنتصف إذا كان عرضها أقل من الأب،
+       يمكنك تحديد max-width عليها وجعل margin auto */
+    max-width: 700px; /* يمكن تعديل هذا الرقم */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* تنسيقات قسم المهارات الجديد (من المهمة 4) */
+/* تنسيقات قسم المهارات الجديد (المهمة 4) */
 .skills-section {
     padding: 40px 20px;
     max-width: 800px;
@@ -170,7 +173,69 @@ nav ul li a i {
     color: #0056b3;
 }
 
-/* الأقسام الاحتياطية */
+/* تنسيقات قسم المشاريع (المهمة 5) */
+.projects-section {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center; /* لتوسيط العنوان */
+}
+
+.projects-section h2 {
+    font-size: 28px;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.project-card {
+    background-color: #e9f5ff;
+    border: 1px solid #cceeff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: left; /* لجعل محتوى البطاقة محاذيًا لليسار */
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card h3 {
+    color: #007bff;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.project-icon {
+    font-size: 36px;
+    color: #0056b3;
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+}
+
+/* الأقسام الاحتياطية (للتوصيات حالياً) */
 .section-placeholder {
     height: 300px; /* يمكن تعديل الارتفاع حسب الحاجة عند إضافة المحتوى الفعلي */
     padding-top: 80px; /* لضمان ظهور العنوان أسفل الهيدر الثابت */
