@@ -1,12 +1,12 @@
-// 1. إعدادات Firebase الخاصة بك (تم دمجها الآن)
+// 1. إعدادات Firebase الخاصة بك (استبدل بالمعلومات الحقيقية التي نسختها من لوحة تحكم Firebase)
 const firebaseConfig = {
-  apiKey: "AIzaSyDHUK8CG8FcJ-GJfvoP0NkosPfd1iFHugw",
-  authDomain: "my-personal-project-25.firebaseapp.com",
-  projectId: "my-personal-project-25",
-  storageBucket: "my-personal-project-25.firebasestorage.app",
-  messagingSenderId: "121788883138",
-  appId: "1:121788883138:web:dcac92ffbba06a10eb9b5b",
-  measurementId: "G-PCF78XM5W5"
+    apiKey: "AIzaSyDHUK8CG8FcJ-GJfvoP0NkosPfd1iFHugw", // هذا المفتاح يجب أن يكون صحيحاً
+    authDomain: "my-personal-project-25.firebaseapp.com",
+    projectId: "my-personal-project-25",
+    storageBucket: "my-personal-project-25.firebasestorage.app",
+    messagingSenderId: "121788883138",
+    appId: "1:121788883138:web:dcac92ffbba06a10eb9b5b",
+    // measurementId: "G-PCF78XM5W5" // measurementId ليس ضرورياً لـ firestore
 };
 
 // 2. تهيئة Firebase
@@ -16,24 +16,24 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 document.addEventListener('DOMContentLoaded', function() {
+    // استخدم recommendationsContainer مباشرة، لا داعي لـ dynamicRecommendationsContainer
+    const recommendationsContainer = document.querySelector('.recommendations-container');
     const recommendationForm = document.getElementById('recommendationForm');
-    const dynamicRecommendationsContainer = document.getElementById('dynamic-recommendations-container'); 
-
+    
     // الحصول على عناصر التنبيه المخصصة
-    const customAlert = document.getElementById('custom-alert');
+    const customAlert = document.getElementById('custom-alert'); 
     const alertMessage = document.getElementById('alert-message');
-    const closeButton = document.querySelector('.close-button');
+    const closeButton = document.querySelector('#custom-alert .close-button'); 
     const alertOkButton = document.getElementById('alert-ok-button');
-
 
     // وظيفة لإظهار التنبيه المخصص
     function showCustomAlert(message) {
-        if (customAlert) {
+        if (customAlert && alertMessage) { 
             alertMessage.textContent = message;
-            customAlert.style.display = 'flex'; 
+            customAlert.style.display = 'flex'; // استخدام flex لإظهاره وتوسيعه
         } else {
-            console.error('Custom alert element not found. Falling back to default alert.');
-            alert(message);
+            console.error('Custom alert elements not found. Falling back to default alert.');
+            alert(message); // إذا لم يكن هناك تنبيه مخصص، استخدم تنبيه المتصفح
         }
     }
 
@@ -49,12 +49,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (alertOkButton) alertOkButton.addEventListener('click', hideCustomAlert);
     if (customAlert) {
         customAlert.addEventListener('click', function(event) {
-            if (event.target === customAlert) {
+            if (event.target === customAlert) { 
                 hideCustomAlert();
             }
         });
     }
-
 
     // وظيفة لإنشاء بطاقة توصية جديدة
     function createRecommendationCard(name, title, text) {
@@ -79,24 +78,24 @@ document.addEventListener('DOMContentLoaded', function() {
         return card;
     }
 
-    // وظيفة لجلب التوصيات من Firestore وعرضها في الحاوية الديناميكية
-    async function fetchRecommendations(showErrorAlert = true) { // أضفنا متغير جديد للتحكم بظهور التنبيه
-        if (!dynamicRecommendationsContainer) {
-            console.error("Error: #dynamic-recommendations-container not found. Dynamic recommendations will not display.");
-            return;
-        }
-        dynamicRecommendationsContainer.innerHTML = ''; // مسح المحتوى الديناميكي فقط لمنع التكرار
+    // وظيفة لجلب التوصيات من Firestore وعرضها
+    async function fetchRecommendations(showErrorAlert = true) { 
+        recommendationsContainer.innerHTML = ''; // مسح الحاوية أولاً لمنع التكرار عند إعادة الجلب
 
         try {
             const snapshot = await db.collection('recommendations').orderBy('timestamp', 'desc').get();
+            if (snapshot.empty) {
+                console.log("No recommendations found in Firestore.");
+                // يمكنك هنا إضافة رسالة "لا توجد توصيات حتى الآن" إذا أردت
+            }
             snapshot.forEach(doc => {
                 const data = doc.data();
                 const card = createRecommendationCard(data.name, data.title, data.text);
-                dynamicRecommendationsContainer.appendChild(card);
+                recommendationsContainer.appendChild(card);
             });
         } catch (error) {
             console.error("Error fetching recommendations: ", error);
-            if (showErrorAlert) { // ظهور التنبيه فقط إذا كان showErrorAlert صحيحاً
+            if (showErrorAlert) {
                 showCustomAlert('Failed to load recommendations. Please check console for details.');
             }
         }
@@ -124,16 +123,16 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             recommendationForm.reset();
-            await fetchRecommendations(false); // لا تظهر رسالة خطأ هنا، لأن الإضافة كانت ناجحة
+            await fetchRecommendations(false); 
 
             showCustomAlert('Thank you for your recommendation! It has been added successfully and is now live!');
 
         } catch (error) {
             console.error("Error adding document: ", error);
-            showCustomAlert('Failed to add recommendation. Please check your internet connection or try again later.');
+            showCustomAlert('Failed to add recommendation. Please check your internet connection or try again later. (Error: ' + error.message + ')');
         }
     });
 
-    // جلب وعرض التوصيات عند تحميل الصفحة لأول مرة، بدون إظهار رسالة خطأ تلقائية
-    fetchRecommendations(false); // هنا نمرر 'false' لمنع ظهور التنبيه عند التحميل الأول
+    // جلب وعرض التوصيات عند تحميل الصفحة لأول مرة
+    fetchRecommendations(false); 
 });
