@@ -27,6 +27,9 @@ header {
     font-size: 24px; /* حجم الخط لاسم الموقع */
     color: #007bff; /* لون مميز لاسم الموقع */
     margin: 0; /* إزالة الهوامش الافتراضية */
+    white-space: nowrap; /* منع انقسام الاسم في الشاشات الكبيرة */
+    overflow: hidden; /* إخفاء أي جزء زائد */
+    text-overflow: ellipsis; /* إضافة نقاط (...) إذا تم اقتطاع الاسم */
 }
 
 nav ul {
@@ -361,68 +364,73 @@ nav ul li a i {
 /* Media Queries للتصميم المتجاوب (هذا الجزء هو الذي سنركز على تعديله) */
 @media (max-width: 768px) {
     header {
-        flex-direction: column; /* Stack Rashed Alhashmi title and nav bar vertically */
-        align-items: center;    /* Center both the title and nav bar horizontally */
-        padding: 10px;          /* Adjusted padding */
-        height: auto;           /* Allow height to adjust based on content */
-        position: static;       /* Remove fixed positioning for mobile to allow scrolling (optional, can be fixed if needed for design) */
-    }
-
-    .site-title {
-        width: 100%; /* Make the site title container take full width */
-        text-align: center; /* Center the h1 inside site-title */
-        margin-bottom: 10px; /* Space between title and nav */
+        flex-direction: row; /* جعل العناصر (الاسم والتنقل) جنب بعضها مرة أخرى */
+        justify-content: space-between; /* توزيع الاسم لليسار والتنقل لليمين */
+        align-items: center;    /* توسيط عمودي */
+        padding: 10px;          /* حشوة كافية */
+        height: auto;           /* ارتفاع تلقائي */
+        position: fixed;       /* جعل الهيدر ثابتاً عند التمرير */
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box; /* لضمان عدم تجاوز العرض */
     }
 
     .site-title h1 {
-        font-size: 22px; /* Slightly smaller font for mobile title */
+        font-size: 16px; /* تصغير حجم خط الاسم بشكل أكبر */
+        margin: 0;
+        white-space: nowrap; /* منع انقسام الاسم إلى سطرين */
+        overflow: hidden; /* إخفاء أي جزء زائد إذا كان الاسم طويلاً جداً */
+        text-overflow: ellipsis; /* إضافة نقاط (...) إذا تم اقتطاع الاسم */
+        padding-right: 10px; /* مسافة بسيطة بين الاسم والتنقل */
     }
 
     nav {
-        width: 100%; /* Make nav take full width */
+        width: auto; /* السماح لشريط التنقل بأن يأخذ العرض الذي يحتاجه فقط */
     }
 
     nav ul {
-        flex-direction: column; /* Stack nav items vertically */
-        align-items: center;    /* Center nav items horizontally */
-        padding: 0;             /* Remove default ul padding */
+        flex-direction: row; /* جعل عناصر القائمة جنب بعضها مرة أخرى */
+        justify-content: flex-end; /* محاذاة عناصر القائمة لليمين */
+        padding: 0;
+        margin: 0;
     }
 
     nav ul li {
-        margin: 5px 0; /* Vertical spacing between nav items */
-        width: 100%;   /* Ensure each list item takes full width for centering */
-        text-align: center; /* Center text within each list item */
+        margin: 0 5px; /* مسافة أفقية بسيطة بين عناصر القائمة */
     }
 
     nav ul li a {
-        display: block; /* Make the link a block to take full width of li */
-        padding: 8px 0; /* Adjust padding for block links */
-        box-sizing: border-box; /* Include padding in width calculation */
+        padding: 5px 8px; /* تقليل الحشوة لجعل الروابط أصغر */
+        font-size: 12px; /* تصغير حجم الخط لروابط التنقل */
+        white-space: nowrap; /* منع انقسام نص الرابط */
+        display: flex; /* للحفاظ على الأيقونة والنص جنب بعضهما */
+        align-items: center;
+        gap: 3px; /* تقليل المسافة بين الأيقونة والنص */
     }
 
-    /* Adjust padding-top for sections to account for non-fixed header */
+    /* تعديل padding-top للأقسام لتجنب التداخل مع الهيدر الثابت */
     .about-section,
     .skills-section,
     .projects-section,
     .recommendations-section {
-        padding-top: 20px; /* Adjust as header is not fixed or smaller */
-        margin-top: 10px;
+        padding-top: 70px; /* زيادة الحشوة العلوية للسماح بظهور الهيدر الثابت بالكامل */
+        margin-top: 0; /* إعادة تعيين الهامش العلوي */
     }
 
-    /* Ensure project and recommendation cards fit */
+    /* حافظ على هذه التعديلات لبطاقات المشاريع والتوصيات */
     .project-card,
     .recommendation-card {
-        max-width: 95%; /* Adjust max-width for smaller screens */
+        max-width: 95%;
         margin: 10px auto;
     }
 
-    /* Adjust about text max-width for better readability on small screens */
+    /* حافظ على هذه التعديلات لفقرات About Me */
     .about-content p {
         max-width: 95%;
     }
 
-    /* Optional: Hide scrollbar if it's the issue causing cutoff, but this is a temporary fix */
     body {
-        overflow-x: hidden;
+        overflow-x: hidden; /* للحفاظ على عدم ظهور شريط تمرير أفقي */
     }
 }
