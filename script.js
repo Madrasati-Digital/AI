@@ -1,12 +1,12 @@
 // 1. إعدادات Firebase الخاصة بك (تم دمجها الآن)
 const firebaseConfig = {
-  apiKey: "AIzaSyDHUK8CG8FcJ-GJfvoP0NkosPfd1iFHugw", // تأكد أن هذه هي قيمتك الحقيقية
-  authDomain: "my-personal-project-25.firebaseapp.com", // تأكد أن هذه هي قيمتك الحقيقية
-  projectId: "my-personal-project-25", // تأكد أن هذه هي قيمتك الحقيقية
-  storageBucket: "my-personal-project-25.firebasestorage.app", // تأكد أن هذه هي قيمتك الحقيقية
-  messagingSenderId: "121788883138", // تأكد أن هذه هي قيمتك الحقيقية
-  appId: "1:121788883138:web:dcac92ffbba06a10eb9b5b", // تأكد أن هذه هي قيمتك الحقيقية
-  measurementId: "G-PCF78XM5W5" // تأكد أن هذه هي قيمتك الحقيقية
+  apiKey: "AIzaSyDHUK8CG8FcJ-GJfvoP0NkosPfd1iFHugw",
+  authDomain: "my-personal-project-25.firebaseapp.com",
+  projectId: "my-personal-project-25",
+  storageBucket: "my-personal-project-25.firebasestorage.app",
+  messagingSenderId: "121788883138",
+  appId: "1:121788883138:web:dcac92ffbba06a10eb9b5b",
+  measurementId: "G-PCF78XM5W5"
 };
 
 // 2. تهيئة Firebase
