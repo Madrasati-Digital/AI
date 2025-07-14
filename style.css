@@ -100,7 +100,7 @@ nav ul li a i {
 }
 
 .about-content {
-    text-align: left; /* نص فقرات "About Me" يكون محاذيًا لليسار */
+    text-align: center; /* نص فقرات "About Me" يكون محاذيًا لليسار */
 }
 
 .about-content h2 {
