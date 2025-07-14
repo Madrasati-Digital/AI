@@ -1,140 +1,549 @@
-// 1. إعدادات Firebase الخاصة بك (استبدل بالمعلومات الحقيقية التي نسختها من لوحة تحكم Firebase)
-const firebaseConfig = {
-    apiKey: "AIzaSyDHUK8CG8FcJ-GJfvoP0NkosPfd1iFHugw", // هذا المفتاح يجب أن يكون صحيحاً
-    authDomain: "my-personal-project-25.firebaseapp.com",
-    projectId: "my-personal-project-25",
-    storageBucket: "my-personal-project-25.firebasestorage.app",
-    messagingSenderId: "121788883138",
-    appId: "1:121788883138:web:dcac92ffbba06a10eb9b5b",
-    // measurementId: "G-PCF78XM5W5" // measurementId ليس ضرورياً لـ firestore
-};
+/* (نفس كود style.css الذي قدمته لي، بما في ذلك Media Queries) */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    overflow-x: hidden; /* لمنع أي تمرير أفقي غير مرغوب فيه */
+}
 
-// 2. تهيئة Firebase
-firebase.initializeApp(firebaseConfig);
+/* تعديلات الهيدر ليضم الاسم في اليسار والتنقل في اليمين (للمهمة 1) */
+header {
+    background-color: #fff;
+    padding: 10px 20px; /* حشوة موحدة للهيدر */
+    border-bottom: 1px solid #ddd;
+    display: flex; /* لترتيب العناصر (الاسم وشريط التنقل) أفقياً */
+    justify-content: space-between; /* يدفع الاسم لليسار وشريط التنقل لليمين */
+    align-items: center; /* توسيط العناصر عمودياً */
+    position: fixed; /* يبقى الهيدر ثابتاً عند التمرير */
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box; /* لضمان أن الحشوة لا تزيد من عرض الهيدر */
+    z-index: 1000; /* ليبقى الهيدر فوق المحتوى الآخر */
+}
 
-// 3. الحصول على مرجع لقاعدة بيانات Firestore
-const db = firebase.firestore();
+/* تنسيق اسم الموقع في الهيدر (المهمة 1) */
+.site-title h1 {
+    font-size: 24px; /* حجم الخط لاسم الموقع */
+    color: #007bff; /* لون مميز لاسم الموقع */
+    margin: 0; /* إزالة الهوامش الافتراضية */
+    white-space: nowrap; /* منع انقسام الاسم في الشاشات الكبيرة */
+    overflow: hidden; /* إخفاء أي جزء زائد */
+    text-overflow: ellipsis; /* إضافة نقاط (...) إذا تم اقتطاع الاسم */
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-    // استخدم recommendationsContainer مباشرة، لا داعي لـ dynamicRecommendationsContainer
-    const recommendationsContainer = document.querySelector('.recommendations-container');
-    const recommendationForm = document.getElementById('recommendationForm');
-    
-    // الحصول على عناصر التنبيه المخصصة
-    const customAlert = document.getElementById('custom-alert'); 
-    const alertMessage = document.getElementById('alert-message');
-    const closeButton = document.querySelector('#custom-alert .close-button'); 
-    const alertOkButton = document.getElementById('alert-ok-button');
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; /* إزالة الحشوة من الـ ul حيث تم التحكم بها في الهيدر */
+    display: flex; /* لجعل عناصر القائمة أفقية */
+}
 
-    // وظيفة لإظهار التنبيه المخصص
-    function showCustomAlert(message) {
-        if (customAlert && alertMessage) { 
-            alertMessage.textContent = message;
-            customAlert.style.display = 'flex'; // استخدام flex لإظهاره وتوسيعه
-        } else {
-            console.error('Custom alert elements not found. Falling back to default alert.');
-            alert(message); // إذا لم يكن هناك تنبيه مخصص، استخدم تنبيه المتصفح
-        }
+nav ul li {
+    margin-left: 20px; /* مسافة بين عناصر القائمة في الهيدر */
+}
+
+/* تنسيق روابط التنقل (للمهمة 2) */
+nav ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold; /* يمكنك تركه bold أو تغييره إلى normal حسب ما تفضله للخط الأساسي */
+    transition: color 0.3s ease, text-decoration 0.3s ease, transform 0.3s ease; /* أضف 'transform' للـ transition */
+    display: flex; /* لتوسيط الأيقونة والنص داخل الرابط */
+    align-items: center; /* توسيط عمودي للأيقونة والنص */
+    gap: 5px; /* مسافة بين الأيقونة والنص (للمهمة 8) */
+}
+
+/* تأثير الـ hover للمهمة 2: يكبر ويصبح تحته خط */
+nav ul li a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+    transform: scale(1.2); /* يكبر العنصر بنسبة 10% */
+    /* إذا أردت أن يصبح bold فقط عند الهوفر، ضع font-weight: bold; هنا وأزله من nav ul li a */
+}
+
+/* تنسيق الأيقونة داخل روابط التنقل (للمهمة 8) */
+nav ul li a i {
+    color: #007bff; /* لون الأيقونة */
+}
+
+
+/* تصميم قسم "About Me" (المهمة 3) */
+.about-section {
+    padding: 100px 20px 20px; /* ضبط الحشوة العلوية ليتجنب الهيدر الثابت */
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center; /* لتوسيط كل من الصورة والاسم وعنوان "About Me" */
+}
+
+.profile-main-content { /* الحاوية الجديدة للصورة والاسم في قسم About Me */
+    margin-bottom: 20px;
+}
+
+.profile-image-container {
+    margin-bottom: 15px; /* مسافة بين الصورة والاسم */
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+}
+
+.profile-name-in-about { /* تنسيق اسم Rashed Alhashmi في قسم About Me */
+    font-size: 28px;
+    color: #333;
+    margin: 0;
+    margin-bottom: 30px;
+}
+
+.about-content {
+    text-align: center; /* نص وفقرات "About Me" ستكون في المنتصف */
+}
+
+.about-content h2 {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.about-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 0;
+    /* لإظهار الفقرة في المنتصف إذا كان عرضها أقل من الأب،
+       يمكنك تحديد max-width عليها وجعل margin auto */
+    max-width: 700px; /* يمكن تعديل هذا الرقم */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* تنسيقات قسم المهارات الجديد (المهمة 4) */
+.skills-section {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.skills-section h2 {
+    font-size: 28px;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+.skills-category {
+    margin-bottom: 20px;
+}
+
+.skills-category h3 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.skills-category ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.skills-category li {
+    background-color: #e9f5ff;
+    color: #007bff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 15px;
+    white-space: nowrap;
+    border: 1px solid #cceeff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.skills-category li i {
+    color: #0056b3;
+}
+
+/* تنسيقات قسم المشاريع (المهمة 5) */
+.projects-section {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center; /* لتوسيط العنوان */
+}
+
+.projects-section h2 {
+    font-size: 28px;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.project-card {
+    background-color: #e9f5ff;
+    border: 1px solid #cceeff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: left; /* لجعل محتوى البطاقة محاذيًا لليسار */
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card h3 {
+    color: #007bff;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.project-icon {
+    font-size: 36px;
+    color: #0056b3;
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+}
+
+/* تنسيقات قسم التوصيات (المهمة 6) */
+.recommendations-section {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center; /* لتوسيط العنوان */
+}
+
+.recommendations-section h2 {
+    font-size: 28px;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+.recommendations-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.recommendation-card {
+    background-color: #e9f5ff; /* نفس خلفية بطاقات المشاريع */
+    border: 1px solid #cceeff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 300px; /* نفس عرض بطاقات المشاريع */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: left; /* لجعل محتوى البطاقة محاذيًا لليسار */
+    transition: transform 0.3s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-5px); /* نفس تأثير الـ hover للمشاريع */
+}
+
+.recommendation-card p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-style: italic; /* لجعل نص التوصية مائلاً */
+}
+
+.recommendation-card h4 {
+    color: #007bff;
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.recommendation-card .recommender-title {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 0;
+}
+
+/* تنسيقات نموذج إضافة التوصية (للمهام 7 و 9) */
+.add-recommendation-form-container {
+    background-color: #f8f8f8; /* خلفية أفتح للنموذج */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 40px; /* مسافة بين التوصيات والنموذج */
+    max-width: 600px; /* عرض النموذج */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left; /* لجعل محتوى النموذج محاذيًا لليسار */
+}
+
+.add-recommendation-form-container h3 {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 25px;
+    text-align: center; /* توسيط عنوان النموذج */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block; /* لجعل العنوان يظهر في سطر خاص به */
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* لضمان أن الحشوة لا تزيد من العرض */
+}
+
+.form-group textarea {
+    resize: vertical; /* للسماح بتغيير حجم مربع النص عمودياً */
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block; /* لجعل الزر يأخذ عرضاً كاملاً إذا أردت */
+    margin: 0 auto; /* توسيط الزر */
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* تنسيقات رسالة التنبيه المخصصة (Custom Alert) */
+.custom-alert {
+    display: none; /* هام جداً: مخفية افتراضياً */
+    position: fixed; /* لتظهر فوق كل المحتوى */
+    z-index: 1001; /* يجب أن تكون أعلى من أي عناصر أخرى (مثل الهيدر) */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* تمكين التمرير إذا كان المحتوى كبيراً */
+    background-color: rgba(0,0,0,0.4); /* خلفية معتمة */
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-alert-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%; /* عرض المربع */
+    max-width: 400px; /* أقصى عرض */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    text-align: center;
+    position: relative; /* لتحديد موقع زر الإغلاق */
+}
+
+.custom-alert-content p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#alert-ok-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#alert-ok-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Media Queries للتصميم المتجاوب */
+@media (max-width: 768px) {
+    /* قواعد الهيدر لتكون ثابتة ومتقاربة */
+    header {
+        flex-direction: row; /* العناصر جنباً إلى جنب */
+        justify-content: space-between; /* توزيع الاسم والتنقل */
+        align-items: center;
+        padding: 5px 10px; /* تقليل الحشوة للهيدر نفسه */
+        position: fixed; /* يبقى ثابتاً */
+        width: 100%;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        z-index: 1000;
+        min-height: 40px; /* ضمان ارتفاع أدنى للهيدر */
     }
 
-    // وظيفة لإخفاء التنبيه المخصصة
-    function hideCustomAlert() {
-        if (customAlert) {
-            customAlert.style.display = 'none';
-        }
+    .site-title {
+        flex-basis: auto; /* السماح للمحتوى بتحديد العرض الأساسي */
+        flex-grow: 0; /* لا تسمح للنمو */
+        flex-shrink: 1; /* اسمح بالانكماش إذا لزم الأمر */
+        min-width: 0; /* يسمح للعنصر بأن يصبح أصغر من محتواه */
+        padding-right: 5px; /* مسافة بين الاسم والتنقل */
     }
 
-    // إضافة مستمعي الأحداث لأزرار الإغلاق والتأكيد في التنبيه المخصص
-    if (closeButton) closeButton.addEventListener('click', hideCustomAlert);
-    if (alertOkButton) alertOkButton.addEventListener('click', hideCustomAlert);
-    if (customAlert) {
-        customAlert.addEventListener('click', function(event) {
-            if (event.target === customAlert) { 
-                hideCustomAlert();
-            }
-        });
+    .site-title h1 {
+        font-size: 14px; /* تصغير خط الاسم أكثر */
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    // وظيفة لإنشاء بطاقة توصية جديدة
-    function createRecommendationCard(name, title, text) {
-        const card = document.createElement('div');
-        card.classList.add('recommendation-card');
-
-        const recommendationText = document.createElement('p');
-        recommendationText.textContent = `"${text}"`;
-        recommendationText.style.fontStyle = 'italic';
-
-        const recommenderName = document.createElement('h4');
-        recommenderName.textContent = name;
-
-        const recommenderTitle = document.createElement('p');
-        recommenderTitle.classList.add('recommender-title');
-        recommenderTitle.textContent = title ? title : 'Anonymous';
-
-        card.appendChild(recommendationText);
-        card.appendChild(recommenderName);
-        card.appendChild(recommenderTitle);
-
-        return card;
+    nav {
+        flex-grow: 1; /* السماح لشريط التنقل بشغل المساحة المتبقية */
+        flex-shrink: 1; /* السماح بالانكماش */
+        min-width: 0; /* يسمح للعنصر بأن يصبح أصغر من محتواه */
+        overflow-x: auto; /* إضافة شريط تمرير أفقي للتنقل إذا كانت الكلمات كثيرة */
+        -webkit-overflow-scrolling: touch; /* لتحسين التمرير على iOS */
+        padding-left: 5px; /* حشوة من اليسار للتنقل */
     }
 
-    // وظيفة لجلب التوصيات من Firestore وعرضها
-    async function fetchRecommendations(showErrorAlert = true) { 
-        recommendationsContainer.innerHTML = ''; // مسح الحاوية أولاً لمنع التكرار عند إعادة الجلب
-
-        try {
-            const snapshot = await db.collection('recommendations').orderBy('timestamp', 'desc').get();
-            if (snapshot.empty) {
-                console.log("No recommendations found in Firestore.");
-                // يمكنك هنا إضافة رسالة "لا توجد توصيات حتى الآن" إذا أردت
-            }
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                const card = createRecommendationCard(data.name, data.title, data.text);
-                recommendationsContainer.appendChild(card);
-            });
-        } catch (error) {
-            console.error("Error fetching recommendations: ", error);
-            if (showErrorAlert) {
-                showCustomAlert('Failed to load recommendations. Please check console for details.');
-            }
-        }
+    nav ul {
+        flex-direction: row; /* عناصر القائمة جنباً إلى جنب */
+        justify-content: flex-end; /* محاذاة لليمين */
+        padding: 0;
+        margin: 0;
+        flex-wrap: nowrap; /* منع انقسام العناصر لأسطر جديدة */
+        align-items: center;
     }
 
-    // الاستماع لحدث إرسال النموذج
-    recommendationForm.addEventListener('submit', async function(event) {
-        event.preventDefault();
+    nav ul li {
+        margin: 0 2px; /* تقليل المسافة بين عناصر القائمة */
+        flex-shrink: 0; /* منع عنصر القائمة من الانكماش */
+    }
 
-        const name = document.getElementById('recommender-name').value;
-        const title = document.getElementById('recommender-title-org').value;
-        const text = document.getElementById('recommendation-text').value;
+    nav ul li a {
+        padding: 3px 5px; /* تقليل حشوة الروابط أكثر */
+        font-size: 10px; /* تصغير خط الروابط أكثر */
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 1px; /* تقليل المسافة بين الأيقونة والنص */
+    }
 
-        if (name.trim() === '' || text.trim() === '') {
-            showCustomAlert('Please fill in your name and recommendation text.');
-            return;
-        }
+    /* تعديل padding-top للأقسام لتجنب التداخل مع الهيدر الثابت */
+    .about-section,
+    .skills-section,
+    .projects-section,
+    .recommendations-section {
+        padding-top: 50px; /* زيادة الحشوة العلوية للسماح بظهور الهيدر الثابت بالكامل */
+        margin-top: 0;
+    }
 
-        try {
-            await db.collection('recommendations').add({
-                name: name,
-                title: title,
-                text: text,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
+    /* ضمان أن بطاقات المشاريع والتوصيات تتكيف بشكل جيد */
+    .project-card,
+    .recommendation-card {
+        max-width: 95%; /* قد تحتاج إلى ضبط هذا الرقم أكثر في بعض الحالات */
+        margin: 10px auto;
+    }
 
-            recommendationForm.reset();
-            await fetchRecommendations(false); 
+    /* ضبط أقصى عرض للفقرات في About Me لسهولة القراءة */
+    .about-content p {
+        max-width: 95%;
+    }
+}
 
-            showCustomAlert(
-            "Thank you so much for your heartfelt recommendation! We've added it with love."
-            "شكرًا جزيلًا لتوصيتك النابعة من القلب! لقد أضفناها بكل حب."
-            );
-        } catch (error) {
-            console.error("Error adding document: ", error);
-            showCustomAlert('Failed to add recommendation. Please check your internet connection or try again later. (Error: ' + error.message + ')');
-        }
-    });
+/* إضافة نقطة توقف إضافية للهواتف الأصغر جداً */
+@media (max-width: 480px) {
+    header {
+        padding: 5px; /* حشوة أقل جداً للهيدر */
+        min-height: 35px; /* ارتفاع أقل للهيدر */
+    }
 
-    // جلب وعرض التوصيات عند تحميل الصفحة لأول مرة
-    fetchRecommendations(false); 
-});
+    .site-title h1 {
+        font-size: 12px; /* تصغير خط الاسم لأقصى حد */
+    }
+
+    nav ul li {
+        margin: 0 1px; /* مسافة أقل جداً بين العناصر */
+    }
+
+    nav ul li a {
+        padding: 2px 3px; /* حشوة أقل جداً للروابط */
+        font-size: 9px; /* تصغير خط الروابط لأقصى حد */
+        gap: 0px; /* إزالة المسافة بين الأيقونة والنص */
+    }
+
+    .about-section,
+    .skills-section,
+    .projects-section,
+    .recommendations-section {
+        padding-top: 45px; /* ضبط الحشوة العلوية بناءً على ارتفاع الهيدر الجديد */
+    }
+}
