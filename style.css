@@ -1,3 +1,4 @@
+/* (نفس كود style.css الذي قدمته لي، بما في ذلك Media Queries) */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -375,7 +376,6 @@ nav ul li a i {
     height: 100%;
     overflow: auto; /* تمكين التمرير إذا كان المحتوى كبيراً */
     background-color: rgba(0,0,0,0.4); /* خلفية معتمة */
-    display: flex; /* لمركزة المحتوى */
     justify-content: center;
     align-items: center;
 }
