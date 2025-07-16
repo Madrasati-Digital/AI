@@ -1,4 +1,4 @@
-/* (كودك الأصلي لـ style.css قبل التعديلات) */
+/* (كودك الأصلي لـ style.css قبل التعديلات - هذا مجرد تعليق للتوضيح) */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -377,7 +377,6 @@ nav ul li a i {
         z-index: 1000;
         min-height: 40px;
     }
-    /* .language-switcher moved to relative and adjusted in smaller screens */
     .site-title {
         order: 1;
         flex-basis: auto;
@@ -464,49 +463,28 @@ nav ul li a i {
 }
 
 
-/* --- هذا هو الكود الجديد والخاص باللغات يجب إضافته في نهاية style.css --- */
+/* --- هذا هو الكود الجديد الذي يجب إضافته في نهاية style.css (تم تحديثه لحل المشكلات) --- */
 
-/* تنسيق أزرار تبديل اللغة */
+/* 1. تصحيح زر اللغة: الحجم والموقع */
 .language-switcher {
-    position: absolute; /* أو قد تضعه كـ `relative` وتغير الـ `top/right` */
-    top: 10px; /* اضبط حسب الحاجة ليتناسب مع شريط التنقل */
-    right: 20px; /* اضبط حسب الحاجة */
-    z-index: 1001; /* للتأكد أنها تظهر فوق العناصر الأخرى، أعلى من الهيدر */
+    position: absolute; /* احتفظ بها absolute لتحديد الموقع الدقيق */
+    top: 10px; /* اضبطها لأسفل قليلاً إذا لزم الأمر */
+    right: 20px; /* اضبطها لليمين */
+    z-index: 1001; /* تأكد أنها فوق كل شيء */
     display: flex;
-    gap: 5px; /* مسافة بين الزرين */
+    gap: 5px;
+    /* لجعل الزر أصغر */
+    font-size: 13px; /* حجم خط مناسب */
 }
 
 .language-switcher .lang-btn {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 6px 10px;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 5px 10px; /* تقليل الحشوة لجعل الزر أصغر */
+    font-size: 13px; /* تأكيد حجم الخط */
+    border-radius: 4px; /* جعل الحواف أقل دائرية قليلاً */
 }
 
-.language-switcher .lang-btn.active {
-    background-color: #007bff; /* لون مميز للزر النشط */
-    color: white;
-    border-color: #007bff;
-}
-
-/* تعديلات الاتجاه العام للجسم */
-/* هذه الكلاسات ستضاف/تزال بواسطة JavaScript على عنصر <body> */
-body.lang-ar {
-    direction: rtl;
-    text-align: right; /* لجعل المحتوى يبدأ من اليمين بشكل عام */
-}
-
-body.lang-en {
-    direction: ltr;
-    text-align: left; /* لجعل المحتوى يبدأ من اليسار بشكل عام */
-}
-
-/* تعديلات محددة للعناصر المتأثرة بالاتجاه (override للجزء العام) */
-
-/* الهيدر وعناصره - يجب أن يتبع الاتجاه العام للجسم */
+/* 2. تصحيح اتجاه شريط التنقل (Navbar) وتغيير مكان الروابط */
+/* اتجاه الـ header ككل */
 body.lang-ar header {
     direction: rtl;
 }
@@ -514,55 +492,84 @@ body.lang-en header {
     direction: ltr;
 }
 
-/* محاذاة النصوص داخل الأقسام - لضمان محاذاة كل المحتوى لليمين في العربية واليسار في الإنجليزية */
-body.lang-ar .about-content,
-body.lang-ar .skills-section,
-body.lang-ar .projects-section,
-body.lang-ar .recommendations-section,
-body.lang-ar .recommendations-section .add-recommendation-form-container {
-    text-align: right;
+/* لضبط ترتيب عناصر الـ nav داخل الـ header */
+body.lang-ar header .site-title {
+    order: 2; /* الاسم يمين */
+}
+body.lang-en header .site-title {
+    order: 1; /* الاسم يسار */
 }
 
-body.lang-en .about-content,
-body.lang-en .skills-section,
-body.lang-en .projects-section,
-body.lang-en .recommendations-section,
-body.lang-en .recommendations-section .add-recommendation-form-container {
-    text-align: left;
+body.lang-ar header nav {
+    order: 1; /* الروابط يسار */
+}
+body.lang-en header nav {
+    order: 2; /* الروابط يمين */
 }
 
-/* تعديل الهوامش والحشوة للقوائم - إذا كان لديك padding/margin ثابت على اليسار/اليمين */
+/* محاذاة روابط الـ Navbar داخل الـ ul */
 body.lang-ar nav ul {
-    /* إذا كان لديك padding-left: ...; أعدله هنا إلى padding-right */
-    padding-left: 0;
+    justify-content: flex-end; /* الروابط تبدأ من اليمين في العربية */
     padding-right: 0;
+    padding-left: 0;
 }
 body.lang-en nav ul {
+    justify-content: flex-start; /* الروابط تبدأ من اليسار في الإنجليزية */
     padding-left: 0;
     padding-right: 0;
 }
 
-/* تعديل مسافة عناصر الـ li في الـ Navbar */
+/* عكس الهوامش لعناصر القائمة في الـ Navbar */
 body.lang-ar nav ul li {
     margin-left: 0;
-    margin-right: 20px; /* عكس المارجن ليتناسب مع RTL */
+    margin-right: 20px; /* مسافة بين العناصر من اليمين في العربية */
 }
 body.lang-en nav ul li {
     margin-right: 0;
-    margin-left: 20px; /* إعادة المارجن لـ LTR */
+    margin-left: 20px; /* مسافة بين العناصر من اليسار في الإنجليزية */
 }
 
-/* أيقونات المهارات في الـ li - لعكس ترتيب الأيقونة والنص */
+
+/* 3. تصحيح محاذاة العناوين الرئيسية للأقسام (About Me, Skills, Projects, Recommendations) */
+/* هذه العناوين يجب أن تظل في المنتصف بغض النظر عن الاتجاه */
+.about-section h2,
+.skills-section h2,
+.projects-section h2,
+.recommendations-section h2,
+.add-recommendation-form-container h3 /* عنوان "Leave a Recommendation" */ {
+    text-align: center; /* إجبارها على أن تكون في المنتصف */
+}
+
+/* لضبط النص الرئيسي في قسم About Me ليكون في المنتصف */
+.about-content {
+    text-align: center; /* لجعل النص داخل هذا الـ div في المنتصف */
+}
+.about-content p {
+    margin-left: auto;
+    margin-right: auto; /* هذا سيجعل الفقرة تظهر في المنتصف ضمن الـ div */
+}
+
+
+/* ضبط الاتجاه العام للجسم والتأكد من تطبيق محاذاة النصوص */
+body.lang-ar {
+    direction: rtl;
+    /* text-align: right; هذا سيؤثر على كل شيء، لذا استخدمه بحذر أو اتركه */
+}
+
+body.lang-en {
+    direction: ltr;
+    /* text-align: left; */
+}
+
+/* الأيقونات والنصوص في قائمة المهارات */
 body.lang-ar .skills-category li {
-    flex-direction: row-reverse; /* لجعل الأيقونة بعد النص في العربية */
-    gap: 8px; /* المسافة بين الأيقونة والنص */
+    flex-direction: row-reverse; /* يجعل الأيقونة تتبع النص في العربية */
 }
 body.lang-en .skills-category li {
-    flex-direction: row; /* لجعل الأيقونة قبل النص في الإنجليزية */
-    gap: 8px;
+    flex-direction: row; /* الأيقونة تسبق النص في الإنجليزية */
 }
 
-/* حقول النموذج في قسم التوصيات - محاذاة تسميات الحقول */
+/* محاذاة حقول النموذج (labels) */
 body.lang-ar .form-group label {
     text-align: right;
 }
@@ -570,7 +577,7 @@ body.lang-en .form-group label {
     text-align: left;
 }
 
-/* زر الإرسال في النموذج - لتوسيعه في الاتجاهين إذا كان يستخدم margin: 0 auto; */
+/* محاذاة أزرار إرسال النموذج */
 body.lang-ar .submit-button {
     margin-left: auto;
     margin-right: auto;
@@ -581,19 +588,42 @@ body.lang-en .submit-button {
 }
 
 
-/* تعديلات الـ Media Queries لضمان عمل تبديل اللغة معها */
+/* Media Queries للتصميم المتجاوب - تحديثات لضبط تبديل اللغة */
 @media (max-width: 768px) {
+    /* زر تبديل اللغة في الشاشات الصغيرة */
     .language-switcher {
         position: relative; /* تغيير الموضع ليتناسب مع flexbox في الهيدر */
         top: auto;
         right: auto;
         order: 2; /* ترتيب أزرار اللغة داخل الهيدر المرن */
         margin-right: 10px; /* مسافة بسيطة */
+        margin-left: 10px; /* مسافة من اليسار ايضاً */
     }
-    /* في الوضع العربي على الشاشات الصغيرة، حوّل زر اللغة لليسار وعكس ترتيب الأزرار */
+    
+    /* ضبط اتجاه زر اللغة في العربية على الشاشات الصغيرة */
     body.lang-ar .language-switcher {
-        right: auto; /* إلغاء الـ right الافتراضي */
-        left: 10px; /* تحويلها لليسار */
+        left: auto; /* إلغاء الـ left الذي قد يوضع */
+        right: auto; /* إلغاء الـ right */
         flex-direction: row-reverse; /* ترتيب الزرين بشكل عكسي (الإنجليزية ثم العربية) */
+        /* يمكن ضبط justify-content هنا إذا كان جزءًا من الـ header كـ flex container */
+        /* justify-content: flex-end; */
+    }
+
+    /* ضمان أن الـ Navbar يتحرك بشكل صحيح في الشاشات الصغيرة */
+    body.lang-ar header nav ul {
+        justify-content: flex-start; /* الروابط تبدأ من اليسار في العربية (عكس الاتجاه الطبيعي للشريط) */
+    }
+    body.lang-en header nav ul {
+        justify-content: flex-end; /* الروابط تبدأ من اليمين في الإنجليزية (عكس الاتجاه الطبيعي للشريط) */
+    }
+
+    /* تعديل هوامش عناصر الـ nav ul li لتناسب الاتجاه */
+    body.lang-ar nav ul li {
+        margin-left: 0;
+        margin-right: 2px; /* مسافة أقل في الشاشات الصغيرة للعربية */
+    }
+    body.lang-en nav ul li {
+        margin-right: 0;
+        margin-left: 2px; /* مسافة أقل في الشاشات الصغيرة للإنجليزية */
     }
 }
