@@ -179,12 +179,23 @@ function applyTranslation(lang) {
     const langEnBtn = document.getElementById('lang-en');
 
     if (langArBtn && langEnBtn) {
+        // ***** START OF TEMPORARY DEBUGGING CODE IN JS - هذا هو الكود الذي يسبب ظهور الزر الأحمر *****
+        // اجعل كلا الزرين مرئيين دائماً، وتجاهل منطق الإخفاء المؤقت
+        langArBtn.style.display = 'block'; // اجعل زر العربية مرئياً دائماً
+        langEnBtn.style.display = 'block'; // اجعل زر الإنجليزية مرئياً دائماً
+
+        langArBtn.classList.remove('hidden'); // تأكد من إزالة فئة 'hidden' من زر العربية
+        langEnBtn.classList.remove('hidden'); // تأكد من إزالة فئة 'hidden' من زر الإنجليزية
+        // ***** END OF TEMPORARY DEBUGGING CODE IN JS *****
+
+        // الأسطر التالية التي كانت تتحكم في إظهار/إخفاء الزر بواسطة 'hidden' سيتم تجاهلها حالياً بسبب أسطر التشخيص
+        // لا تقم بتغيير هذه الأسطر، فقط اتركها كما هي (معلقة أو غير معلقة)
         if (lang === 'ar') {
-            langArBtn.classList.add('hidden'); // إخفاء زر العربية
-            langEnBtn.classList.remove('hidden'); // إظهار زر الإنجليزية
+            // langArBtn.classList.add('hidden'); // هذا السطر كان يسبب الإخفاء، لكننا تجاهلناه مؤقتاً
+            // langEnBtn.classList.remove('hidden');
         } else { // lang === 'en'
-            langEnBtn.classList.add('hidden'); // إخفاء زر الإنجليزية
-            langArBtn.classList.remove('hidden'); // إظهار زر العربية
+            // langEnBtn.classList.add('hidden'); // هذا السطر كان يسبب الإخفاء، لكننا تجاهلناه مؤقتاً
+            // langArBtn.classList.remove('hidden');
         }
     }
     // بعد تغيير اللغة، أعد جلب التوصيات لتحديث أي نصوص مترجمة داخلها (مثل "مجهول")
