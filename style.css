@@ -138,6 +138,11 @@ nav ul li a {
     align-items: center;
     gap: 5px; /* مسافة بين الأيقونة والنص */
     white-space: nowrap; /* مهم: لمنع التفاف النص داخل الرابط */
+    /*
+    *** التعديل الأول: تكبير حجم الخط لكلمات الـ Navbar ***
+    */
+    font-size: 17px; /* حجم الخط الجديد للروابط في اللغتين */
+    padding: 5px 10px; /* زيادة بسيطة في الحشوة لجعلها تبدو أفضل مع الخط الأكبر */
 }
 
 nav ul li a:hover {
@@ -268,7 +273,11 @@ body.lang-en .form-group label {
     color: #007bff;
     padding: 8px 15px;
     border-radius: 20px;
-    font-size: 15px;
+    /*
+    *** التعديل الثاني: جعل الكلمات داخل بطاقات المهارات بالخط العريض (Bold) ***
+    */
+    font-weight: bold; /* جعل النص بولد */
+    font-size: 15px; /* حجم الخط كما هو ليتناسب مع البولد */
     white-space: nowrap;
     border: 1px solid #cceeff;
     display: flex;
@@ -569,17 +578,21 @@ body.lang-ar .add-recommendation-form-container {
     }
     nav ul li a {
         padding: 2px 4px; /* **هنا التعديل: حشوة داخل كل رابط (تحكم في عرض الرابط). قيم أولية صغيرة جداً جداً.** */
-        font-size: 10px; /* **هنا التعديل: حجم الخط العام للروابط الإنجليزية (قيم أولية صغيرة جداً).** */
+        /*
+        *** التعديل على الجوال: حجم الخط للروابط ***
+        */
+        font-size: 13px; /* حجم خط أكبر قليلاً على الجوال */
         gap: 2px; /* مسافة أقل بين الأيقونة والنص */
         white-space: nowrap; /* منع التفاف النص داخل الرابط */
         line-height: 1.2;
     }
-    body.lang-ar nav ul li a {
-        font-size: 11px; /* **هنا التعديل: حجم خط الروابط العربية على الجوال (قيم أولية صغيرة جداً).** */
+    /* إزالة التعديلات المنفصلة للخط العربي والإنجليزي على الجوال وإبقاء قاعدة واحدة */
+    /* body.lang-ar nav ul li a {
+        font-size: 11px;
     }
     body.lang-en nav ul li a {
-        font-size: 10px; /* **هنا التعديل: حجم خط الروابط الإنجليزية على الجوال (قيم أولية صغيرة جداً).** */
-    }
+        font-size: 10px;
+    } */
 
 
     /* Further adjust top padding for other sections on mobile */
@@ -597,15 +610,19 @@ body.lang-ar .add-recommendation-form-container {
     }
     nav ul li a {
         padding: 1px 2px;
-        font-size: 9px;
+        /*
+        *** التعديل على الجوال الصغير: حجم الخط للروابط ***
+        */
+        font-size: 12px; /* حجم خط أكبر قليلاً على الجوال الأصغر */
         gap: 1px;
     }
-    body.lang-ar nav ul li a {
+    /* إزالة التعديلات المنفصلة للخط العربي والإنجليزي على الجوال وإبقاء قاعدة واحدة */
+    /* body.lang-ar nav ul li a {
         font-size: 10px;
     }
     body.lang-en nav ul li a {
         font-size: 9px;
-    }
+    } */
     .about-section {
         padding-top: 110px;
     }
