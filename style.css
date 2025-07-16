@@ -383,46 +383,46 @@ header {
     padding-bottom: 10px;
 }
 
-/* محاذاة زر اللغة والـ Navbar داخل الهيدر */
-/* لجعل الروابط والزر على الجانبين المطلوبين */
-header nav { /* هذا يمثل الحاوية لـ ul ولـ language-switcher */
-    display: flex;
-    align-items: center;
-    flex-grow: 1; /* السماح للـ nav بأخذ المساحة المتاحة */
-}
-
-/* تحديد اتجاه وترتيب عناصر الـ nav بناءً على اللغة */
-body.lang-ar header nav {
-    direction: rtl; /* لجعل الـ ul على اليمين والزر على اليسار */
-    justify-content: space-between; /* لدفع العناصر إلى الأطراف */
-    padding-right: 20px; /* مسافة من اليمين (حافة المتصفح) */
-    padding-left: 0;
-}
-
-body.lang-en header nav {
-    direction: ltr; /* لجعل الـ ul على اليسار والزر على اليمين */
-    justify-content: space-between; /* لدفع العناصر إلى الأطراف */
-    padding-left: 20px; /* مسافة من اليسار (حافة المتصفح) */
-    padding-right: 0;
-}
-
-/* تحديد ترتيب زر اللغة والـ ul داخل الـ nav */
+/* تحديد موقع زر اللغة بناءً على اللغة */
 .language-switcher {
-    order: 2; /* زر اللغة يظهر ثانياً (سيكون على اليسار في RTL وعلى اليمين في LTR) */
-    position: relative; /* ليكون جزءًا من تدفق الـ nav */
-    top: auto;
-    right: auto;
+    position: absolute;
+    top: 10px;
     z-index: 1002;
     display: flex;
     gap: 5px;
     flex-shrink: 0;
 }
 
-nav ul {
-    order: 1; /* الروابط تظهر أولاً (ستكون على اليمين في RTL وعلى اليسار في LTR) */
-    justify-content: flex-start; /* الروابط تبدأ من البداية ضمن ترتيبها */
+body.lang-ar .language-switcher {
+    left: 20px; /* زر اللغة يسار في العربية */
+    right: auto;
+}
+body.lang-en .language-switcher {
+    right: 20px; /* زر اللغة يمين في الإنجليزية */
+    left: auto;
 }
 
+/* ضبط محاذاة روابط الـ Navbar بناءً على اللغة */
+nav {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* للسماح لها بأخذ المساحة المتاحة */
+    padding: 0;
+}
+
+body.lang-ar nav {
+    justify-content: flex-end; /* الروابط على اليمين في العربية */
+    direction: rtl; /* اتجاه الروابط نفسها */
+    margin-right: 20px; /* مسافة من اليمين للحافة */
+    margin-left: auto; /* لدفعها لليمين */
+}
+
+body.lang-en nav {
+    justify-content: flex-start; /* الروابط على اليسار في الإنجليزية */
+    direction: ltr; /* اتجاه الروابط نفسها */
+    margin-left: 20px; /* مسافة من اليسار للحافة */
+    margin-right: auto; /* لدفعها لليسار */
+}
 
 /* 3. تعديل شكل زر تغيير اللغة (أصغر وأكثر تناسقًا) */
 .language-switcher .lang-btn {
@@ -500,28 +500,29 @@ body.lang-en .skills-category li {
     
     /* 1. الصورة في قسم About Me (مشكلة القطع) */
     .profile-image-container {
-        width: 150px;
-        height: 150px;
-        overflow: hidden;
-        border-radius: 50%;
-        margin: 0 auto 15px auto;
+        width: 150px; /* ضمان عرض ثابت */
+        height: 150px; /* ضمان ارتفاع ثابت */
+        overflow: hidden; /* قص أي جزء خارج الدائرة */
+        border-radius: 50%; /* لجعلها دائرة */
+        margin: 0 auto 15px auto; /* توسيط الصورة */
+        /* يمكن إضافة flex-shrink: 0; هنا إذا كانت الصورة تتشوه في Flexbox */
     }
     .profile-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
+        object-fit: cover; /* لضمان ملء الصورة للحاوية مع الحفاظ على الأبعاد */
+        border-radius: 50%; /* لضمان شكل دائري */
     }
 
     /* 2. زر اللغة على الجوال: ثابت في مكان مناسب وواضح */
     .language-switcher {
-        position: relative;
+        position: relative; /* ليكون جزءًا من التدفق العمودي */
         top: auto;
         right: auto;
-        order: 1;
-        margin-bottom: 10px;
+        order: 1; /* يظهر أولاً */
+        margin-bottom: 10px; /* مسافة من الـ Navbar */
         width: 100%;
-        justify-content: center;
+        justify-content: center; /* توسيط أزرار اللغة */
         padding: 0 10px;
         box-sizing: border-box;
         gap: 8px;
@@ -533,7 +534,7 @@ body.lang-en .skills-category li {
 
     /* 3. الـ Navbar على الجوال: ثابت في المنتصف، كلمات أكبر، تظهر كاملة */
     nav {
-        order: 2;
+        order: 2; /* يظهر بعد زر اللغة */
         width: 100%;
         padding: 0 10px;
         margin-bottom: 15px;
