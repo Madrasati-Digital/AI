@@ -577,34 +577,34 @@ body.lang-ar .add-recommendation-form-container {
         justify-content: center; /* توسيط الروابط */
         display: flex;
         flex-wrap: nowrap; /* منع التفاف الروابط إلى سطر جديد مهما كان الثمن */
-        gap: 5px; /* مسافة أولية بين الروابط (لتجربتها) */
+        gap: 5px; /* **هنا التعديل: مسافة أولية بين الروابط (لتجربتها)** */
         height: auto;
     }
     nav ul {
         justify-content: center;
         display: flex;
-        flex-wrap: nowrap; /* منع التفاف الروابط إلى سطر جديد داخل الـ ul */
+        flex-wrap: nowrap;
         padding: 0;
         margin: 0;
-        direction: ltr; /* Force LTR direction on ul for consistent behavior */
+        direction: ltr;
     }
     nav ul li {
         margin: 0;
-        flex-shrink: 0; /* منع الانكماش لضمان أخذ الحجم المطلوب وعدم الاختفاء */
+        flex-shrink: 0;
         text-align: center;
     }
     nav ul li a {
-        padding: 2px 4px; /* حشوة داخل كل رابط (تحكم في عرض الرابط). قيم أولية صغيرة جداً جداً. */
-        font-size: 10px; /* حجم الخط العام للروابط الإنجليزية (قيم أولية صغيرة جداً). */
+        padding: 2px 4px; /* **هنا التعديل: حشوة داخل كل رابط (تحكم في عرض الرابط). قيم أولية صغيرة جداً جداً.** */
+        font-size: 10px; /* **هنا التعديل: حجم الخط العام للروابط الإنجليزية (قيم أولية صغيرة جداً).** */
         gap: 2px; /* مسافة أقل بين الأيقونة والنص */
         white-space: nowrap; /* منع التفاف النص داخل الرابط */
         line-height: 1.2;
     }
     body.lang-ar nav ul li a {
-        font-size: 11px; /* تكبير الخط للعربية قليلاً عن الإنجليزية */
+        font-size: 11px; /* **هنا التعديل: حجم خط الروابط العربية على الجوال (قيم أولية صغيرة جداً).** */
     }
     body.lang-en nav ul li a {
-        font-size: 10px; /* حجم افتراضي للإنجليزية */
+        font-size: 10px; /* **هنا التعديل: حجم خط الروابط الإنجليزية على الجوال (قيم أولية صغيرة جداً).** */
     }
 
 
