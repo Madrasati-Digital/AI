@@ -610,3 +610,25 @@ body.lang-ar .add-recommendation-form-container {
         padding-top: 110px; /* Fine-tune for smaller screens */
     }
 }
+/* أضف هذه القاعدة الجديدة في أي مكان في ملف style.css */
+.lang-btn.hidden {
+    display: none;
+}
+
+/* (باقي كود CSS الخاص بك كما هو بالضبط) */
+
+/* Language Switcher Positioning and Ordering */
+.language-switcher {
+    display: flex; /* لكي يعمل الـ Flexbox بشكل صحيح لإظهار/إخفاء الزر */
+    gap: 5px;
+    flex-shrink: 0;
+    z-index: 1002;
+}
+/* هذه القواعد ستبقى كما هي لأنها تعتمد على order داخل الـ header */
+body.lang-ar .language-switcher {
+    order: 0; /* زر اللغة يمين (في LTR header) -> فعلياً يسار الشاشة */
+}
+body.lang-en .language-switcher {
+    order: 1; /* زر اللغة يسار (في LTR header) -> فعلياً يمين الشاشة */
+}
+
