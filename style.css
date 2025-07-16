@@ -47,9 +47,11 @@ header {
 
 body.lang-ar .language-switcher {
     order: 0; /* Will appear at the left side of the LTR header */
+    margin-right: auto; /* يدفع الـ Navbar إلى اليمين */
 }
 body.lang-en .language-switcher {
     order: 1; /* Will appear at the right side of the LTR header */
+    margin-left: auto; /* يدفع الـ Navbar إلى اليسار */
 }
 
 /* Language Switcher Buttons */
@@ -66,13 +68,8 @@ body.lang-en .language-switcher {
 .language-switcher .lang-btn:hover {
     background-color: #0056b3;
 }
-/* أزلنا فئة 'active' من الأزرار في HTML، لذا هذا السطر لن يكون له تأثير مباشر بعد الآن */
-/* .language-switcher .lang-btn.active {
-    background-color: #0056b3;
-    border-color: #003e80;
-} */
 
-/* أضف هذه القاعدة الجديدة في أي مكان في ملف style.css */
+/* قاعدة إخفاء الأزرار غير النشطة */
 .lang-btn.hidden {
     display: none;
 }
@@ -105,7 +102,6 @@ nav ul {
     margin: 0;
     padding: 0;
     display: flex;
-    /* Use direction on ul to ensure proper item ordering within the list */
 }
 
 body.lang-ar nav ul {
@@ -138,9 +134,10 @@ nav ul li a {
     color: #007bff;
     font-weight: bold;
     transition: color 0.3s ease, text-decoration 0.3s ease, transform 0.3s ease;
-    display: flex;
+    display: flex; /* مهم: لجعل الأيقونة والنص بجانب بعضهما */
     align-items: center;
-    gap: 5px;
+    gap: 5px; /* مسافة بين الأيقونة والنص */
+    white-space: nowrap; /* مهم: لمنع التفاف النص داخل الرابط */
 }
 
 nav ul li a:hover {
@@ -567,11 +564,11 @@ body.lang-ar .add-recommendation-form-container {
         justify-content: center; /* Center nav links within their container */
         display: flex;
         flex-wrap: wrap; /* Allow links to wrap to next line */
-        gap: 6px 10px; /* Gap between wrapped links */
+        gap: 8px 15px; /* **مهم:** زيادة المسافة بين الروابط على الجوال لتقليل التداخل */
         height: auto;
     }
     nav ul {
-        justify-content: center; /* Center the ul content */
+        justify-content: center;
         display: flex;
         width: 100%;
         flex-wrap: wrap;
@@ -586,12 +583,20 @@ body.lang-ar .add-recommendation-form-container {
         text-align: center;
     }
     nav ul li a {
-        padding: 5px 10px;
-        font-size: 13px;
-        gap: 3px;
-        white-space: nowrap; /* Prevent text wrapping within a single link */
+        padding: 6px 12px; /* **تعديل:** حشوة أكبر قليلاً */
+        font-size: 14px; /* **تعديل:** خط أكبر قليلاً */
+        gap: 5px; /* مسافة بين الأيقونة والنص */
+        white-space: nowrap;
         line-height: 1.2;
     }
+    /* **إضافة:** حجم خط أكبر قليلاً للروابط العربية على الجوال */
+    body.lang-ar nav ul li a {
+        font-size: 15px; /* تكبير الخط للعربية */
+    }
+    body.lang-en nav ul li a {
+        font-size: 14px; /* حجم افتراضي للإنجليزية */
+    }
+
 
     /* Further adjust top padding for other sections on mobile */
     .skills-section,
@@ -607,10 +612,13 @@ body.lang-ar .add-recommendation-form-container {
         font-size: 12px;
     }
     nav ul li a {
-        padding: 4px 8px;
-        font-size: 12px;
+        padding: 5px 10px; /* ضبط الحشوة للروابط على الشاشات الأصغر */
+        font-size: 13px; /* ضبط حجم الخط للروابط على الشاشات الأصغر */
+    }
+    body.lang-ar nav ul li a {
+        font-size: 14px; /* تكبير الخط للعربية على الشاشات الأصغر */
     }
     .about-section {
-        padding-top: 110px; /* Fine-tune for smaller screens */
+        padding-top: 110px;
     }
 }
