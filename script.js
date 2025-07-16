@@ -188,7 +188,7 @@ function applyTranslation(lang) {
         }
     }
     // بعد تغيير اللغة، أعد جلب التوصيات لتحديث أي نصوص مترجمة داخلها (مثل "مجهول")
-    fetchRecommendations(); 
+    fetchRecommendations();
 }
 
 // دالة لعرض التوصيات
@@ -203,8 +203,9 @@ async function fetchRecommendations() {
         }
         snapshot.forEach(doc => {
             const data = doc.data();
-            // استخدام data.titleOrg للعنوان
-            const recommenderTitleText = data.titleOrg || translations[currentLanguage].anonymousPlaceholder;
+            
+            // استخدام data.titleOrg أولاً، ثم data.title، ثم القيمة الافتراضية المترجمة
+            const recommenderTitleText = data.titleOrg || data.title || translations[currentLanguage].anonymousPlaceholder;
 
             const card = document.createElement('div');
             card.classList.add('recommendation-card');
@@ -214,7 +215,6 @@ async function fetchRecommendations() {
                 <h4>${data.name || translations[currentLanguage].anonymousPlaceholder}</h4>
                 <p class="recommender-title">${recommenderTitleText}</p>
             `;
-            // Simplified the innerHTML to directly use recommenderTitleText
             
             recommendationsContainer.appendChild(card);
         });
