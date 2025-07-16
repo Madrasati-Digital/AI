@@ -20,7 +20,7 @@ header {
     padding: 10px 20px;
     border-bottom: 1px solid #ddd;
     display: flex;
-    justify-content: space-between; /* Distribute items to edges */
+    justify-content: space-between; /* Distribute items to edges (physical left/right) */
     align-items: center;
     position: fixed;
     width: 100%;
@@ -28,25 +28,28 @@ header {
     left: 0;
     box-sizing: border-box;
     z-index: 1000;
+    /* Ensure header's internal flex direction is always LTR for consistent ordering with 'order' property */
+    direction: ltr; /* This is key for consistent order with space-between */
 }
 
 .site-title {
     display: none; /* Hide "Rashed Alhashmi" from the top navigation bar */
 }
 
-/* Language Switcher Positioning */
+/* Language Switcher Positioning and Ordering */
 .language-switcher {
     display: flex;
     gap: 5px;
     flex-shrink: 0; /* Prevents shrinking */
-    z-index: 1002; /* Ensure it's above other elements if needed */
+    z-index: 1002;
+    /* Order within the LTR header flex container */
 }
 
 body.lang-ar .language-switcher {
-    order: -1; /* Puts it to the far left in LTR flex context (header) */
+    order: 0; /* Will appear at the left side of the LTR header */
 }
 body.lang-en .language-switcher {
-    order: 1; /* Puts it to the far right in LTR flex context (header) */
+    order: 1; /* Will appear at the right side of the LTR header */
 }
 
 /* Language Switcher Buttons */
@@ -68,24 +71,26 @@ body.lang-en .language-switcher {
     border-color: #003e80;
 }
 
-/* Navigation Menu */
+/* Navigation Menu Positioning and Ordering */
 nav {
     display: flex;
     align-items: center;
     flex-grow: 1; /* Allows it to take available space */
     padding: 0;
+    /* Order within the LTR header flex container */
 }
 
 body.lang-ar nav {
-    justify-content: flex-end; /* Align links to the right for Arabic */
-    /* No need for direction: rtl here directly on nav, as ul handles content direction */
-    padding-right: 20px;
+    order: 1; /* Will appear at the right side of the LTR header */
+    justify-content: flex-end; /* Align links to the right within nav */
+    padding-right: 20px; /* Space from right edge */
     padding-left: 0;
 }
 
 body.lang-en nav {
-    justify-content: flex-start; /* Align links to the left for English */
-    padding-left: 20px;
+    order: 0; /* Will appear at the left side of the LTR header */
+    justify-content: flex-start; /* Align links to the left within nav */
+    padding-left: 20px; /* Space from left edge */
     padding-right: 0;
 }
 
@@ -99,13 +104,14 @@ nav ul {
 
 body.lang-ar nav ul {
     direction: rtl; /* For correct ordering of list items (right-to-left) */
-    margin-right: auto; /* Push ul to the right in LTR context of nav */
+    /* margin-right: auto; // Not needed with order and justify-content */
 }
 body.lang-en nav ul {
-    direction: ltr; /* For correct ordering of list items (left-to-right) */
-    margin-left: auto; /* Push ul to the left in LTR context of nav */
+    direction: ltr; /* Default, but explicit for clarity */
+    /* margin-left: auto; // Not needed with order and justify-content */
 }
 
+/* Adjust margins between list items based on language direction */
 nav ul li {
     /* Margin between list items based on language direction */
 }
@@ -519,6 +525,7 @@ body.lang-ar .add-recommendation-form-container {
         align-items: center;
         padding: 8px 10px; /* Reduced padding */
         height: auto; /* Allow header to adjust height */
+        direction: ltr; /* Always LTR on mobile for header flex items, then use order */
     }
 
     /* Adjust padding for the first content section to clear the fixed header */
@@ -533,7 +540,7 @@ body.lang-ar .add-recommendation-form-container {
         top: auto;
         right: auto;
         left: auto;
-        order: 1; /* Appears first */
+        order: 1; /* Appears first (top) in the mobile column */
         margin-bottom: 10px; /* Space between language buttons and nav */
         width: 100%;
         justify-content: center; /* Center buttons */
@@ -547,7 +554,7 @@ body.lang-ar .add-recommendation-form-container {
 
     /* Navbar on mobile */
     nav {
-        order: 2; /* Appears after language switcher */
+        order: 2; /* Appears after language switcher (below it) */
         width: 100%;
         padding: 0 5px;
         margin-bottom: 15px;
@@ -566,7 +573,7 @@ body.lang-ar .add-recommendation-form-container {
         flex-wrap: wrap;
         padding: 0;
         margin: 0;
-        direction: ltr; /* Force LTR direction on ul for consistent wrapping behavior */
+        direction: ltr; /* Force LTR direction on ul for consistent wrapping behavior on mobile */
     }
     nav ul li {
         margin: 0; /* Remove specific margins, rely on gap */
