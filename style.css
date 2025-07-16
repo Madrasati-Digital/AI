@@ -376,7 +376,7 @@ nav ul li a i {
 /* 2. ضبط محاذاة شريط التنقل (Navbar) وعناصر الهيدر على الكمبيوتر */
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* للسماح بتوزيع العناصر على الأطراف */
     align-items: center;
     flex-wrap: nowrap;
     padding-top: 10px;
@@ -496,6 +496,7 @@ body.lang-en .skills-category li {
         padding: 10px;
         min-height: auto;
         height: auto;
+        padding-bottom: 5px; /* تقليل الحشوة السفلية لتقليل ارتفاع الهيدر */
     }
     
     /* 1. الصورة في قسم About Me (مشكلة القطع) */
@@ -504,7 +505,7 @@ body.lang-en .skills-category li {
         height: 150px;
         overflow: hidden;
         border-radius: 50%;
-        margin: 0 auto 15px auto; /* توسيط الصورة */
+        margin: 0 auto 15px auto;
     }
     .profile-image {
         width: 100%;
@@ -513,12 +514,17 @@ body.lang-en .skills-category li {
         border-radius: 50%;
     }
 
+    /* ضبط مكان الصورة لتنزل أكثر بعيدًا عن الهيدر */
+    .about-section {
+        padding-top: 130px; /* زيادة الحشوة العلوية لدفع الصورة للأسفل */
+    }
+
     /* 2. زر اللغة على الجوال: ثابت في مكان مناسب وواضح */
     .language-switcher {
-        position: relative; /* ليكون جزءًا من التدفق العمودي */
+        position: relative;
         top: auto;
         right: auto;
-        order: 1; /* يظهر أولاً */
+        order: 1;
         margin-bottom: 10px;
         width: 100%;
         justify-content: center;
@@ -533,16 +539,16 @@ body.lang-en .skills-category li {
 
     /* 3. الـ Navbar على الجوال: ثابت في المنتصف، كلمات أكبر، تظهر كاملة */
     nav {
-        order: 2; /* يظهر بعد زر اللغة */
+        order: 2;
         width: 100%;
         padding: 0 10px;
         margin-bottom: 15px;
-        overflow-x: hidden; /* إخفاء التمرير الأفقي (سنضبط العناصر لتناسب العرض) */
+        overflow-x: hidden;
         white-space: normal; /* السماح بالتفاف النصوص إذا لزم الأمر */
-        justify-content: center; /* توسيط الروابط */
+        justify-content: center;
         display: flex;
         flex-wrap: wrap; /* السماح للروابط بالنزول لسطر جديد */
-        gap: 5px 10px; /* مسافة بين الروابط (صف وعمود) */
+        gap: 5px 10px;
         height: auto;
     }
     nav ul {
@@ -567,7 +573,7 @@ body.lang-en .skills-category li {
     }
 
     /* ضبط padding-top للأقسام ليتجنب تداخل الهيدر الجديد */
-    .about-section,
+    /* بما أننا عدلنا .about-section padding-top، يمكن هنا أن يكون أقل */
     .skills-section,
     .projects-section,
     .recommendations-section {
@@ -584,10 +590,14 @@ body.lang-en .skills-category li {
         font-size: 13px;
         padding: 4px 8px;
     }
-    .about-section,
+    .about-section, /* Adjust padding-top for smallest screens as well */
     .skills-section,
     .projects-section,
     .recommendations-section {
         padding-top: 25px;
+    }
+    /* زيادة الـ padding-top لقسم about-section على أصغر الشاشات أيضاً */
+    .about-section {
+        padding-top: 120px; /* ضبط ليتناسب مع ارتفاع الهيدر الجديد */
     }
 }
