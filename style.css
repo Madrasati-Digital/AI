@@ -336,6 +336,7 @@ body.lang-ar .project-card {
     color: #555;
     line-height: 1.6;
     margin-bottom: 15px;
+    font-style: italic;
 }
 
 .project-icon {
@@ -536,6 +537,7 @@ body.lang-ar .add-recommendation-form-container {
         padding: 8px 10px; /* Reduced padding */
         height: auto; /* Allow header to adjust height */
         direction: ltr; /* Always LTR on mobile for header flex items, then use order */
+        position: relative; /* <--- أضفت هذا السطر هنا (السطر 206) */
     }
 
     /* Adjust padding for the first content section to clear the fixed header */
@@ -544,9 +546,22 @@ body.lang-ar .add-recommendation-form-container {
         margin-top: 0;
     }
 
-    /* **إخفاء زر اللغة بالكامل على الجوال** */
-    .language-switcher {
-        display: none; /* هذا هو التعديل لإخفاء زر اللغة على الجوال */
+    /* **إظهار زر اللغة وتحديده في الزاوية العلوية اليمنى** */
+    .language-switcher { /* السطر 220 */
+        display: flex; /* <--- غيّر 'none' إلى 'flex' */
+        position: absolute; /* <--- أضف هذا السطر */
+        top: 10px; /* <--- أضف هذا السطر (يمكنك تعديل القيمة) */
+        right: 10px; /* <--- أضف هذا السطر (يمكنك تعديل القيمة) */
+        z-index: 1002; /* <--- أضف هذا السطر للتأكد من ظهوره فوق العناصر الأخرى */
+        /* لا حاجة لهذه الخصائص بعد استخدام Position: absolute */
+        /* width: 100%; */
+        /* padding: 0 10px; */
+        /* box-sizing: border-box; */
+        /* min-height: 30px; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* margin-bottom: 10px; */
+        /* order: 1; */
     }
 
     /* Navbar on mobile */
