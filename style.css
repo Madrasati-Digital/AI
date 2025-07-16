@@ -17,7 +17,7 @@ body.lang-en {
 
 header {
     background-color: #fff;
-    padding: 10px 20px;
+    padding: 10px 20px; /* **تمت إعادة القيمة الأصلية للكمبيوتر (10px)** */
     border-bottom: 1px solid #ddd;
     display: flex;
     justify-content: space-between; /* Distribute items to edges (physical left/right) */
@@ -36,7 +36,7 @@ header {
     display: none; /* Hide "Rashed Alhashmi" from the top navigation bar */
 }
 
-/* Language Switcher Positioning and Ordering (Desktop - لم يتم المساس به) */
+/* Language Switcher Positioning and Ordering */
 .language-switcher {
     display: flex; /* لكي يعمل الـ Flexbox بشكل صحيح لإظهار/إخفاء الزر */
     gap: 5px;
@@ -73,7 +73,7 @@ body.lang-en .language-switcher {
     display: none;
 }
 
-/* Navigation Menu Positioning and Ordering (Desktop - لم يتم المساس به) */
+/* Navigation Menu Positioning and Ordering */
 nav {
     display: flex;
     align-items: center;
@@ -528,43 +528,41 @@ body.lang-ar .add-recommendation-form-container {
         flex-direction: column; /* Stack items vertically */
         justify-content: center;
         align-items: center;
-        padding: 8px 10px; /* Reduced padding */
+        padding: 5px 10px; /* **هنا التعديل: تقليل الحشوة العمودية للجوال (5px)** */
         height: auto; /* Allow header to adjust height */
         direction: ltr; /* Always LTR on mobile for header flex items, then use order */
-        position: fixed; /* **مهم: أضفت هذا السطر هنا لتحديد المطلق (السطر 206)** */
+        position: fixed;
     }
 
     /* Adjust padding for the first content section to clear the fixed header */
     .about-section {
-        padding-top: 130px; /* More padding to account for taller mobile header */
+        padding-top: 100px; /* **هنا التعديل: تقليل الـ padding-top ليتناسب مع الـ header الأقصر** */
         margin-top: 0;
     }
 
     /* **إظهار زر اللغة وتحديده في الزاوية العلوية اليمنى** */
-    .language-switcher { /* السطر 220 */
-        display: flex; /* <--- غيّر 'none' إلى 'flex' */
-        position: absolute; /* <--- أضف هذا السطر */
-        top: 10px; /* <--- أضف هذا السطر (يمكنك تعديل القيمة) */
-        /* right: 10px; */ /* **أزل هذا السطر: سيتم تحديده بناءً على اللغة** */
-        z-index: 1002; /* <--- أضف هذا السطر للتأكد من ظهوره فوق العناصر الأخرى */
-        /* لا حاجة لهذه الخصائص بعد استخدام Position: absolute */
-        width: auto; /* بدلاً من width: 100%; */
-        padding: 0; /* بدلاً من 0 10px */
-        box-sizing: content-box; /* بدلاً من border-box */
-        min-height: auto; /* بدلاً من 30px */
-        align-items: flex-start; /* بدلاً من center */
-        justify-content: flex-start; /* بدلاً من center */
-        margin-bottom: 0; /* بدلاً من 10px */
-        order: auto; /* بدلاً من 1 */
+    .language-switcher {
+        display: flex;
+        position: absolute;
+        top: 5px; /* **هنا التعديل: تقليل الـ top ليتناسب مع الـ header الأقصر** */
+        z-index: 1002;
+        width: auto;
+        padding: 0;
+        box-sizing: content-box;
+        min-height: auto;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-bottom: 0;
+        order: auto;
     }
     /* **هنا التعديل الجديد: التحكم بموقع زر اللغة داخل حاويته على الجوال (بناءً على اللغة)** */
     body.lang-ar .language-switcher {
         left: 10px; /* زر اللغة لليسار في العربية (زر English) */
-        right: auto; /* مهم لتجاهل أي right سابق */
+        right: auto;
     }
     body.lang-en .language-switcher {
         right: 10px; /* زر اللغة لليمين في الإنجليزية (زر العربية) */
-        left: auto; /* مهم لتجاهل أي left سابق */
+        left: auto;
     }
 
 
@@ -574,12 +572,12 @@ body.lang-ar .add-recommendation-form-container {
         width: 100%;
         padding: 0 5px;
         margin-bottom: 15px;
-        overflow-x: hidden; /* إخفاء التمرير الأفقي تماماً (بناءً على طلبك) */
+        overflow-x: auto;
         white-space: normal;
         justify-content: center; /* توسيط الروابط */
         display: flex;
         flex-wrap: nowrap; /* منع التفاف الروابط إلى سطر جديد مهما كان الثمن */
-        gap: 5px; /* **هنا التعديل: مسافة أولية بين الروابط (لتجربتها)** */
+        gap: 5px;
         height: auto;
     }
     nav ul {
@@ -620,13 +618,11 @@ body.lang-ar .add-recommendation-form-container {
 
 @media (max-width: 480px) {
     /* **تعديلات زر اللغة على الشاشات الأصغر** */
-    .language-switcher { /* السطر 264 */
+    .language-switcher {
         display: flex;
         position: absolute;
-        top: 5px; /* Adjust as needed */
-        /* right: 5px; */ /* **أزل هذا السطر: سيتم تحديده بناءً على اللغة** */
+        top: 3px; /* **هنا التعديل: تقليل الـ top ليتناسب مع الـ header الأقصر على الشاشات الأصغر** */
         z-index: 1002;
-        /* لا حاجة لهذه الخصائص بعد استخدام Position: absolute */
         width: auto;
         padding: 0;
         box-sizing: content-box;
@@ -662,6 +658,6 @@ body.lang-ar .add-recommendation-form-container {
         font-size: 10px; /* حجم الخط للإنجليزية على الجوال الأصغر (أصغر قليلاً) */
     }
     .about-section {
-        padding-top: 110px;
+        padding-top: 90px; /* **هنا التعديل: تقليل الـ padding-top ليتناسب مع الـ header الأقصر على الشاشات الأصغر** */
     }
 }
