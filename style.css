@@ -383,6 +383,7 @@ body.lang-ar .recommendation-card {
 }
 
 .recommendation-card .recommender-title {
+
     font-size: 14px;
     color: #777;
     margin-bottom: 0;
@@ -530,7 +531,7 @@ body.lang-ar .add-recommendation-form-container {
         padding: 8px 10px; /* Reduced padding */
         height: auto; /* Allow header to adjust height */
         direction: ltr; /* Always LTR on mobile for header flex items, then use order */
-        position: relative; /* **مهم: أضفت هذا السطر هنا لتحديد المطلق (السطر 206)** */
+        position: fixed; /* **مهم: أضفت هذا السطر هنا لتحديد المطلق (السطر 206)** */
     }
 
     /* Adjust padding for the first content section to clear the fixed header */
