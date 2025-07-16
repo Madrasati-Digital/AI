@@ -595,7 +595,7 @@ body.lang-ar .add-recommendation-form-container {
         text-align: center;
     }
     nav ul li a {
-        padding: 2px 4px; /* حشوة داخل كل رابط (تحكم في عرض الرابط). قيم أولية صغيرة جداً جداً. */
+        padding: 2px 4px; /* حشوة داخل كل رابط (تحكم في عرض الرابط). قيم أولية صغيرة جداً جداً.*/
         gap: 2px; /* مسافة أقل بين الأيقونة والنص */
         white-space: nowrap; /* منع التفاف النص داخل الرابط */
         line-height: 1.2;
