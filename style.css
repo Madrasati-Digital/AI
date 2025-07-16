@@ -491,12 +491,12 @@ body.lang-en .skills-category li {
 @media (max-width: 768px) {
     header {
         flex-direction: column; /* تكديس عمودي */
-        justify-content: flex-start;
-        align-items: center;
-        padding: 10px;
+        justify-content: center; /* توسيط المحتوى عموديًا */
+        align-items: center; /* توسيط العناصر أفقيا */
+        padding: 5px 10px; /* حشوة أقل لتقليل ارتفاع الهيدر */
         min-height: auto;
         height: auto;
-        padding-bottom: 5px; /* تقليل الحشوة السفلية لتقليل ارتفاع الهيدر */
+        box-sizing: border-box; /* لضمان أن الحشوة لا تزيد من العرض/الارتفاع */
     }
     
     /* 1. الصورة في قسم About Me (مشكلة القطع) */
@@ -517,6 +517,7 @@ body.lang-en .skills-category li {
     /* ضبط مكان الصورة لتنزل أكثر بعيدًا عن الهيدر */
     .about-section {
         padding-top: 130px; /* زيادة الحشوة العلوية لدفع الصورة للأسفل */
+        margin-top: 0; /* لضمان عدم وجود هامش علوي إضافي */
     }
 
     /* 2. زر اللغة على الجوال: ثابت في مكان مناسب وواضح */
@@ -524,8 +525,8 @@ body.lang-en .skills-category li {
         position: relative;
         top: auto;
         right: auto;
-        order: 1;
-        margin-bottom: 10px;
+        order: 1; /* يظهر أولاً */
+        margin-bottom: 8px; /* مسافة أقل بينه وبين الـ Navbar */
         width: 100%;
         justify-content: center;
         padding: 0 10px;
@@ -533,22 +534,22 @@ body.lang-en .skills-category li {
         gap: 8px;
     }
     .language-switcher .lang-btn {
-        padding: 6px 12px;
-        font-size: 14px;
+        padding: 5px 10px; /* حشوة أقل قليلاً */
+        font-size: 13px; /* خط أصغر قليلاً */
     }
 
     /* 3. الـ Navbar على الجوال: ثابت في المنتصف، كلمات أكبر، تظهر كاملة */
     nav {
-        order: 2;
+        order: 2; /* يظهر بعد زر اللغة */
         width: 100%;
-        padding: 0 10px;
+        padding: 0 5px; /* حشوة أقل من الجوانب */
         margin-bottom: 15px;
-        overflow-x: hidden;
-        white-space: normal; /* السماح بالتفاف النصوص إذا لزم الأمر */
+        overflow-x: hidden; /* إخفاء التمرير الأفقي */
+        white-space: normal; /* السماح بالتفاف النصوص */
         justify-content: center;
         display: flex;
         flex-wrap: wrap; /* السماح للروابط بالنزول لسطر جديد */
-        gap: 5px 10px;
+        gap: 5px 8px; /* مسافة أقل بين الروابط (صف وعمود) */
         height: auto;
     }
     nav ul {
@@ -566,14 +567,14 @@ body.lang-en .skills-category li {
         text-align: center;
     }
     nav ul li a {
-        padding: 6px 12px;
-        font-size: 14px;
+        padding: 5px 10px; /* حشوة مناسبة */
+        font-size: 13px; /* خط أوضح */
         gap: 3px;
         white-space: nowrap; /* منع التفاف النص داخل الرابط */
+        line-height: 1; /* لتقليل ارتفاع الرابط */
     }
 
     /* ضبط padding-top للأقسام ليتجنب تداخل الهيدر الجديد */
-    /* بما أننا عدلنا .about-section padding-top، يمكن هنا أن يكون أقل */
     .skills-section,
     .projects-section,
     .recommendations-section {
@@ -583,21 +584,14 @@ body.lang-en .skills-category li {
 
 @media (max-width: 480px) {
     .language-switcher .lang-btn {
-        padding: 5px 10px;
-        font-size: 13px;
+        padding: 4px 8px;
+        font-size: 12px;
     }
     nav ul li a {
-        font-size: 13px;
         padding: 4px 8px;
+        font-size: 12px;
     }
-    .about-section, /* Adjust padding-top for smallest screens as well */
-    .skills-section,
-    .projects-section,
-    .recommendations-section {
-        padding-top: 25px;
-    }
-    /* زيادة الـ padding-top لقسم about-section على أصغر الشاشات أيضاً */
     .about-section {
-        padding-top: 120px; /* ضبط ليتناسب مع ارتفاع الهيدر الجديد */
+        padding-top: 110px; /* ضبط أكثر للشاشات الأصغر */
     }
 }
