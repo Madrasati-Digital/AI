@@ -7,6 +7,8 @@ const translations = {
         navSkills: "المهارات",
         navProjects: "مشاريعي",
         navRecommendations: "توصيات",
+        // **هنا تم إضافة ترجمة الاسم:**
+        profileName: "راشد الهاشمي", 
         // About Section
         aboutTitle: "نبذة عني",
         aboutParagraph1: "أنا راشد الهاشمي، ضابط شكاوى حكومي أول في شركة طاقة للتوزيع. أحمل درجة البكالوريوس في الهندسة المدنية وشهادات في حل المشكلات الإبداعي وأدوات Six Sigma. تتجلى خبرتي في تحليل البيانات لتحديد الأسباب الجذرية وحل الشكاوى بناءً على البيانات، بالإضافة إلى خبرتي في قيادة الفريق وخدمة العملاء، مما يعكس التزامًا قويًا بالتميز التشغيلي ورضا العملاء. حالياً، أعمل على توسيع معرفتي في الذكاء الاصطناعي من خلال دورات متقدمة في 'الذكاء الاصطناعي التوليدي: أساسيات هندسة الأوامر' و 'الذكاء الاصطناعي التوليدي: مقدمة وتطبيقات' من IBM على Coursera. هذا التعلم المستمر يعزز قدرتي على تطبيق نهج مبتكرة تعتمد على البيانات لتحسين جودة الخدمة ودعم العملاء.",
@@ -58,6 +60,8 @@ const translations = {
         navSkills: "Skills",
         navProjects: "Projects",
         navRecommendations: "Recommendations",
+        // **هنا تم إضافة ترجمة الاسم:**
+        profileName: "Rashed Alhashmi",
         // About Section
         aboutTitle: "About Me",
         aboutParagraph1: "I am Rashed Alhashmi, a Senior AD Government Complaint Officer at TAQA Distribution. With a Bachelor's in Civil Engineering and certifications in Creative Problem Solving and Six Sigma Tools, I specialize in analyzing complex datasets to identify root causes and deliver data-driven resolutions for complaints. My experience also includes team leadership and direct customer service, reflecting a strong commitment to operational excellence and customer satisfaction. Currently, I am expanding my expertise in Artificial Intelligence by completing advanced courses in 'Generative AI: Prompt Engineering Basics' and 'Generative AI: Introduction and Applications' through IBM on Coursera. This continuous learning enhances my ability to apply innovative, data-driven approaches to improve service quality and customer support.",
@@ -178,8 +182,8 @@ function applyTranslation(lang) {
     const langArBtn = document.getElementById('lang-ar');
     const langEnBtn = document.getElementById('lang-en');
 
+    // **ملاحظة: زر اللغة تم إخفاؤه بالكامل في CSS على الجوال (@media query). هذا المنطق سيظل يعمل للكمبيوتر.**
     if (langArBtn && langEnBtn) {
-        // المنطق النهائي والصحيح لإظهار زر واحد فقط (أزلنا قواعد التشخيص المؤقتة)
         if (lang === 'ar') {
             langArBtn.classList.add('hidden');       // إخفاء زر العربية (لأنها اللغة الحالية)
             langEnBtn.classList.remove('hidden');    // إظهار زر الإنجليزية (للتحويل إليها)
@@ -188,7 +192,7 @@ function applyTranslation(lang) {
             langArBtn.classList.remove('hidden');    // إظهار زر العربية (للتحويل إليها)
         }
     }
-    // بعد تغيير اللغة، أعد جلب التوصيات لتحديث أي نصوص مترجمة داخلها (مثل "مجهول")
+    // بعد تغيير اللغة، أعد جلب التوصيات لتحديث أي نصوص مترجمة داخلها (مثل "مجهول)
     fetchRecommendations();
 }
 
