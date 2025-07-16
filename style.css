@@ -38,7 +38,7 @@ header {
 
 /* Language Switcher Positioning and Ordering */
 .language-switcher {
-    display: flex;
+    display: flex; /* لكي يعمل الـ Flexbox بشكل صحيح لإظهار/إخفاء الزر */
     gap: 5px;
     flex-shrink: 0; /* Prevents shrinking */
     z-index: 1002;
@@ -66,9 +66,15 @@ body.lang-en .language-switcher {
 .language-switcher .lang-btn:hover {
     background-color: #0056b3;
 }
-.language-switcher .lang-btn.active {
+/* أزلنا فئة 'active' من الأزرار في HTML، لذا هذا السطر لن يكون له تأثير مباشر بعد الآن */
+/* .language-switcher .lang-btn.active {
     background-color: #0056b3;
     border-color: #003e80;
+} */
+
+/* أضف هذه القاعدة الجديدة في أي مكان في ملف style.css */
+.lang-btn.hidden {
+    display: none;
 }
 
 /* Navigation Menu Positioning and Ordering */
@@ -104,11 +110,9 @@ nav ul {
 
 body.lang-ar nav ul {
     direction: rtl; /* For correct ordering of list items (right-to-left) */
-    /* margin-right: auto; // Not needed with order and justify-content */
 }
 body.lang-en nav ul {
     direction: ltr; /* Default, but explicit for clarity */
-    /* margin-left: auto; // Not needed with order and justify-content */
 }
 
 /* Adjust margins between list items based on language direction */
@@ -610,25 +614,3 @@ body.lang-ar .add-recommendation-form-container {
         padding-top: 110px; /* Fine-tune for smaller screens */
     }
 }
-/* أضف هذه القاعدة الجديدة في أي مكان في ملف style.css */
-.lang-btn.hidden {
-    display: none;
-}
-
-/* (باقي كود CSS الخاص بك كما هو بالضبط) */
-
-/* Language Switcher Positioning and Ordering */
-.language-switcher {
-    display: flex; /* لكي يعمل الـ Flexbox بشكل صحيح لإظهار/إخفاء الزر */
-    gap: 5px;
-    flex-shrink: 0;
-    z-index: 1002;
-}
-/* هذه القواعد ستبقى كما هي لأنها تعتمد على order داخل الـ header */
-body.lang-ar .language-switcher {
-    order: 0; /* زر اللغة يمين (في LTR header) -> فعلياً يسار الشاشة */
-}
-body.lang-en .language-switcher {
-    order: 1; /* زر اللغة يسار (في LTR header) -> فعلياً يمين الشاشة */
-}
-
