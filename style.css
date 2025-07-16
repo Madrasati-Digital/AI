@@ -386,7 +386,7 @@ header {
 /* تحديد موقع زر اللغة بناءً على اللغة */
 .language-switcher {
     position: absolute;
-    top: 10px; /* لتوسيطه عموديًا في الهيدر */
+    top: 10px;
     z-index: 1002;
     display: flex;
     gap: 5px;
@@ -407,20 +407,20 @@ nav {
     display: flex;
     align-items: center;
     flex-grow: 1; /* للسماح لها بأخذ المساحة المتاحة */
-    padding: 0; /* إزالة أي padding من الـ nav نفسه */
+    padding: 0;
 }
 
 body.lang-ar nav {
     justify-content: flex-end; /* الروابط على اليمين في العربية */
     direction: rtl; /* اتجاه الروابط نفسها */
-    margin-right: 20px; /* مسافة من اليمين (للمحافظة على المسافة من زر اللغة) */
+    margin-right: 20px; /* مسافة من اليمين للحافة */
     margin-left: auto; /* لدفعها لليمين */
 }
 
 body.lang-en nav {
     justify-content: flex-start; /* الروابط على اليسار في الإنجليزية */
     direction: ltr; /* اتجاه الروابط نفسها */
-    margin-left: 20px; /* مسافة من اليسار (للمحافظة على المسافة من زر اللغة) */
+    margin-left: 20px; /* مسافة من اليسار للحافة */
     margin-right: auto; /* لدفعها لليسار */
 }
 
@@ -430,6 +430,7 @@ body.lang-en nav {
     font-size: 14px;
     border-radius: 4px;
 }
+
 
 /* تعديلات عامة لاتجاهات النصوص والمحاذاة */
 body.lang-ar {
