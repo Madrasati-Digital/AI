@@ -10,18 +10,21 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
 <body>
-
     <header>
         <div class="site-title">
             <h1>Rashed Alhashmi</h1>
         </div>
         <nav>
+            <div class="language-switcher">
+                <button id="lang-ar" class="lang-btn active">العربية</button>
+                <button id="lang-en" class="lang-btn">English</button>
+            </div>
             <ul>
-                <li><a href="#about"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#about" data-key="navHome"><i class="fas fa-home"></i> </a></li>
+                <li><a href="#about" data-key="navAbout"></a></li>
+                <li><a href="#skills" data-key="navSkills"></a></li>
+                <li><a href="#projects" data-key="navProjects"></a></li>
+                <li><a href="#recommendations" data-key="navRecommendations"></a></li>
             </ul>
         </nav>
     </header>
@@ -42,84 +45,78 @@
             <h1 class="profile-name-in-about">Rashed Alhashmi</h1>
         </div>
         <div class="about-content">
-            <h2>About Me</h2>
-            <p>
-                I am Rashed Alhashmi, a Senior AD Government Complaint Officer at TAQA Distribution. With a Bachelor's in Civil Engineering and certifications in Creative Problem Solving and Six Sigma Tools, I specialize in analyzing complex datasets to identify root causes and deliver data-driven resolutions for complaints. My experience also includes team leadership and direct customer service, reflecting a strong commitment to operational excellence and customer satisfaction.
-                <br><br> Currently, I am expanding my expertise in Artificial Intelligence by completing advanced courses in "Generative AI: Prompt Engineering Basics" and "Generative AI: Introduction and Applications" through IBM on Coursera. This continuous learning enhances my ability to apply innovative, data-driven approaches to improve service quality and customer support.
-            </p>
+            <h2 data-key="aboutTitle"></h2>
+            <p data-key="aboutParagraph1"></p>
         </div>
     </section>
 
     <section id="skills" class="skills-section">
-        <h2>Skills</h2>
+        <h2 data-key="skillsTitle"></h2>
         <div class="skills-category">
-            <h3>Technical Skills</h3>
+            <h3 data-key="techSkillsTitle"></h3>
             <ul>
-                <li><i class="fas fa-chart-line"></i> Data Analysis</li>
-                <li><i class="fas fa-lightbulb"></i> Problem Solving</li>
-                <li><i class="fas fa-cogs"></i> Six Sigma Tools</li>
-                <li><i class="fas fa-hard-hat"></i> Civil Engineering Principles</li>
-                <li><i class="fas fa-robot"></i> Prompt Engineering (AI)</li>
-                <li><i class="fas fa-brain"></i> AI Applications</li>
+                <li><i class="fas fa-chart-line"></i> <span data-key="skillDataAnalysis"></span></li>
+                <li><i class="fas fa-lightbulb"></i> <span data-key="skillProblemSolving"></span></li>
+                <li><i class="fas fa-cogs"></i> <span data-key="skillSixSigma"></span></li>
+                <li><i class="fas fa-hard-hat"></i> <span data-key="skillCivilEng"></span></li>
+                <li><i class="fas fa-robot"></i> <span data-key="skillPromptEng"></span></li>
+                <li><i class="fas fa-brain"></i> <span data-key="skillAIAp"></span></li>
             </ul>
         </div>
         <div class="skills-category">
-            <h3>Soft Skills & Management</h3>
+            <h3 data-key="softSkillsTitle"></h3>
             <ul>
-                <li><i class="fas fa-users"></i> Team Leadership</li>
-                <li><i class="fas fa-headset"></i> Direct Customer Service</li>
-                <li><i class="fas fa-comments"></i> Effective Communication</li>
-                <li><i class="fas fa-tasks"></i> Operational Excellence</li>
-                <li><i class="fas fa-exclamation-triangle"></i> Complaint Management</li>
-                <li><i class="fas fa-flask"></i> Strategic Thinking</li>
+                <li><i class="fas fa-users"></i> <span data-key="skillTeamLeadership"></span></li>
+                <li><i class="fas fa-headset"></i> <span data-key="skillCustomerService"></span></li>
+                <li><i class="fas fa-comments"></i> <span data-key="skillCommunication"></span></li>
+                <li><i class="fas fa-tasks"></i> <span data-key="skillOperationalExcellence"></span></li>
+                <li><i class="fas fa-exclamation-triangle"></i> <span data-key="skillComplaintManagement"></span></li>
+                <li><i class="fas fa-flask"></i> <span data-key="skillStrategicThinking"></span></li>
             </ul>
         </div>
     </section>
 
     <section id="projects" class="projects-section">
-        <h2>My Projects</h2>
+        <h2 data-key="projectsTitle"></h2>
         <div class="projects-container">
             <div class="project-card">
-                <h3>Civil Engineering Projects</h3>
-                <p>Involved in two distinct projects: "Razeen Sand Leveling and Removal Project" (2 months) and "Villa Foundation Construction Project" from start to finish, applying best engineering practices in both.</p>
+                <h3 data-key="projectCivilTitle"></h3>
+                <p data-key="projectCivilDesc"></p>
                 <i class="fas fa-hard-hat project-icon"></i>
             </div>
-
             <div class="project-card">
-                <h3>Complaint Filtering & Summarization Tool</h3>
-                <p>Designed and developed a web page for efficient filtering and summarization of requests and complaints, enabling streamlined review and logging of case numbers for improved follow-up.</p>
+                <h3 data-key="projectComplaintToolTitle"></h3>
+                <p data-key="projectComplaintToolDesc"></p>
                 <i class="fas fa-filter project-icon"></i>
             </div>
-
             <div class="project-card">
-                <h3>Customer Satisfaction Improvement Initiative</h3>
-                <p>A project focused on analyzing complaint data to identify weaknesses and enhance customer satisfaction KPIs, resulting in an uplifted level of service quality and customer support.</p>
+                <h3 data-key="projectCustomerSatTitle"></h3>
+                <p data-key="projectCustomerSatDesc"></p>
                 <i class="fas fa-smile project-icon"></i>
             </div>
         </div>
     </section>
 
     <section id="recommendations" class="recommendations-section">
-        <h2>Recommendations</h2>
+        <h2 data-key="recommendationsTitle"></h2>
         <div class="recommendations-container">
             </div>
-
         <div class="add-recommendation-form-container">
-            <h3>Leave a Recommendation</h3>
+            <h3 data-key="leaveRecTitle"></h3>
             <form id="recommendationForm">
                 <div class="form-group">
-                    <label for="recommender-name">Your Name:</label>
-                    <input type="text" id="recommender-name" required>
+                    <label for="recommender-name" data-key="formName"></label>
+                    <input type="text" id="recommender-name" required data-key="formNamePlaceholder" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label for="recommender-title-org">Your Title/Company (Optional):</label>
-                    <input type="text" id="recommender-title-org">
+                    <label for="recommender-title-org" data-key="formTitleOrg"></label>
+                    <input type="text" id="recommender-title-org" data-key="formTitleOrgPlaceholder" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label for="recommendation-text">Your Recommendation:</label>
-                    <textarea id="recommendation-text" rows="5" required></textarea>
+                    <label for="recommendation-text" data-key="formRecommendation"></label>
+                    <textarea id="recommendation-text" rows="5" required data-key="formRecPlaceholder" placeholder=""></textarea>
                 </div>
-                <button type="submit" class="submit-button">Submit Recommendation</button>
+                <button type="submit" class="submit-button" data-key="formSubmitBtn"></button>
             </form>
         </div>
     </section>
