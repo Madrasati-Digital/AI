@@ -7,15 +7,23 @@ body {
     overflow-x: hidden;
 }
 
+/* Base direction for body - will be overridden by lang-ar/lang-en classes */
+body.lang-ar {
+    direction: rtl;
+}
+body.lang-en {
+    direction: ltr;
+}
+
 header {
     background-color: #fff;
     padding: 10px 20px;
     border-bottom: 1px solid #ddd;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Distribute items to edges */
     align-items: center;
-    position: fixed; /* تم التأكد من أنها ثابتة */
-    width: 100%; /* تم التأكد من أنها تأخذ العرض الكامل */
+    position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
     box-sizing: border-box;
@@ -23,16 +31,62 @@ header {
 }
 
 .site-title {
-    display: none; /* إخفاء اسم Rashed Alhashmi في شريط التنقل العلوي */
+    display: none; /* Hide "Rashed Alhashmi" from the top navigation bar */
 }
 
-.site-title h1 {
-    font-size: 24px;
-    color: #007bff;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+/* Language Switcher Positioning */
+.language-switcher {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0; /* Prevents shrinking */
+    z-index: 1002; /* Ensure it's above other elements if needed */
+}
+
+body.lang-ar .language-switcher {
+    order: -1; /* Puts it to the far left in LTR flex context (header) */
+}
+body.lang-en .language-switcher {
+    order: 1; /* Puts it to the far right in LTR flex context (header) */
+}
+
+/* Language Switcher Buttons */
+.language-switcher .lang-btn {
+    padding: 4px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #0056b3;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.language-switcher .lang-btn:hover {
+    background-color: #0056b3;
+}
+.language-switcher .lang-btn.active {
+    background-color: #0056b3;
+    border-color: #003e80;
+}
+
+/* Navigation Menu */
+nav {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Allows it to take available space */
+    padding: 0;
+}
+
+body.lang-ar nav {
+    justify-content: flex-end; /* Align links to the right for Arabic */
+    /* No need for direction: rtl here directly on nav, as ul handles content direction */
+    padding-right: 20px;
+    padding-left: 0;
+}
+
+body.lang-en nav {
+    justify-content: flex-start; /* Align links to the left for English */
+    padding-left: 20px;
+    padding-right: 0;
 }
 
 nav ul {
@@ -40,11 +94,33 @@ nav ul {
     margin: 0;
     padding: 0;
     display: flex;
+    /* Use direction on ul to ensure proper item ordering within the list */
+}
+
+body.lang-ar nav ul {
+    direction: rtl; /* For correct ordering of list items (right-to-left) */
+    margin-right: auto; /* Push ul to the right in LTR context of nav */
+}
+body.lang-en nav ul {
+    direction: ltr; /* For correct ordering of list items (left-to-right) */
+    margin-left: auto; /* Push ul to the left in LTR context of nav */
 }
 
 nav ul li {
-    /* تم تعديل الهوامش هنا في الأقسام الخاصة باللغات */
-    /* margin-left: 20px;  سيتم إزالتها أو تعديلها بناءً على اللغة */
+    /* Margin between list items based on language direction */
+}
+body.lang-ar nav ul li {
+    margin-left: 15px;
+    margin-right: 0;
+}
+body.lang-en nav ul li {
+    margin-right: 15px;
+    margin-left: 0;
+}
+
+nav ul li:last-child { /* Remove margin from the last item to prevent extra space */
+    margin-left: 0; /* For Arabic last item */
+    margin-right: 0; /* For English last item */
 }
 
 nav ul li a {
@@ -60,15 +136,16 @@ nav ul li a {
 nav ul li a:hover {
     color: #0056b3;
     text-decoration: underline;
-    transform: scale(1.2);
+    transform: scale(1.1); /* Slightly smaller scale for smoother effect */
 }
 
 nav ul li a i {
     color: #007bff;
 }
 
+/* Main Content Sections - Adjust padding-top to avoid header overlap */
 .about-section {
-    padding: 100px 20px 20px;
+    padding: 100px 20px 20px; /* Increased top padding */
     max-width: 800px;
     margin: 20px auto;
     background-color: #fff;
@@ -82,22 +159,25 @@ nav ul li a i {
 }
 
 .profile-image-container {
-    margin-bottom: 15px;
+    width: 150px; /* Fixed width and height for consistency */
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden; /* Ensure image doesn't overflow container */
+    margin: 0 auto 15px auto;
 }
 
 .profile-image {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the container */
     border-radius: 50%;
-    object-fit: cover;
     border: 3px solid #007bff;
 }
 
 .profile-name-in-about {
     font-size: 28px;
     color: #333;
-    margin: 0;
-    margin-bottom: 30px;
+    margin: 0 0 30px 0;
 }
 
 .about-content {
@@ -113,13 +193,28 @@ nav ul li a i {
 .about-content p {
     font-size: 16px;
     line-height: 1.6;
-    margin-bottom: 0;
+    margin: 0 auto;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.skills-section {
+/* Align text content based on language direction */
+body.lang-ar .about-content p,
+body.lang-ar .project-card p,
+body.lang-ar .recommendation-card p,
+body.lang-ar .form-group label {
+    text-align: right;
+}
+body.lang-en .about-content p,
+body.lang-en .project-card p,
+body.lang-en .recommendation-card p,
+body.lang-en .form-group label {
+    text-align: left;
+}
+
+/* Section Headings */
+.skills-section,
+.projects-section,
+.recommendations-section {
     padding: 40px 20px;
     max-width: 800px;
     margin: 20px auto;
@@ -129,12 +224,17 @@ nav ul li a i {
     text-align: center;
 }
 
-.skills-section h2 {
+.skills-section h2,
+.projects-section h2,
+.recommendations-section h2,
+.add-recommendation-form-container h3 {
     font-size: 28px;
     color: #007bff;
     margin-bottom: 30px;
+    text-align: center; /* Ensure headings are centered regardless of language direction */
 }
 
+/* Skills Section Specifics */
 .skills-category {
     margin-bottom: 20px;
 }
@@ -169,26 +269,19 @@ nav ul li a i {
     gap: 8px;
 }
 
+/* Adjust icon/text order for skills list based on language */
+body.lang-ar .skills-category li {
+    flex-direction: row-reverse; /* Icon after text in RTL */
+}
+body.lang-en .skills-category li {
+    flex-direction: row; /* Icon before text in LTR */
+}
+
 .skills-category li i {
     color: #0056b3;
 }
 
-.projects-section {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-}
-
-.projects-section h2 {
-    font-size: 28px;
-    color: #007bff;
-    margin-bottom: 30px;
-}
-
+/* Projects Section Specifics */
 .projects-container {
     display: flex;
     flex-wrap: wrap;
@@ -204,8 +297,12 @@ nav ul li a i {
     width: 100%;
     max-width: 300px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    text-align: left;
+    text-align: left; /* Base for LTR */
     transition: transform 0.3s ease;
+}
+
+body.lang-ar .project-card {
+    text-align: right;
 }
 
 .project-card:hover {
@@ -215,8 +312,7 @@ nav ul li a i {
 .project-card h3 {
     color: #007bff;
     font-size: 20px;
-    margin-top: 0;
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
 }
 
 .project-card p {
@@ -234,22 +330,7 @@ nav ul li a i {
     text-align: center;
 }
 
-.recommendations-section {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-}
-
-.recommendations-section h2 {
-    font-size: 28px;
-    color: #007bff;
-    margin-bottom: 30px;
-}
-
+/* Recommendations Section Specifics */
 .recommendations-container {
     display: flex;
     flex-wrap: wrap;
@@ -265,8 +346,12 @@ nav ul li a i {
     width: 100%;
     max-width: 300px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    text-align: left;
+    text-align: left; /* Base for LTR */
     transition: transform 0.3s ease;
+}
+
+body.lang-ar .recommendation-card {
+    text-align: right;
 }
 
 .recommendation-card:hover {
@@ -284,8 +369,7 @@ nav ul li a i {
 .recommendation-card h4 {
     color: #007bff;
     font-size: 18px;
-    margin-top: 0;
-    margin-bottom: 5px;
+    margin: 0 0 5px 0;
 }
 
 .recommendation-card .recommender-title {
@@ -294,6 +378,7 @@ nav ul li a i {
     margin-bottom: 0;
 }
 
+/* Add Recommendation Form */
 .add-recommendation-form-container {
     background-color: #f8f8f8;
     border: 1px solid #ddd;
@@ -303,7 +388,11 @@ nav ul li a i {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    text-align: left;
+    text-align: left; /* Base for LTR */
+}
+
+body.lang-ar .add-recommendation-form-container {
+    text-align: right;
 }
 
 .add-recommendation-form-container h3 {
@@ -355,6 +444,7 @@ nav ul li a i {
     background-color: #0056b3;
 }
 
+/* Custom Alert Box */
 .custom-alert {
     display: none;
     position: fixed;
@@ -420,250 +510,79 @@ nav ul li a i {
     background-color: #0056b3;
 }
 
-/* --- بداية التعديلات النهائية والمحدثة هنا --- */
 
-/* 1. إخفاء اسم "Rashed Alhashmi" الأزرق من أعلى اليسار (الذي في .site-title) */
-.site-title {
-    display: none;
-}
-
-/* 2. ضبط محاذاة شريط التنقل (Navbar) وعناصر الهيدر على الكمبيوتر */
-header {
-    display: flex;
-    justify-content: space-between; /* للسماح بتوزيع العناصر على الأطراف */
-    align-items: center;
-    flex-wrap: nowrap;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    position: fixed; /* تأكد من أنها ثابتة */
-    width: 100%; /* تأكد من أنها تأخذ العرض الكامل */
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    z-index: 1000;
-    background-color: #fff; /* أضف لون خلفية لضمان الظهور فوق المحتوى */
-}
-
-/* محاذاة زر اللغة بناءً على اللغة - على الكمبيوتر فقط */
-.language-switcher {
-    position: absolute; /* اجعلها مطلقة لتحديد موقعها بدقة */
-    top: 10px;
-    z-index: 1002;
-    display: flex;
-    gap: 5px;
-    flex-shrink: 0;
-}
-
-body.lang-ar .language-switcher {
-    left: 20px; /* زر اللغة يسار في العربية */
-    right: auto;
-}
-body.lang-en .language-switcher {
-    right: 20px; /* زر اللغة يمين في الإنجليزية */
-    left: auto;
-}
-
-/* ضبط محاذاة روابط الـ Navbar بناءً على اللغة - على الكمبيوتر فقط */
-nav {
-    display: flex;
-    align-items: center;
-    flex-grow: 1; /* للسماح لها بأخذ المساحة المتاحة */
-    padding: 0;
-}
-
-body.lang-ar nav {
-    justify-content: flex-end; /* الروابط على اليمين في العربية */
-    direction: rtl; /* اتجاه الروابط نفسها */
-    padding-right: 20px; /* مسافة من اليمين للحافة */
-    padding-left: 0;
-}
-
-body.lang-en nav {
-    justify-content: flex-start; /* الروابط على اليسار في الإنجليزية */
-    direction: ltr; /* اتجاه الروابط نفسها */
-    padding-left: 20px; /* مسافة من اليسار للحافة */
-    padding-right: 0;
-}
-
-/* 3. تعديل شكل زر تغيير اللغة (أصغر وأكثر تناسقًا) */
-.language-switcher .lang-btn {
-    padding: 4px 10px;
-    font-size: 14px;
-    border-radius: 4px;
-    background-color: #007bff; /* تأكد من وجود لون خلفية */
-    color: white; /* وتأكد من لون النص */
-    border: 1px solid #0056b3;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.language-switcher .lang-btn:hover {
-    background-color: #0056b3;
-}
-
-/* الأزرار النشطة (التي تمثل اللغة الحالية) يمكن أن يكون لها نمط مختلف */
-.language-switcher .lang-btn.active {
-    background-color: #0056b3;
-    border-color: #003e80;
-}
-
-/* تعديلات عامة لاتجاهات النصوص والمحاذاة */
-body.lang-ar {
-    direction: rtl;
-}
-body.lang-en {
-    direction: ltr;
-}
-
-/* عناوين الأقسام الرئيسية يجب أن تكون في المنتصف */
-.about-section h2,
-.skills-section h2,
-.projects-section h2,
-.recommendations-section h2,
-.add-recommendation-form-container h3 {
-    text-align: center;
-}
-
-/* محاذاة النصوص والفقرات داخل الأقسام لاتباع اتجاه اللغة */
-body.lang-ar .about-content p,
-body.lang-ar .project-card p,
-body.lang-ar .recommendation-card p {
-    text-align: right;
-}
-body.lang-en .about-content p,
-body.lang-en .project-card p,
-body.lang-en .recommendation-card p {
-    text-align: left;
-}
-
-/* ضبط الهوامش في القوائم في الـ Navbar */
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: flex-start; /* Default for LTR */
-    flex-wrap: nowrap;
-}
-
-body.lang-ar nav ul {
-    justify-content: flex-end; /* تدفع العناصر لليمين في RTL */
-}
-
-/* ضبط الهوامش بين عناصر الـ li */
-body.lang-ar nav ul li {
-    margin-left: 15px; /* مسافة بين الروابط في RTL */
-    margin-right: 0;
-}
-body.lang-en nav ul li {
-    margin-right: 15px; /* مسافة بين الروابط في LTR */
-    margin-left: 0;
-}
-
-/* محاذاة تسميات حقول النموذج (labels) */
-body.lang-ar .form-group label {
-    text-align: right;
-}
-body.lang-en .form-group label {
-    text-align: left;
-}
-
-/* الأيقونات والنصوص في قائمة المهارات - للحفاظ على الترتيب أيقونة ثم نص في LTR والعكس في RTL */
-body.lang-ar .skills-category li {
-    flex-direction: row-reverse; /* لعكس ترتيب الأيقونة والنص في RTL */
-}
-body.lang-en .skills-category li {
-    flex-direction: row; /* الافتراضي */
-}
-
-/* --- تعديلات خاصة بالجوال (Mobile) --- */
+/* --- Mobile Adjustments (max-width: 768px) --- */
 @media (max-width: 768px) {
     header {
-        flex-direction: column; /* تكديس عمودي */
-        justify-content: center; /* توسيط المحتوى عموديًا */
-        align-items: center; /* توسيط العناصر أفقيا */
-        padding: 5px 10px; /* حشوة أقل لتقليل ارتفاع الهيدر */
-        min-height: auto;
-        height: auto;
-        box-sizing: border-box; /* لضمان أن الحشوة لا تزيد من العرض/الارتفاع */
-    }
-    
-    /* 1. الصورة في قسم About Me (مشكلة القطع) */
-    .profile-image-container {
-        width: 150px;
-        height: 150px;
-        overflow: hidden;
-        border-radius: 50%;
-        margin: 0 auto 15px auto;
-    }
-    .profile-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
+        flex-direction: column; /* Stack items vertically */
+        justify-content: center;
+        align-items: center;
+        padding: 8px 10px; /* Reduced padding */
+        height: auto; /* Allow header to adjust height */
     }
 
-    /* ضبط مكان الصورة لتنزل أكثر بعيدًا عن الهيدر */
+    /* Adjust padding for the first content section to clear the fixed header */
     .about-section {
-        padding-top: 130px; /* زيادة الحشوة العلوية لدفع الصورة للأسفل */
-        margin-top: 0; /* لضمان عدم وجود هامش علوي إضافي */
+        padding-top: 130px; /* More padding to account for taller mobile header */
+        margin-top: 0;
     }
 
-    /* 2. زر اللغة على الجوال: ثابت في مكان مناسب وواضح */
+    /* Language Switcher on mobile */
     .language-switcher {
-        position: relative; /* اجعلها نسبية على الجوال */
+        position: relative; /* Make it relative within the flex container */
         top: auto;
         right: auto;
-        left: auto; /* أعد تعيين الخصائص المطلقة */
-        order: 1; /* يظهر أولاً */
-        margin-bottom: 8px; /* مسافة أقل بينه وبين الـ Navbar */
+        left: auto;
+        order: 1; /* Appears first */
+        margin-bottom: 10px; /* Space between language buttons and nav */
         width: 100%;
-        justify-content: center;
+        justify-content: center; /* Center buttons */
         padding: 0 10px;
         box-sizing: border-box;
-        gap: 8px;
     }
     .language-switcher .lang-btn {
-        padding: 5px 10px; /* حشوة أقل قليلاً */
-        font-size: 13px; /* خط أصغر قليلاً */
+        padding: 5px 12px;
+        font-size: 13px;
     }
 
-    /* 3. الـ Navbar على الجوال: ثابت في المنتصف، كلمات أكبر، تظهر كاملة */
+    /* Navbar on mobile */
     nav {
-        order: 2; /* يظهر بعد زر اللغة */
+        order: 2; /* Appears after language switcher */
         width: 100%;
-        padding: 0 5px; /* حشوة أقل من الجوانب */
+        padding: 0 5px;
         margin-bottom: 15px;
-        overflow-x: hidden; /* إخفاء التمرير الأفقي */
-        white-space: normal; /* السماح بالتفاف النصوص */
-        justify-content: center; /* توسيط الروابط */
+        overflow-x: hidden;
+        white-space: normal;
+        justify-content: center; /* Center nav links within their container */
         display: flex;
-        flex-wrap: wrap; /* السماح للروابط بالنزول لسطر جديد */
-        gap: 5px 8px; /* مسافة أقل بين الروابط (صف وعمود) */
+        flex-wrap: wrap; /* Allow links to wrap to next line */
+        gap: 6px 10px; /* Gap between wrapped links */
         height: auto;
     }
     nav ul {
-        justify-content: center; /* توسيط القائمة بالكامل */
+        justify-content: center; /* Center the ul content */
         display: flex;
         width: 100%;
         flex-wrap: wrap;
         padding: 0;
         margin: 0;
+        direction: ltr; /* Force LTR direction on ul for consistent wrapping behavior */
     }
     nav ul li {
-        margin: 0;
+        margin: 0; /* Remove specific margins, rely on gap */
         flex-basis: auto;
         flex-shrink: 1;
         text-align: center;
     }
     nav ul li a {
-        padding: 5px 10px; /* حشوة مناسبة */
-        font-size: 13px; /* خط أوضح */
+        padding: 5px 10px;
+        font-size: 13px;
         gap: 3px;
-        white-space: nowrap; /* منع التفاف النص داخل الرابط */
-        line-height: 1; /* لتقليل ارتفاع الرابط */
+        white-space: nowrap; /* Prevent text wrapping within a single link */
+        line-height: 1.2;
     }
 
-    /* ضبط padding-top للأقسام ليتجنب تداخل الهيدر الجديد */
+    /* Further adjust top padding for other sections on mobile */
     .skills-section,
     .projects-section,
     .recommendations-section {
@@ -673,7 +592,7 @@ body.lang-en .skills-category li {
 
 @media (max-width: 480px) {
     .language-switcher .lang-btn {
-        padding: 4px 8px;
+        padding: 4px 10px;
         font-size: 12px;
     }
     nav ul li a {
@@ -681,6 +600,6 @@ body.lang-en .skills-category li {
         font-size: 12px;
     }
     .about-section {
-        padding-top: 110px; /* ضبط أكثر للشاشات الأصغر */
+        padding-top: 110px; /* Fine-tune for smaller screens */
     }
 }
