@@ -547,15 +547,16 @@ body.lang-ar .add-recommendation-form-container {
         justify-content: center; /* Center buttons */
         padding: 0 10px;
         box-sizing: border-box;
-        display: flex; /* **إضافة: ضمان أن حاوية زر اللغة تظهر كـ flexbox** */
-        min-height: 30px; /* **إضافة: حجم أدنى لضمان رؤية الحاوية** */
-        align-items: center; /* **إضافة: توسيط عمودي لمحتوى حاوية زر اللغة** */
+        display: flex !important; /* **مهم جداً: لضمان ظهور الحاوية كـ flexbox على الجوال** */
+        min-height: 30px;
+        align-items: center;
+        z-index: 1002; /* **مهم جداً: لضمان ظهورها فوق العناصر الأخرى** */
     }
     .language-switcher .lang-btn {
         padding: 5px 12px;
         font-size: 13px;
-        min-width: 60px; /* **إضافة: حجم أدنى لزر اللغة نفسه** */
-        flex-shrink: 0; /* **إضافة: منع زر اللغة من الانكماش والاختفاء** */
+        min-width: 60px;
+        flex-shrink: 0;
     }
 
     /* Navbar on mobile */
@@ -564,42 +565,39 @@ body.lang-ar .add-recommendation-form-container {
         width: 100%;
         padding: 0 5px;
         margin-bottom: 15px;
-        overflow-x: hidden; /* **هنا التعديل: إخفاء التمرير الأفقي تماماً (بناءً على طلبك)** */
+        overflow-x: hidden;
         white-space: normal;
-        justify-content: center; /* توسيط الروابط */
+        justify-content: center;
         display: flex;
-        flex-wrap: nowrap; /* **هنا التعديل: منع التفاف الروابط إلى سطر جديد مهما كان الثمن** */
-        gap: 5px; /* **هنا التعديل: مسافة أولية بين الروابط (لتجربتها)** */
+        flex-wrap: nowrap;
+        gap: 5px;
         height: auto;
     }
     nav ul {
         justify-content: center;
         display: flex;
-        /* width: 100%; تأكد أن الـ ul يأخذ العرض الكامل - قد يكون من الأفضل عدم تحديد عرض لترك الـ flex items تتمدد/تتقلص */
-        flex-wrap: nowrap; /* **هنا التعديل: منع التفاف الروابط إلى سطر جديد داخل الـ ul** */
+        flex-wrap: nowrap;
         padding: 0;
         margin: 0;
-        direction: ltr; /* Force LTR direction on ul for consistent behavior */
+        direction: ltr;
     }
     nav ul li {
-        margin: 0; /* Remove specific margins, rely on gap */
-        flex-shrink: 0; /* **مهم: منع الانكماش لضمان أخذ الحجم المطلوب وعدم الاختفاء** */
+        margin: 0;
+        flex-shrink: 0;
         text-align: center;
     }
     nav ul li a {
-        padding: 2px 4px; /* **هنا التعديل: حشوة داخل كل رابط (تحكم في عرض الرابط). قيم أولية صغيرة جداً جداً.** */
-        font-size: 10px; /* **هنا التعديل: حجم الخط العام للروابط الإنجليزية (قيم أولية صغيرة جداً).** */
-        gap: 2px; /* مسافة أقل بين الأيقونة والنص */
-        white-space: nowrap; /* مهم: منع التفاف النص داخل الرابط */
+        padding: 2px 4px;
+        font-size: 10px;
+        gap: 2px;
+        white-space: nowrap;
         line-height: 1.2;
     }
-    /* **هنا التعديل: حجم خط الروابط العربية على الجوال (قيم أولية صغيرة جداً).** */
     body.lang-ar nav ul li a {
-        font-size: 11px; /* تكبير الخط للعربية قليلاً عن الإنجليزية */
+        font-size: 11px;
     }
-    /* **هنا التعديل: حجم خط الروابط الإنجليزية على الجوال (قيم أولية صغيرة جداً).** */
     body.lang-en nav ul li a {
-        font-size: 10px; /* حجم افتراضي للإنجليزية */
+        font-size: 10px;
     }
 
 
@@ -613,19 +611,19 @@ body.lang-ar .add-recommendation-form-container {
 
 @media (max-width: 480px) {
     .language-switcher .lang-btn {
-        padding: 3px 6px; /* أصغر قليلاً */
-        font-size: 10px; /* أصغر قليلاً */
+        padding: 3px 6px;
+        font-size: 10px;
     }
     nav ul li a {
-        padding: 1px 2px; /* حشوة أقل جداً */
-        font-size: 9px; /* أصغر جداً */
+        padding: 1px 2px;
+        font-size: 9px;
         gap: 1px;
     }
     body.lang-ar nav ul li a {
-        font-size: 10px; /* أصغر جداً للعربية أيضاً */
+        font-size: 10px;
     }
     body.lang-en nav ul li a {
-        font-size: 9px; /* أصغر جداً للإنجليزية */
+        font-size: 9px;
     }
     .about-section {
         padding-top: 110px;
