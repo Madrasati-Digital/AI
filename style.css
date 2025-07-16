@@ -36,28 +36,28 @@ header {
     display: none; /* Hide "Rashed Alhashmi" from the top navigation bar */
 }
 
-/* Language Switcher Positioning and Ordering */
+/* Language Switcher Positioning and Ordering (Desktop - لم يتم المساس به) */
 .language-switcher {
     display: flex; /* لكي يعمل الـ Flexbox بشكل صحيح لإظهار/إخفاء الزر */
     gap: 5px;
     flex-shrink: 0; /* Prevents shrinking */
     z-index: 1002;
-    /* Order within the LTR header flex container */
+    /* Order and margin are controlled by body.lang-ar/en below for desktop */
 }
 
 body.lang-ar .language-switcher {
-    order: 0; /* Will appear at the left side of the LTR header */
+    order: 0; /* الزر في أقصى اليسار في العربية */
     margin-right: auto; /* يدفع الـ Navbar إلى اليمين */
 }
 body.lang-en .language-switcher {
-    order: 1; /* Will appear at the right side of the LTR header */
+    order: 1; /* الزر في أقصى اليمين في الإنجليزية */
     margin-left: auto; /* يدفع الـ Navbar إلى اليسار */
 }
 
 /* Language Switcher Buttons */
 .language-switcher .lang-btn {
     padding: 4px 10px;
-    font-size: 14px;
+    font-size: 14px; /* **لم يتم تصغير خط زر اللغة هنا** */
     border-radius: 4px;
     background-color: #007bff;
     color: white;
@@ -74,26 +74,26 @@ body.lang-en .language-switcher {
     display: none;
 }
 
-/* Navigation Menu Positioning and Ordering */
+/* Navigation Menu Positioning and Ordering (Desktop - لم يتم المساس به) */
 nav {
     display: flex;
     align-items: center;
     flex-grow: 1; /* Allows it to take available space */
     padding: 0;
-    /* Order within the LTR header flex container */
+    order: 0; /* Nav is the primary content, will be first in LTR header */
 }
 
 body.lang-ar nav {
-    order: 1; /* Will appear at the right side of the LTR header */
-    justify-content: flex-end; /* Align links to the right within nav */
-    padding-right: 20px; /* Space from right edge */
+    order: 1; /* Navbar لليمين (في الوضع العربي) */
+    justify-content: flex-end; /* الروابط لليمين داخل الـ Navbar */
+    padding-right: 20px; /* مسافة من اليمين للحافة */
     padding-left: 0;
 }
 
 body.lang-en nav {
-    order: 0; /* Will appear at the left side of the LTR header */
-    justify-content: flex-start; /* Align links to the left within nav */
-    padding-left: 20px; /* Space from left edge */
+    order: 0; /* Navbar لليسار (في الوضع الإنجليزي) */
+    justify-content: flex-start; /* الروابط لليسار داخل الـ Navbar */
+    padding-left: 20px; /* مسافة من اليسار للحافة */
     padding-right: 0;
 }
 
@@ -138,11 +138,8 @@ nav ul li a {
     align-items: center;
     gap: 5px; /* مسافة بين الأيقونة والنص */
     white-space: nowrap; /* مهم: لمنع التفاف النص داخل الرابط */
-    /*
-    *** التعديل الأول: تكبير حجم الخط لكلمات الـ Navbar ***
-    */
-    font-size: 17px; /* حجم الخط الجديد للروابط في اللغتين */
-    padding: 5px 10px; /* زيادة بسيطة في الحشوة لجعلها تبدو أفضل مع الخط الأكبر */
+    font-size: 17px; /* حجم الخط للروابط في اللغتين على الكمبيوتر */
+    padding: 5px 10px; /* زيادة بسيطة في الحشوة */
 }
 
 nav ul li a:hover {
@@ -160,7 +157,7 @@ nav ul li a i {
     padding: 100px 20px 20px; /* Increased top padding */
     max-width: 800px;
     margin: 20px auto;
-    background-color: #fff; /* **هنا التعديل: تغيير الخلفية إلى الأبيض** */
+    background-color: #fff; /* **تغيير الخلفية إلى الأبيض** */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
@@ -230,7 +227,7 @@ body.lang-en .form-group label {
     padding: 40px 20px;
     max-width: 800px;
     margin: 20px auto;
-    background-color: #fff; /* **هنا التعديل: تغيير الخلفية إلى الأبيض** */
+    background-color: #fff; /* **تغيير الخلفية إلى الأبيض** */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
@@ -273,9 +270,6 @@ body.lang-en .form-group label {
     color: #007bff;
     padding: 8px 15px;
     border-radius: 20px;
-    /*
-    *** التعديل الثاني: جعل الكلمات داخل بطاقات المهارات بالخط العريض (Bold) ***
-    */
     font-weight: bold; /* جعل النص بولد */
     font-size: 15px; /* حجم الخط كما هو ليتناسب مع البولد */
     white-space: nowrap;
@@ -336,7 +330,6 @@ body.lang-ar .project-card {
     color: #555;
     line-height: 1.6;
     margin-bottom: 15px;
-    font-style: italic;
 }
 
 .project-icon {
@@ -537,7 +530,7 @@ body.lang-ar .add-recommendation-form-container {
         padding: 8px 10px; /* Reduced padding */
         height: auto; /* Allow header to adjust height */
         direction: ltr; /* Always LTR on mobile for header flex items, then use order */
-        position: relative; /* <--- أضفت هذا السطر هنا (السطر 206) */
+        position: relative; /* **مهم: أضفت هذا السطر هنا لتحديد المطلق (السطر 206)** */
     }
 
     /* Adjust padding for the first content section to clear the fixed header */
@@ -554,14 +547,14 @@ body.lang-ar .add-recommendation-form-container {
         right: 10px; /* <--- أضف هذا السطر (يمكنك تعديل القيمة) */
         z-index: 1002; /* <--- أضف هذا السطر للتأكد من ظهوره فوق العناصر الأخرى */
         /* لا حاجة لهذه الخصائص بعد استخدام Position: absolute */
-        /* width: 100%; */
-        /* padding: 0 10px; */
-        /* box-sizing: border-box; */
-        /* min-height: 30px; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* margin-bottom: 10px; */
-        /* order: 1; */
+        width: auto; /* بدلاً من width: 100%; */
+        padding: 0; /* بدلاً من 0 10px */
+        box-sizing: content-box; /* بدلاً من border-box */
+        min-height: auto; /* بدلاً من 30px */
+        align-items: flex-start; /* بدلاً من center */
+        justify-content: flex-start; /* بدلاً من center */
+        margin-bottom: 0; /* بدلاً من 10px */
+        order: auto; /* بدلاً من 1 */
     }
 
     /* Navbar on mobile */
@@ -592,22 +585,18 @@ body.lang-ar .add-recommendation-form-container {
         text-align: center;
     }
     nav ul li a {
-        padding: 2px 4px; /* **هنا التعديل: حشوة داخل كل رابط (تحكم في عرض الرابط). قيم أولية صغيرة جداً جداً.** */
-        /*
-        *** التعديل على الجوال: حجم الخط للروابط ***
-        */
-        font-size: 13px; /* حجم خط أكبر قليلاً على الجوال */
+        padding: 2px 4px; /* حشوة داخل كل رابط (تحكم في عرض الرابط). قيم أولية صغيرة جداً جداً. */
         gap: 2px; /* مسافة أقل بين الأيقونة والنص */
         white-space: nowrap; /* منع التفاف النص داخل الرابط */
         line-height: 1.2;
     }
-    /* إزالة التعديلات المنفصلة للخط العربي والإنجليزي على الجوال وإبقاء قاعدة واحدة */
-    /* body.lang-ar nav ul li a {
-        font-size: 11px;
+    /* **هنا التعديل الرئيسي: أحجام الخط المنفصلة للـ Navbar على الجوال** */
+    body.lang-ar nav ul li a {
+        font-size: 13px; /* حجم الخط للعربية على الجوال */
     }
     body.lang-en nav ul li a {
-        font-size: 10px;
-    } */
+        font-size: 11px; /* حجم الخط للإنجليزية على الجوال (أصغر قليلاً) */
+    }
 
 
     /* Further adjust top padding for other sections on mobile */
@@ -619,25 +608,38 @@ body.lang-ar .add-recommendation-form-container {
 }
 
 @media (max-width: 480px) {
+    /* **تعديلات زر اللغة على الشاشات الأصغر** */
+    .language-switcher { /* السطر 264 */
+        display: flex;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 1002;
+        /* لا حاجة لهذه الخصائص بعد استخدام Position: absolute */
+        /* width: 100%; */
+        /* padding: 0; */
+        /* box-sizing: content-box; */
+        /* min-height: auto; */
+        /* align-items: flex-start; */
+        /* justify-content: flex-start; */
+        /* margin-bottom: 0; */
+        /* order: auto; */
+    }
     .language-switcher .lang-btn {
         padding: 3px 6px;
         font-size: 10px;
     }
     nav ul li a {
         padding: 1px 2px;
-        /*
-        *** التعديل على الجوال الصغير: حجم الخط للروابط ***
-        */
-        font-size: 12px; /* حجم خط أكبر قليلاً على الجوال الأصغر */
         gap: 1px;
     }
-    /* إزالة التعديلات المنفصلة للخط العربي والإنجليزي على الجوال وإبقاء قاعدة واحدة */
-    /* body.lang-ar nav ul li a {
-        font-size: 10px;
+    /* **هنا التعديل الرئيسي: أحجام الخط المنفصلة للـ Navbar على الشاشات الأصغر** */
+    body.lang-ar nav ul li a {
+        font-size: 12px; /* حجم الخط للعربية على الجوال الأصغر */
     }
     body.lang-en nav ul li a {
-        font-size: 9px;
-    } */
+        font-size: 10px; /* حجم الخط للإنجليزية على الجوال الأصغر (أصغر قليلاً) */
+    }
     .about-section {
         padding-top: 110px;
     }
