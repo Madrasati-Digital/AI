@@ -543,20 +543,27 @@ body.lang-ar .add-recommendation-form-container {
         left: auto;
         order: 1; /* Appears first (top) in the mobile column */
         margin-bottom: 10px; /* Space between language buttons and nav */
-        width: 100%;
-        justify-content: center; /* Center buttons */
-        padding: 0 10px;
+        width: 100%; /* **مهم: تأكد أنها تأخذ العرض الكامل** */
+        padding: 0 10px; /* padding داخلي لضبط محاذاة الأزرار */
         box-sizing: border-box;
-        display: flex !important; /* **مهم جداً: لضمان ظهور الحاوية كـ flexbox على الجوال** */
-        min-height: 30px;
-        align-items: center;
-        z-index: 1002; /* **مهم جداً: لضمان ظهورها فوق العناصر الأخرى** */
+        display: flex !important; /* **مهم جداً: لضمان ظهور حاوية زر اللغة كـ flexbox** */
+        min-height: 30px; /* حجم أدنى لضمان رؤية الحاوية */
+        align-items: center; /* توسيط عمودي لمحتوى حاوية زر اللغة */
+        z-index: 1002; /* لضمان ظهورها فوق العناصر الأخرى */
     }
+    /* **هنا التعديل الجديد: التحكم بموقع زر اللغة داخل حاويته على الجوال** */
+    body.lang-ar .language-switcher {
+        justify-content: flex-start; /* زر اللغة لليسار في العربية */
+    }
+    body.lang-en .language-switcher {
+        justify-content: flex-end; /* زر اللغة لليمين في الإنجليزية */
+    }
+
     .language-switcher .lang-btn {
         padding: 5px 12px;
         font-size: 13px;
         min-width: 60px;
-        flex-shrink: 0;
+        flex-shrink: 0; /* منع زر اللغة من الانكماش والاختفاء */
     }
 
     /* Navbar on mobile */
@@ -565,39 +572,39 @@ body.lang-ar .add-recommendation-form-container {
         width: 100%;
         padding: 0 5px;
         margin-bottom: 15px;
-        overflow-x: hidden;
+        overflow-x: hidden; /* إخفاء التمرير الأفقي تماماً (بناءً على طلبك) */
         white-space: normal;
-        justify-content: center;
+        justify-content: center; /* توسيط الروابط */
         display: flex;
-        flex-wrap: nowrap;
-        gap: 5px;
+        flex-wrap: nowrap; /* منع التفاف الروابط إلى سطر جديد مهما كان الثمن */
+        gap: 5px; /* مسافة أولية بين الروابط (لتجربتها) */
         height: auto;
     }
     nav ul {
         justify-content: center;
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: nowrap; /* منع التفاف الروابط إلى سطر جديد داخل الـ ul */
         padding: 0;
         margin: 0;
-        direction: ltr;
+        direction: ltr; /* Force LTR direction on ul for consistent behavior */
     }
     nav ul li {
         margin: 0;
-        flex-shrink: 0;
+        flex-shrink: 0; /* منع الانكماش لضمان أخذ الحجم المطلوب وعدم الاختفاء */
         text-align: center;
     }
     nav ul li a {
-        padding: 2px 4px;
-        font-size: 10px;
-        gap: 2px;
-        white-space: nowrap;
+        padding: 2px 4px; /* حشوة داخل كل رابط (تحكم في عرض الرابط). قيم أولية صغيرة جداً جداً. */
+        font-size: 10px; /* حجم الخط العام للروابط الإنجليزية (قيم أولية صغيرة جداً). */
+        gap: 2px; /* مسافة أقل بين الأيقونة والنص */
+        white-space: nowrap; /* منع التفاف النص داخل الرابط */
         line-height: 1.2;
     }
     body.lang-ar nav ul li a {
-        font-size: 11px;
+        font-size: 11px; /* تكبير الخط للعربية قليلاً عن الإنجليزية */
     }
     body.lang-en nav ul li a {
-        font-size: 10px;
+        font-size: 10px; /* حجم افتراضي للإنجليزية */
     }
 
 
