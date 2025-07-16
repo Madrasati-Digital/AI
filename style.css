@@ -155,7 +155,7 @@ nav ul li a i {
     padding: 100px 20px 20px; /* Increased top padding */
     max-width: 800px;
     margin: 20px auto;
-    background-color: #f4f4f4; /* تم تغيير الخلفية هنا لتتناسب مع الـ body */
+    background-color: #f4f4f4;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
@@ -546,7 +546,7 @@ body.lang-ar .add-recommendation-form-container {
         width: 100%; /* **مهم: تأكد أنها تأخذ العرض الكامل** */
         padding: 0 10px; /* padding داخلي لضبط محاذاة الأزرار */
         box-sizing: border-box;
-        display: flex !important; /* **مهم جداً: لضمان ظهور حاوية زر اللغة كـ flexbox** */
+        display: flex; /* **مهم جداً: لضمان ظهور حاوية زر اللغة كـ flexbox** */
         min-height: 30px; /* حجم أدنى لضمان رؤية الحاوية */
         align-items: center; /* توسيط عمودي لمحتوى حاوية زر اللغة */
         z-index: 1002; /* لضمان ظهورها فوق العناصر الأخرى */
@@ -636,28 +636,3 @@ body.lang-ar .add-recommendation-form-container {
         padding-top: 110px;
     }
 }
-/* --- قواعد تشخيص مؤقتة - قم بإزالتها بعد حل المشكلة --- */
-.language-switcher button {
-    display: block !important; /* Force display block for all buttons */
-    background-color: #ff0000 !important; /* Make it very noticeable (RED) */
-    color: yellow !important;
-    font-size: 20px !important; /* Make font huge */
-    width: auto !important; /* Allow it to take natural width */
-    height: auto !important; /* Allow it to take natural height */
-    padding: 10px !important; /* Add padding */
-    margin: 5px !important; /* Add margin */
-    opacity: 1 !important; /* Ensure it's not transparent */
-    visibility: visible !important; /* Ensure it's visible */
-    border: 3px solid black !important; /* Add a thick border */
-}
-
-/* للتأكد من أن الحاوية الأم ظاهرة أيضاً */
-.language-switcher {
-    display: flex !important;
-    background-color: #00ff00 !important; /* Make container very noticeable (GREEN) */
-    min-height: 50px !important;
-    min-width: 50px !important;
-    overflow: visible !important; /* Ensure nothing is hidden by overflow */
-    box-shadow: 0 0 10px rgba(0,0,0,0.5) !important; /* Add shadow to see its boundaries */
-}
-/* --- نهاية قواعد التشخيص المؤقتة --- */
