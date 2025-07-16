@@ -537,7 +537,7 @@ body.lang-ar .add-recommendation-form-container {
 
     /* Language Switcher on mobile */
     .language-switcher {
-        position: relative; /* Make it relative within the flex container */
+        position: relative;
         top: auto;
         right: auto;
         left: auto;
@@ -559,42 +559,42 @@ body.lang-ar .add-recommendation-form-container {
         width: 100%;
         padding: 0 5px;
         margin-bottom: 15px;
-        overflow-x: hidden;
+        /* overflow-x: auto;  تم إزالة التمرير الأفقي حسب طلبك */
         white-space: normal;
-        justify-content: center; /* Center nav links within their container */
+        justify-content: center; /* توسيط الروابط */
         display: flex;
-        flex-wrap: wrap; /* Allow links to wrap to next line */
-        gap: 8px 15px; /* **مهم:** زيادة المسافة بين الروابط على الجوال لتقليل التداخل */
+        flex-wrap: nowrap; /* مهم: منع التفاف الروابط إلى سطر جديد */
+        /* gap: 8px 15px; تم تقليل المسافة بشكل أكبر */
+        gap: 0px 5px; /* مسافة أقل جداً لزيادة فرصة ظهورها في سطر واحد */
         height: auto;
     }
     nav ul {
         justify-content: center;
         display: flex;
-        width: 100%;
-        flex-wrap: wrap;
+        /* width: 100%; هنا قد نحتاج لضبط العرض أو السماح بالفيضان */
+        flex-wrap: nowrap; /* مهم: منع التفاف الروابط إلى سطر جديد داخل الـ ul */
         padding: 0;
         margin: 0;
-        direction: ltr; /* Force LTR direction on ul for consistent wrapping behavior on mobile */
+        direction: ltr; /* Force LTR direction on ul for consistent behavior */
     }
     nav ul li {
         margin: 0; /* Remove specific margins, rely on gap */
-        flex-basis: auto;
-        flex-shrink: 1;
+        flex-shrink: 0; /* مهم: منع الانكماش */
         text-align: center;
     }
     nav ul li a {
-        padding: 6px 12px; /* **تعديل:** حشوة أكبر قليلاً */
-        font-size: 14px; /* **تعديل:** خط أكبر قليلاً */
-        gap: 5px; /* مسافة بين الأيقونة والنص */
-        white-space: nowrap;
+        padding: 4px 8px; /* **تعديل:** حشوة أقل */
+        font-size: 12px; /* **تعديل:** خط أصغر لمحاولة احتواء الكل */
+        gap: 3px; /* مسافة أقل بين الأيقونة والنص */
+        white-space: nowrap; /* مهم: منع التفاف النص داخل الرابط */
         line-height: 1.2;
     }
-    /* **إضافة:** حجم خط أكبر قليلاً للروابط العربية على الجوال */
+    /* **تعديل:** حجم خط للعربية أصغر أيضاً ليناسب الشاشات الضيقة */
     body.lang-ar nav ul li a {
-        font-size: 15px; /* تكبير الخط للعربية */
+        font-size: 13px; /* تكبير الخط للعربية قليلاً عن الإنجليزية، لكن أصغر من السابق */
     }
     body.lang-en nav ul li a {
-        font-size: 14px; /* حجم افتراضي للإنجليزية */
+        font-size: 12px; /* حجم افتراضي أصغر للإنجليزية */
     }
 
 
@@ -608,15 +608,15 @@ body.lang-ar .add-recommendation-form-container {
 
 @media (max-width: 480px) {
     .language-switcher .lang-btn {
-        padding: 4px 10px;
-        font-size: 12px;
+        padding: 4px 8px; /* أصغر قليلاً */
+        font-size: 11px; /* أصغر قليلاً */
     }
     nav ul li a {
-        padding: 5px 10px; /* ضبط الحشوة للروابط على الشاشات الأصغر */
-        font-size: 13px; /* ضبط حجم الخط للروابط على الشاشات الأصغر */
+        padding: 3px 6px; /* حشوة أقل جداً */
+        font-size: 11px; /* أصغر جداً */
     }
     body.lang-ar nav ul li a {
-        font-size: 14px; /* تكبير الخط للعربية على الشاشات الأصغر */
+        font-size: 12px; /* أصغر جداً للعربية أيضاً */
     }
     .about-section {
         padding-top: 110px;
