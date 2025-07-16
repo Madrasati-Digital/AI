@@ -383,7 +383,7 @@ header {
     padding-bottom: 10px;
 }
 
-/* تحديد موقع زر اللغة بناءً على اللغة */
+/* محاذاة زر اللغة بناءً على اللغة - على الكمبيوتر فقط */
 .language-switcher {
     position: absolute;
     top: 10px;
@@ -402,7 +402,7 @@ body.lang-en .language-switcher {
     left: auto;
 }
 
-/* ضبط محاذاة روابط الـ Navbar بناءً على اللغة */
+/* ضبط محاذاة روابط الـ Navbar بناءً على اللغة - على الكمبيوتر فقط */
 nav {
     display: flex;
     align-items: center;
@@ -500,18 +500,17 @@ body.lang-en .skills-category li {
     
     /* 1. الصورة في قسم About Me (مشكلة القطع) */
     .profile-image-container {
-        width: 150px; /* ضمان عرض ثابت */
-        height: 150px; /* ضمان ارتفاع ثابت */
-        overflow: hidden; /* قص أي جزء خارج الدائرة */
-        border-radius: 50%; /* لجعلها دائرة */
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 50%;
         margin: 0 auto 15px auto; /* توسيط الصورة */
-        /* يمكن إضافة flex-shrink: 0; هنا إذا كانت الصورة تتشوه في Flexbox */
     }
     .profile-image {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* لضمان ملء الصورة للحاوية مع الحفاظ على الأبعاد */
-        border-radius: 50%; /* لضمان شكل دائري */
+        object-fit: cover;
+        border-radius: 50%;
     }
 
     /* 2. زر اللغة على الجوال: ثابت في مكان مناسب وواضح */
@@ -520,9 +519,9 @@ body.lang-en .skills-category li {
         top: auto;
         right: auto;
         order: 1; /* يظهر أولاً */
-        margin-bottom: 10px; /* مسافة من الـ Navbar */
+        margin-bottom: 10px;
         width: 100%;
-        justify-content: center; /* توسيط أزرار اللغة */
+        justify-content: center;
         padding: 0 10px;
         box-sizing: border-box;
         gap: 8px;
@@ -540,7 +539,7 @@ body.lang-en .skills-category li {
         margin-bottom: 15px;
         overflow-x: hidden; /* إخفاء التمرير الأفقي (سنضبط العناصر لتناسب العرض) */
         white-space: normal; /* السماح بالتفاف النصوص إذا لزم الأمر */
-        justify-content: center;
+        justify-content: center; /* توسيط الروابط */
         display: flex;
         flex-wrap: wrap; /* السماح للروابط بالنزول لسطر جديد */
         gap: 5px 10px; /* مسافة بين الروابط (صف وعمود) */
@@ -564,7 +563,7 @@ body.lang-en .skills-category li {
         padding: 6px 12px;
         font-size: 14px;
         gap: 3px;
-        white-space: nowrap;
+        white-space: nowrap; /* منع التفاف النص داخل الرابط */
     }
 
     /* ضبط padding-top للأقسام ليتجنب تداخل الهيدر الجديد */
