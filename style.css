@@ -362,176 +362,98 @@ nav ul li a i {
 #alert-ok-button:hover {
     background-color: #0056b3;
 }
-/* Media Queries للتصميم المتجاوب */
-@media (max-width: 768px) {
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 10px;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        box-sizing: border-box;
-        z-index: 1000;
-        min-height: 40px;
-    }
-    .site-title {
-        order: 1;
-        flex-basis: auto;
-        flex-grow: 0;
-        flex-shrink: 1;
-        min-width: 0;
-        padding-right: 5px;
-    }
-    .site-title h1 {
-        font-size: 14px;
-        margin: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    nav {
-        order: 3;
-        flex-grow: 1;
-        flex-shrink: 1;
-        min-width: 0;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-left: 5px;
-    }
-    nav ul {
-        flex-direction: row;
-        justify-content: flex-end;
-        padding: 0;
-        margin: 0;
-        flex-wrap: nowrap;
-        align-items: center;
-    }
-    nav ul li {
-        margin: 0 2px;
-        flex-shrink: 0;
-    }
-    nav ul li a {
-        padding: 3px 5px;
-        font-size: 10px;
-        white-space: nowrap;
-        display: flex;
-        align-items: center;
-        gap: 1px;
-    }
-    .about-section,
-    .skills-section,
-    .projects-section,
-    .recommendations-section {
-        padding-top: 50px;
-        margin-top: 0;
-    }
-    .project-card,
-    .recommendation-card {
-        max-width: 95%;
-        margin: 10px auto;
-    }
-    .about-content p {
-        max-width: 95%;
-    }
+
+/* --- بداية التعديلات الجديدة والمحدثة هنا --- */
+
+/* 1. إزالة اسم "Rashed Alhashmi" الأزرق من أعلى اليسار */
+/* بما أنك لا تريد إزالة العنصر من HTML، سنقوم بإخفائه */
+/* إذا كان هذا العنصر ضمن .site-title h1، فسيكون: */
+.site-title {
+    display: none; /* إخفاء حاوية العنوان بالكامل */
 }
-
-@media (max-width: 480px) {
-    header {
-        padding: 5px;
-        min-height: 35px;
-    }
-    .site-title h1 {
-        font-size: 12px;
-    }
-    nav ul li {
-        margin: 0 1px;
-    }
-    nav ul li a {
-        padding: 2px 3px;
-        font-size: 9px;
-        gap: 0px;
-    }
-    .about-section,
-    .skills-section,
-    .projects-section,
-    .recommendations-section {
-        padding-top: 45px;
-    }
-}
+/* إذا كان العنصر الذي تريده إزالته هو مجرد رابط أو نص خارج .site-title،
+   سوف تحتاج إلى إعطائه كلاس أو ID محدد لإخفائه.
+   بما أنني رأيت "Rashed Alhashmi" في صورك كجزء من الهيدر، فإن إخفاء .site-title
+   هو الحل الأنسب حاليًا، إلا إذا أردت الاحتفاظ بـ "Rashed Alhashmi" آخر. */
 
 
-/* --- هذا هو الكود الجديد الذي يجب إضافته في نهاية style.css (تم تحديثه لحل المشكلات) --- */
-
-/* 1. تصحيح زر اللغة: الحجم والموقع */
-.language-switcher {
-    position: absolute; /* احتفظ بها absolute لتحديد الموقع الدقيق */
-    top: 10px; /* اضبطها لأسفل قليلاً إذا لزم الأمر */
-    right: 20px; /* اضبطها لليمين */
-    z-index: 1001; /* تأكد أنها فوق كل شيء */
+/* 2. ضبط محاذاة شريط التنقل (Navbar) وعناصر الهيدر */
+header {
+    /* تأكد أن الهيدر يستخدم flexbox وأن justify-content موجودة */
     display: flex;
-    gap: 5px;
-    /* لجعل الزر أصغر */
-    font-size: 13px; /* حجم خط مناسب */
+    justify-content: space-between; /* لتباعد العناصر */
+    align-items: center;
+    flex-wrap: wrap; /* للسماح للعناصر بالنزول لسطر جديد في الشاشات الصغيرة */
 }
 
-.language-switcher .lang-btn {
-    padding: 5px 10px; /* تقليل الحشوة لجعل الزر أصغر */
-    font-size: 13px; /* تأكيد حجم الخط */
-    border-radius: 4px; /* جعل الحواف أقل دائرية قليلاً */
-}
-
-/* 2. تصحيح اتجاه شريط التنقل (Navbar) وتغيير مكان الروابط */
-/* اتجاه الـ header ككل */
-body.lang-ar header {
-    direction: rtl;
-}
-body.lang-en header {
-    direction: ltr;
-}
-
-/* لضبط ترتيب عناصر الـ nav داخل الـ header */
+/* ترتيب العناصر داخل الـ header باستخدام flexbox order */
+/* هذا يعتمد على وجود .site-title و nav و .language-switcher كأبناء مباشرين لـ header */
 body.lang-ar header .site-title {
-    order: 2; /* الاسم يمين */
+    order: 2; /* الاسم يمين (بعد الروابط) */
 }
 body.lang-en header .site-title {
-    order: 1; /* الاسم يسار */
+    order: 1; /* الاسم يسار (قبل الروابط) */
 }
 
 body.lang-ar header nav {
-    order: 1; /* الروابط يسار */
+    order: 1; /* الروابط يسار (قبل الاسم) */
 }
 body.lang-en header nav {
-    order: 2; /* الروابط يمين */
+    order: 2; /* الروابط يمين (بعد الاسم) */
 }
 
-/* محاذاة روابط الـ Navbar داخل الـ ul */
+/* محاذاة روابط الـ Navbar نفسها (داخل الـ ul) */
+nav ul {
+    display: flex; /* لضمان Flexbox لـ li */
+    padding: 0;
+    margin: 0;
+}
+
 body.lang-ar nav ul {
     justify-content: flex-end; /* الروابط تبدأ من اليمين في العربية */
-    padding-right: 0;
-    padding-left: 0;
 }
 body.lang-en nav ul {
-    justify-content: flex-start; /* الروابط تبدأ من اليسار في الإنجليزية */
-    padding-left: 0;
-    padding-right: 0;
+    justify-content: flex-end; /* الروابط تبدأ من اليمين في الإنجليزية (كما طلبت) */
 }
 
-/* عكس الهوامش لعناصر القائمة في الـ Navbar */
-body.lang-ar nav ul li {
-    margin-left: 0;
-    margin-right: 20px; /* مسافة بين العناصر من اليمين في العربية */
-}
-body.lang-en nav ul li {
-    margin-right: 0;
-    margin-left: 20px; /* مسافة بين العناصر من اليسار في الإنجليزية */
+/* 3. تعديل شكل ومكان زر تغيير اللغة */
+.language-switcher {
+    position: absolute; /* احتفظ بها absolute لتحديد الموقع الدقيق */
+    top: 10px; /* ضبط المكان العلوي */
+    right: 10px; /* ضبط المكان من اليمين (ليكون بعيدًا عن الحافة) */
+    z-index: 1002; /* جعله أعلى من الهيدر و أي شيء آخر */
+    display: flex;
+    gap: 2px; /* تقليل المسافة بين الأزرار */
+    /* لجعله أصغر حجماً */
+    font-size: 12px; /* حجم خط أصغر */
 }
 
+.language-switcher .lang-btn {
+    padding: 4px 8px; /* تقليل الحشوة لجعل الزر أصغر */
+    font-size: 12px; /* تأكيد حجم الخط */
+    border-radius: 3px; /* حواف أقل دائرية */
+}
 
-/* 3. تصحيح محاذاة العناوين الرئيسية للأقسام (About Me, Skills, Projects, Recommendations) */
-/* هذه العناوين يجب أن تظل في المنتصف بغض النظر عن الاتجاه */
+/* تعديلات عامة لاتجاهات النصوص (تأكد من هذه القواعد) */
+body.lang-ar {
+    direction: rtl;
+    /* text-align: right; هذا الكود يمكن أن يكون قوياً جداً ويسبب مشاكل.
+       الأفضل تطبيق text-align على أقسام محددة كما في الأسفل. */
+}
+body.lang-en {
+    direction: ltr;
+    /* text-align: left; */
+}
+
+/* محاذاة الأقسام الرئيسية (About, Skills, Projects, Recommendations) */
+.about-section,
+.skills-section,
+.projects-section,
+.recommendations-section {
+    text-align: center; /* لتوسيط المحتوى الرئيسي داخل كل قسم */
+}
+
+/* عناوين الأقسام الرئيسية يجب أن تكون في المنتصف */
 .about-section h2,
 .skills-section h2,
 .projects-section h2,
@@ -540,36 +462,36 @@ body.lang-en nav ul li {
     text-align: center; /* إجبارها على أن تكون في المنتصف */
 }
 
-/* لضبط النص الرئيسي في قسم About Me ليكون في المنتصف */
-.about-content {
-    text-align: center; /* لجعل النص داخل هذا الـ div في المنتصف */
+/* ضبط النصوص والفقرات داخل الأقسام */
+.about-content p,
+.project-card p,
+.recommendation-card p {
+    text-align: initial; /* أو left/right بناءً على الاتجاه العام للغة.
+                          `initial` يحافظ على الاتجاه الافتراضي للغة (ltr/rtl) */
 }
-.about-content p {
-    margin-left: auto;
-    margin-right: auto; /* هذا سيجعل الفقرة تظهر في المنتصف ضمن الـ div */
+body.lang-ar .about-content p,
+body.lang-ar .project-card p,
+body.lang-ar .recommendation-card p {
+    text-align: right; /* النصوص تتبع الاتجاه العام للغة العربية */
 }
-
-
-/* ضبط الاتجاه العام للجسم والتأكد من تطبيق محاذاة النصوص */
-body.lang-ar {
-    direction: rtl;
-    /* text-align: right; هذا سيؤثر على كل شيء، لذا استخدمه بحذر أو اتركه */
-}
-
-body.lang-en {
-    direction: ltr;
-    /* text-align: left; */
+body.lang-en .about-content p,
+body.lang-en .project-card p,
+body.lang-en .recommendation-card p {
+    text-align: left; /* النصوص تتبع الاتجاه العام للغة الإنجليزية */
 }
 
-/* الأيقونات والنصوص في قائمة المهارات */
-body.lang-ar .skills-category li {
-    flex-direction: row-reverse; /* يجعل الأيقونة تتبع النص في العربية */
+
+/* ضبط الهوامش في القوائم */
+body.lang-ar nav ul li {
+    margin-left: 0;
+    margin-right: 20px;
 }
-body.lang-en .skills-category li {
-    flex-direction: row; /* الأيقونة تسبق النص في الإنجليزية */
+body.lang-en nav ul li {
+    margin-right: 0;
+    margin-left: 20px;
 }
 
-/* محاذاة حقول النموذج (labels) */
+/* محاذاة تسميات حقول النموذج (labels) */
 body.lang-ar .form-group label {
     text-align: right;
 }
@@ -577,53 +499,78 @@ body.lang-en .form-group label {
     text-align: left;
 }
 
-/* محاذاة أزرار إرسال النموذج */
-body.lang-ar .submit-button {
-    margin-left: auto;
-    margin-right: auto;
+/* الأيقونات والنصوص في قائمة المهارات */
+body.lang-ar .skills-category li {
+    flex-direction: row-reverse;
 }
-body.lang-en .submit-button {
-    margin-left: auto;
-    margin-right: auto;
+body.lang-en .skills-category li {
+    flex-direction: row;
 }
 
 
-/* Media Queries للتصميم المتجاوب - تحديثات لضبط تبديل اللغة */
+/* Media Queries للتصميم المتجاوب - تحديثات إضافية */
 @media (max-width: 768px) {
-    /* زر تبديل اللغة في الشاشات الصغيرة */
+    header {
+        flex-direction: row; /* لضمان بقاء الاسم وزر اللغة والتنقل في صف واحد مبدئيًا */
+        justify-content: space-between;
+        flex-wrap: wrap; /* للسماح للعناصر بالنزول لأسطر جديدة */
+        padding-top: 50px; /* لترك مساحة كافية لأزرار اللغة إذا كانت في الأعلى */
+    }
+
+    /* مكان وتنسيق زر اللغة في الشاشات الصغيرة */
     .language-switcher {
-        position: relative; /* تغيير الموضع ليتناسب مع flexbox في الهيدر */
-        top: auto;
-        right: auto;
-        order: 2; /* ترتيب أزرار اللغة داخل الهيدر المرن */
-        margin-right: 10px; /* مسافة بسيطة */
-        margin-left: 10px; /* مسافة من اليسار ايضاً */
+        position: absolute; /* أو relative حسب التصميم الأخير للهيدر */
+        top: 5px; /* أعلى قليلاً */
+        right: 5px; /* أقصى اليمين */
+        z-index: 1003; /* لضمان ظهوره */
+        font-size: 10px; /* أصغر حجماً */
+        padding: 2px 5px; /* حشوة أقل */
+        gap: 1px; /* مسافة أقل بين الأزرار */
     }
-    
-    /* ضبط اتجاه زر اللغة في العربية على الشاشات الصغيرة */
-    body.lang-ar .language-switcher {
-        left: auto; /* إلغاء الـ left الذي قد يوضع */
-        right: auto; /* إلغاء الـ right */
-        flex-direction: row-reverse; /* ترتيب الزرين بشكل عكسي (الإنجليزية ثم العربية) */
-        /* يمكن ضبط justify-content هنا إذا كان جزءًا من الـ header كـ flex container */
-        /* justify-content: flex-end; */
+    .language-switcher .lang-btn {
+        padding: 3px 6px;
+        font-size: 10px;
     }
 
-    /* ضمان أن الـ Navbar يتحرك بشكل صحيح في الشاشات الصغيرة */
-    body.lang-ar header nav ul {
-        justify-content: flex-start; /* الروابط تبدأ من اليسار في العربية (عكس الاتجاه الطبيعي للشريط) */
+    /* ضبط ترتيب العناصر في الهيدر على الشاشات الصغيرة */
+    body.lang-ar header .site-title {
+        order: 1; /* الاسم يسار في العربية على الجوال */
     }
-    body.lang-en header nav ul {
-        justify-content: flex-end; /* الروابط تبدأ من اليمين في الإنجليزية (عكس الاتجاه الطبيعي للشريط) */
+    body.lang-en header .site-title {
+        order: 1; /* الاسم يسار في الإنجليزية على الجوال */
+    }
+    body.lang-ar header nav {
+        order: 2; /* الروابط على اليمين بعد الاسم (في صف جديد إن لزم الأمر) */
+    }
+    body.lang-en header nav {
+        order: 2; /* الروابط على اليمين بعد الاسم (في صف جديد إن لزم الأمر) */
     }
 
-    /* تعديل هوامش عناصر الـ nav ul li لتناسب الاتجاه */
-    body.lang-ar nav ul li {
-        margin-left: 0;
-        margin-right: 2px; /* مسافة أقل في الشاشات الصغيرة للعربية */
+    /* محاذاة روابط التنقل على الشاشات الصغيرة */
+    body.lang-ar nav ul {
+        justify-content: flex-end; /* الروابط على اليمين في العربية */
     }
-    body.lang-en nav ul li {
-        margin-right: 0;
-        margin-left: 2px; /* مسافة أقل في الشاشات الصغيرة للإنجليزية */
+    body.lang-en nav ul {
+        justify-content: flex-end; /* الروابط على اليمين في الإنجليزية */
+    }
+
+    /* ضبط padding-top للأقسام ليتجنب تداخل الهيدر الجديد */
+    .about-section,
+    .skills-section,
+    .projects-section,
+    .recommendations-section {
+        padding-top: 70px; /* زيادة الحشوة العلوية أكثر قليلاً */
+    }
+}
+
+@media (max-width: 480px) {
+    /* قد تحتاج تعديلات طفيفة هنا إذا لم يضبط التصميم */
+    .language-switcher {
+        font-size: 9px;
+        padding: 1px 3px;
+    }
+    .language-switcher .lang-btn {
+        font-size: 9px;
+        padding: 2px 4px;
     }
 }
