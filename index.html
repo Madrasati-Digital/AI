@@ -16,10 +16,58 @@
         </div>
         <nav>
             <div class="language-switcher">
-                <button id="lang-ar" class="lang-btn active">العربية</button>
-                <button id="lang-en" class="lang-btn">English</button>
+                <button id="lang-ar" class="lang-btn" data-lang="ar">العربية</button>
+                <button id="lang-en" class="lang-btn" data-lang="en">English</button>
             </div>
             <ul>
+                <li><a href="#about" data-key="navHome"><i class="fas fa-home"></i> </a></li>
+                <li><a href="#about" data-key="navAbout"></a></li>
+                <li><a href="#skills" data-key="navSkills"></a></li>
+                <li><a href="#projects" data-key="navProjects"></a></li>
+                <li><a href="#recommendations" data-key="navRecommendations"></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="custom-alert" class="custom-alert">
+        <div class="custom-alert-content">
+            <span class="close-button">&times;</span>
+            <p id="alert-message"></p>
+            <button id="alert-ok-button">OK</button>
+        </div>
+    </div>
+
+    <section id="about" class="about-section">
+        <div class="profile-main-content">
+            <div class="profile-image-container">
+                <img src="1726104987109.jpeg" alt="صورة الملف الشخصي لراشد الهاشمي" class="profile-image">
+            </div>
+            <h1 class="profile-name-in-about">Rashed Alhashmi</h1>
+        </div>
+        <div class="about-content">
+            <h2 data-key="aboutTitle"></h2>
+            <p data-key="aboutParagraph1"></p>
+        </div>
+    </section>
+
+    <section id="skills" class="skills-section">
+        <h2 data-key="skillsTitle"></h2>
+        <div class="skills-category">
+            <h3 data-key="techSkillsTitle"></h3>
+            <ul>
+                <li><i class="fas fa-chart-line"></i> <span data-key="skillDataAnalysis"></span></li>
+                <li><i class="fas fa-lightbulb"></i> <span data-key="skillProblemSolving"></span></li>
+                <li><i class="fas fa-cogs"></i> <span data-key="skillSixSigma"></span></li>
+                <li><i class="fas fa-hard-hat"></i> <span data-key="skillCivilEng"></span></li>
+                <li><i class="fas fa-robot"></i> <span data-key="skillPromptEng"></span></li>
+                <li><i class="fas fa-brain"></i> <span data-key="skillAIAp"></span></li>
+            </ul>
+        </div>
+        <div class="skills-category">
+            <h3 data-key="softSkillsTitle"></h3>
+            <ul>
+                <li><i class="fas fa-users"></i> <span data-key="skillTeamLeadership"></span></li>
+                <li><i class="fas fa-headset"></i> <span data-key="skillCustomerService"></span></li>
                 <li><a href="#about" data-key="navHome"><i class="fas fa-home"></i> </a></li>
                 <li><a href="#about" data-key="navAbout"></a></li>
                 <li><a href="#skills" data-key="navSkills"></a></li>
