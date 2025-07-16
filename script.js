@@ -49,11 +49,11 @@ const translations = {
         formRecPlaceholder: "اكتب توصيتك هنا",
         formSubmitBtn: "إرسال التوصية",
 
-        // Alert Messages
-        alertFillForm: "الرجاء تعبئة اسمك ونص التوصية.",
-        alertSuccess: "شكراً لتوصيتك! تم إضافتها بنجاح وهي الآن متاحة!",
-        alertFailedAdd: "فشل إضافة التوصية. الرجاء التحقق من اتصال الإنترنت لديك أو المحاولة لاحقاً.",
-        alertFailedLoad: "فشل تحميل التوصيات. الرجاء التحقق من مشغل المتصفح للحصول على تفاصيل الخطأ.",
+        // Alert Messages (Unified for showAlert function)
+        alertFillForm: "الرجاء تعبئة اسمك ونص التوصية.", // Specific message for form validation
+        alertSuccessMessage: "شكراً لتوصيتك! تم إضافتها بنجاح وهي الآن متاحة!", // General success message for submission
+        alertErrorMessage: "حدث خطأ أثناء إرسال التوصية. يرجى التحقق من اتصال الإنترنت لديك أو المحاولة لاحقاً.", // General error message for submission
+        alertFailedLoad: "فشل تحميل التوصيات. الرجاء التحقق من مشغل المتصفح للحصول على تفاصيل الخطأ.", // Specific message for loading error
     },
     en: {
         // Navbar
@@ -104,11 +104,11 @@ const translations = {
         formRecPlaceholder: "Write your recommendation here",
         formSubmitBtn: "Submit Recommendation",
 
-        // Alert Messages
-        alertFillForm: "Please fill in your name and recommendation text.",
-        alertSuccess: "Thank you for your recommendation! It has been added successfully and is now live!",
-        alertFailedAdd: "Failed to add recommendation. Please check your internet connection or try again later.",
-        alertFailedLoad: "Failed to load recommendations. Please check browser console for error details.",
+        // Alert Messages (Unified for showAlert function)
+        alertFillForm: "Please fill in your name and recommendation text.", // Specific message for form validation
+        alertSuccessMessage: "Thank you for your recommendation! It has been added successfully and is now live!", // General success message for submission
+        alertErrorMessage: "An error occurred while submitting your recommendation. Please check your internet connection or try again later.", // General error message for submission
+        alertFailedLoad: "Failed to load recommendations. Please check browser console for error details.", // Specific message for loading error
     }
 };
 
@@ -128,21 +128,15 @@ function applyTranslation(lang) {
     });
 
     // تحديث اتجاه الصفحة (للعربية من اليمين لليسار، وللإنجليزية من اليسار لليمين)
+    // *** تم إزالة body.style.direction - الـ CSS يتعامل مع الاتجاه عبر الفئات ***
     const body = document.body;
-    if (lang === 'ar') {
-        body.style.direction = 'rtl';
-        body.classList.add('lang-ar');
-        body.classList.remove('lang-en');
-    } else {
-        body.style.direction = 'ltr';
-        body.classList.add('lang-en');
-        body.classList.remove('lang-ar');
-    }
-    
+    body.classList.remove('lang-ar', 'lang-en'); // إزالة كلا الفئتين أولاً
+    body.classList.add(`lang-${lang}`); // إضافة الفئة الصحيحة
+
     // حفظ اللغة المفضلة للمستخدم في localStorage
     localStorage.setItem('preferredLang', lang);
     currentLanguage = lang; // تحديث اللغة الحالية في المتغير
-    
+
     // تحديث حالة أزرار اللغة (active)
     const langArBtn = document.getElementById('lang-ar');
     const langEnBtn = document.getElementById('lang-en');
@@ -157,15 +151,21 @@ function applyTranslation(lang) {
     }
 }
 
-// تعديل الدالة showCustomAlert لاستخدام الترجمة
-function showCustomAlert(key, fallbackMessage = '') {
-    const message = translations[currentLanguage][key] || fallbackMessage;
+// تعديل الدالة showCustomAlert لاستخدام الترجمة بشكل موحد
+function showCustomAlert(messageKey, isSuccess = true) {
+    const message = translations[currentLanguage][messageKey] || messageKey; // Fallback to key if no translation
     const customAlert = document.getElementById('custom-alert');
     const alertMessage = document.getElementById('alert-message');
-    
+
     if (customAlert && alertMessage) {
         alertMessage.textContent = message;
-        customAlert.style.display = 'flex';
+        // Adjust background color based on success/error
+        if (isSuccess) {
+            customAlert.style.backgroundColor = 'rgba(0,123,255,0.4)'; // Blue for success
+        } else {
+            customAlert.style.backgroundColor = 'rgba(255,0,0,0.4)'; // Red for error
+        }
+        customAlert.style.display = 'flex'; // Use flex to center
     } else {
         console.error('Custom alert elements not found. Falling back to default alert.');
         alert(message);
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedLang) {
         currentLanguage = savedLang;
     }
-    
+
     // طبق الترجمة الافتراضية أو المحفوظة عند تحميل الصفحة
     applyTranslation(currentLanguage);
 
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // هنا يبدأ كود Firebase الحالي الخاص بك
     const recommendationsContainer = document.querySelector('.recommendations-container');
     const recommendationForm = document.getElementById('recommendationForm');
-    
+
     const customAlert = document.getElementById('custom-alert');
     const alertMessage = document.getElementById('alert-message');
     const closeButton = document.querySelector('#custom-alert .close-button');
@@ -219,9 +219,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideCustomAlert() {
         if (customAlert) {
             customAlert.style.display = 'none';
+            // Reset background color to default or based on last state for next show
+            customAlert.style.backgroundColor = 'rgba(0,0,0,0.4)';
         }
     }
-    
+
     if (closeButton) closeButton.addEventListener('click', hideCustomAlert);
     if (alertOkButton) alertOkButton.addEventListener('click', hideCustomAlert);
     if (customAlert) {
@@ -242,12 +244,15 @@ document.addEventListener('DOMContentLoaded', function() {
         recommenderName.textContent = name;
         const recommenderTitle = document.createElement('p');
         recommenderTitle.classList.add('recommender-title');
-        recommenderTitle.textContent = title ? title : 'Anonymous';
+        recommenderTitle.textContent = title ? title : translations[currentLanguage].anonymousPlaceholder || 'Anonymous'; // Use translated 'Anonymous'
         card.appendChild(recommendationText);
         card.appendChild(recommenderName);
         card.appendChild(recommenderTitle);
         return card;
     }
+    // Add 'anonymousPlaceholder' to your translations object if you want to translate "Anonymous"
+    if (!translations.ar.anonymousPlaceholder) translations.ar.anonymousPlaceholder = "مجهول";
+    if (!translations.en.anonymousPlaceholder) translations.en.anonymousPlaceholder = "Anonymous";
 
     async function fetchRecommendations(showErrorAlert = true) {
         recommendationsContainer.innerHTML = '';
@@ -258,13 +263,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             snapshot.forEach(doc => {
                 const data = doc.data();
+                // Pass currentLanguage to createRecommendationCard if the data itself needs translation,
+                // but usually the stored recommendation text is fixed.
                 const card = createRecommendationCard(data.name, data.title, data.text);
                 recommendationsContainer.appendChild(card);
             });
         } catch (error) {
             console.error("Error fetching recommendations: ", error);
             if (showErrorAlert) {
-                showCustomAlert('alertFailedLoad');
+                showCustomAlert('alertFailedLoad', false); // Pass false for error status
             }
         }
     }
@@ -275,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = document.getElementById('recommender-title-org').value;
         const text = document.getElementById('recommendation-text').value;
         if (name.trim() === '' || text.trim() === '') {
-            showCustomAlert('alertFillForm');
+            showCustomAlert('alertFillForm', false); // Use specific form validation message
             return;
         }
         try {
@@ -286,13 +293,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
             recommendationForm.reset();
-            await fetchRecommendations(false);
-            showCustomAlert('alertSuccess');
+            await fetchRecommendations(false); // Refetch, don't show error if successful
+            showCustomAlert('alertSuccessMessage', true); // Use general success message
         } catch (error) {
             console.error("Error adding document: ", error);
-            showCustomAlert('alertFailedAdd', 'Error: ' + error.message);
+            showCustomAlert('alertErrorMessage', false); // Use general error message
         }
     });
 
-    fetchRecommendations(false);
+    fetchRecommendations(false); // Fetch on initial load
 });
