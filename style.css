@@ -547,10 +547,15 @@ body.lang-ar .add-recommendation-form-container {
         justify-content: center; /* Center buttons */
         padding: 0 10px;
         box-sizing: border-box;
+        display: flex; /* **إضافة: ضمان أن حاوية زر اللغة تظهر كـ flexbox** */
+        min-height: 30px; /* **إضافة: حجم أدنى لضمان رؤية الحاوية** */
+        align-items: center; /* **إضافة: توسيط عمودي لمحتوى حاوية زر اللغة** */
     }
     .language-switcher .lang-btn {
         padding: 5px 12px;
         font-size: 13px;
+        min-width: 60px; /* **إضافة: حجم أدنى لزر اللغة نفسه** */
+        flex-shrink: 0; /* **إضافة: منع زر اللغة من الانكماش والاختفاء** */
     }
 
     /* Navbar on mobile */
@@ -560,7 +565,7 @@ body.lang-ar .add-recommendation-form-container {
         padding: 0 5px;
         margin-bottom: 15px;
         overflow-x: hidden; /* **هنا التعديل: إخفاء التمرير الأفقي تماماً (بناءً على طلبك)** */
-        white-space: normal; /* السماح بتوزيع المحتوى (ليس له تأثير كبير مع nowrap على flex item) */
+        white-space: normal;
         justify-content: center; /* توسيط الروابط */
         display: flex;
         flex-wrap: nowrap; /* **هنا التعديل: منع التفاف الروابط إلى سطر جديد مهما كان الثمن** */
