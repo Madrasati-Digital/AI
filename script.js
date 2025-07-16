@@ -187,6 +187,8 @@ function applyTranslation(lang) {
             langArBtn.classList.remove('hidden'); // إظهار زر العربية
         }
     }
+    // بعد تغيير اللغة، أعد جلب التوصيات لتحديث أي نصوص مترجمة داخلها (مثل "مجهول")
+    fetchRecommendations(); 
 }
 
 // دالة لعرض التوصيات
@@ -200,25 +202,20 @@ async function fetchRecommendations() {
             console.log("No recommendations found in Firestore.");
         }
         snapshot.forEach(doc => {
-            const rec = doc.data();
+            const data = doc.data();
+            // استخدام data.titleOrg للعنوان
+            const recommenderTitleText = data.titleOrg || translations[currentLanguage].anonymousPlaceholder;
+
             const card = document.createElement('div');
             card.classList.add('recommendation-card');
-            // تأكد من استخدام anonymousPlaceholder مترجمة هنا
-            const recommenderTitleText = rec.titleOrg || translations[currentLanguage].anonymousPlaceholder;
-
+            
             card.innerHTML = `
-                <p>${rec.text}</p>
-                <h4>${rec.name || translations[currentLanguage].anonymousPlaceholder}</h4>
-                ${rec.titleOrg ? `<p class="recommender-title">${recommenderTitleText}</p>` : `<p class="recommender-title">${recommenderTitleText}</p>`}
+                <p>${data.text}</p>
+                <h4>${data.name || translations[currentLanguage].anonymousPlaceholder}</h4>
+                <p class="recommender-title">${recommenderTitleText}</p>
             `;
-            // Simplified the ternary for recommenderTitleText to always display the title placeholder if no titleOrg
-            // Or you can completely hide it if no titleOrg is provided:
-            // card.innerHTML = `
-            //     <p>${rec.text}</p>
-            //     <h4>${rec.name || translations[currentLanguage].anonymousPlaceholder}</h4>
-            //     ${rec.titleOrg ? `<p class="recommender-title">${rec.titleOrg}</p>` : ''}
-            // `;
-            // Choose the version you prefer for the recommenderTitle
+            // Simplified the innerHTML to directly use recommenderTitleText
+            
             recommendationsContainer.appendChild(card);
         });
     } catch (error) {
@@ -265,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 await db.collection('recommendations').add({
                     name: name,
-                    titleOrg: titleOrg,
+                    titleOrg: titleOrg, // التأكد من إرسالها بـ titleOrg
                     text: text,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
@@ -280,7 +277,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // جلب وعرض التوصيات عند تحميل الصفحة
-    fetchRecommendations();
+    // جلب وعرض التوصيات عند تحميل الصفحة (تم استدعاؤها بالفعل في applyTranslation)
+    // fetchRecommendations(); 
 });
-
