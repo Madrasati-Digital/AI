@@ -1,549 +1,613 @@
-/* (نفس كود style.css الذي قدمته لي، بما في ذلك Media Queries) */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    overflow-x: hidden; /* لمنع أي تمرير أفقي غير مرغوب فيه */
+/* (كودك الأصلي لـ style.css قبل التعديلات) */
+Body {
+    Font-family: Arial, sans-serif;
+    Margin: 0;
+    Padding: 0;
+    Background-color: #f4f4f4;
+    Color: #333;
+    Overflow-x: hidden; /* لمنع أي تمرير أفقي غير مرغوب فيه */
 }
-
-/* تعديلات الهيدر ليضم الاسم في اليسار والتنقل في اليمين (للمهمة 1) */
-header {
-    background-color: #fff;
-    padding: 10px 20px; /* حشوة موحدة للهيدر */
-    border-bottom: 1px solid #ddd;
-    display: flex; /* لترتيب العناصر (الاسم وشريط التنقل) أفقياً */
-    justify-content: space-between; /* يدفع الاسم لليسار وشريط التنقل لليمين */
-    align-items: center; /* توسيط العناصر عمودياً */
-    position: fixed; /* يبقى الهيدر ثابتاً عند التمرير */
-    width: 100%;
-    top: 0;
-    left: 0;
-    box-sizing: border-box; /* لضمان أن الحشوة لا تزيد من عرض الهيدر */
+Header {
+    Background-color: #fff;
+    Padding: 10px 20px; /* حشوة موحدة للهيدر */
+    Border-bottom: 1px solid #ddd;
+    Display: flex; /* لترتيب العناصر (الاسم وشريط التنقل) أفقياً */
+    Justify-content: space-between; /* يدفع الاسم لليسار وشريط التنقل لليمين */
+    Align-items: center; /* توسيط العناصر عمودياً */
+    Position: fixed; /* يبقى الهيدر ثابتاً عند التمرير */
+    Width: 100%;
+    Top: 0;
+    Left: 0;
+    Box-sizing: border-box; /* لضمان أن الحشوة لا تزيد من عرض الهيدر */
     z-index: 1000; /* ليبقى الهيدر فوق المحتوى الآخر */
 }
-
-/* تنسيق اسم الموقع في الهيدر (المهمة 1) */
 .site-title h1 {
-    font-size: 24px; /* حجم الخط لاسم الموقع */
-    color: #007bff; /* لون مميز لاسم الموقع */
-    margin: 0; /* إزالة الهوامش الافتراضية */
-    white-space: nowrap; /* منع انقسام الاسم في الشاشات الكبيرة */
-    overflow: hidden; /* إخفاء أي جزء زائد */
-    text-overflow: ellipsis; /* إضافة نقاط (...) إذا تم اقتطاع الاسم */
+    Font-size: 24px; /* حجم الخط لاسم الموقع */
+    Color: #007bff; /* لون مميز لاسم الموقع */
+    Margin: 0; /* إزالة الهوامش الافتراضية */
+    White-space: nowrap; /* منع انقسام الاسم في الشاشات الكبيرة */
+    Overflow: hidden; /* إخفاء أي جزء زائد */
+    Text-overflow: ellipsis; /* إضافة نقاط (...) إذا تم اقتطاع الاسم */
 }
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0; /* إزالة الحشوة من الـ ul حيث تم التحكم بها في الهيدر */
-    display: flex; /* لجعل عناصر القائمة أفقية */
+Nav ul {
+    List-style: none;
+    Margin: 0;
+    Padding: 0; /* إزالة الحشوة من الـ ul حيث تم التحكم بها في الهيدر */
+    Display: flex; /* لجعل عناصر القائمة أفقية */
 }
-
-nav ul li {
-    margin-left: 20px; /* مسافة بين عناصر القائمة في الهيدر */
+Nav ul li {
+    Margin-left: 20px; /* مسافة بين عناصر القائمة في الهيدر */
 }
-
-/* تنسيق روابط التنقل (للمهمة 2) */
-nav ul li a {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold; /* يمكنك تركه bold أو تغييره إلى normal حسب ما تفضله للخط الأساسي */
-    transition: color 0.3s ease, text-decoration 0.3s ease, transform 0.3s ease; /* أضف 'transform' للـ transition */
-    display: flex; /* لتوسيط الأيقونة والنص داخل الرابط */
-    align-items: center; /* توسيط عمودي للأيقونة والنص */
-    gap: 5px; /* مسافة بين الأيقونة والنص (للمهمة 8) */
+Nav ul li a {
+    Text-decoration: none;
+    Color: #007bff;
+    Font-weight: bold;
+    Transition: color 0.3s ease, text-decoration 0.3s ease, transform 0.3s ease;
+    Display: flex;
+    Align-items: center;
+    Gap: 5px;
 }
-
-/* تأثير الـ hover للمهمة 2: يكبر ويصبح تحته خط */
-nav ul li a:hover {
-    color: #0056b3;
-    text-decoration: underline;
-    transform: scale(1.2); /* يكبر العنصر بنسبة 10% */
-    /* إذا أردت أن يصبح bold فقط عند الهوفر، ضع font-weight: bold; هنا وأزله من nav ul li a */
+Nav ul li a:hover {
+    Color: #0056b3;
+    Text-decoration: underline;
+    Transform: scale(1.2);
 }
-
-/* تنسيق الأيقونة داخل روابط التنقل (للمهمة 8) */
-nav ul li a i {
-    color: #007bff; /* لون الأيقونة */
+Nav ul li a i {
+    Color: #007bff;
 }
-
-
-/* تصميم قسم "About Me" (المهمة 3) */
 .about-section {
-    padding: 100px 20px 20px; /* ضبط الحشوة العلوية ليتجنب الهيدر الثابت */
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center; /* لتوسيط كل من الصورة والاسم وعنوان "About Me" */
+    Padding: 100px 20px 20px;
+    Max-width: 800px;
+    Margin: 20px auto;
+    Background-color: #fff;
+    Box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    Border-radius: 8px;
+    Text-align: center;
 }
-
-.profile-main-content { /* الحاوية الجديدة للصورة والاسم في قسم About Me */
-    margin-bottom: 20px;
+.profile-main-content {
+    Margin-bottom: 20px;
 }
-
 .profile-image-container {
-    margin-bottom: 15px; /* مسافة بين الصورة والاسم */
+    Margin-bottom: 15px;
 }
-
 .profile-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #007bff;
+    Width: 150px;
+    Height: 150px;
+    Border-radius: 50%;
+    Object-fit: cover;
+    Border: 3px solid #007bff;
 }
-
-.profile-name-in-about { /* تنسيق اسم Rashed Alhashmi في قسم About Me */
-    font-size: 28px;
-    color: #333;
-    margin: 0;
-    margin-bottom: 30px;
+.profile-name-in-about {
+    Font-size: 28px;
+    Color: #333;
+    Margin: 0;
+    Margin-bottom: 30px;
 }
-
 .about-content {
-    text-align: center; /* نص وفقرات "About Me" ستكون في المنتصف */
+    Text-align: center;
 }
-
 .about-content h2 {
-    font-size: 22px;
-    color: #007bff;
-    margin-bottom: 10px;
+    Font-size: 22px;
+    Color: #007bff;
+    Margin-bottom: 10px;
 }
-
 .about-content p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 0;
-    /* لإظهار الفقرة في المنتصف إذا كان عرضها أقل من الأب،
-       يمكنك تحديد max-width عليها وجعل margin auto */
-    max-width: 700px; /* يمكن تعديل هذا الرقم */
-    margin-left: auto;
-    margin-right: auto;
+    Font-size: 16px;
+    Line-height: 1.6;
+    Margin-bottom: 0;
+    Max-width: 700px;
+    Margin-left: auto;
+    Margin-right: auto;
 }
-
-/* تنسيقات قسم المهارات الجديد (المهمة 4) */
 .skills-section {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
+    Padding: 40px 20px;
+    Max-width: 800px;
+    Margin: 20px auto;
+    Background-color: #fff;
+    Box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    Border-radius: 8px;
+    Text-align: center;
 }
-
 .skills-section h2 {
-    font-size: 28px;
-    color: #007bff;
-    margin-bottom: 30px;
+    Font-size: 28px;
+    Color: #007bff;
+    Margin-bottom: 30px;
 }
-
 .skills-category {
-    margin-bottom: 20px;
+    Margin-bottom: 20px;
 }
-
 .skills-category h3 {
-    font-size: 20px;
-    color: #555;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
+    Font-size: 20px;
+    Color: #555;
+    Margin-bottom: 15px;
+    Border-bottom: 1px solid #eee;
+    Padding-bottom: 5px;
 }
-
 .skills-category ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+    List-style: none;
+    Padding: 0;
+    Display: flex;
+    Flex-wrap: wrap;
+    Justify-content: center;
+    Gap: 10px;
 }
-
 .skills-category li {
-    background-color: #e9f5ff;
-    color: #007bff;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 15px;
-    white-space: nowrap;
-    border: 1px solid #cceeff;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    Background-color: #e9f5ff;
+    Color: #007bff;
+    Padding: 8px 15px;
+    Border-radius: 20px;
+    Font-size: 15px;
+    White-space: nowrap;
+    Border: 1px solid #cceeff;
+    Display: flex;
+    Align-items: center;
+    Gap: 8px;
 }
-
 .skills-category li i {
-    color: #0056b3;
+    Color: #0056b3;
 }
-
-/* تنسيقات قسم المشاريع (المهمة 5) */
 .projects-section {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center; /* لتوسيط العنوان */
+    Padding: 40px 20px;
+    Max-width: 800px;
+    Margin: 20px auto;
+    Background-color: #fff;
+    Box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    Border-radius: 8px;
+    Text-align: center;
 }
-
 .projects-section h2 {
-    font-size: 28px;
-    color: #007bff;
-    margin-bottom: 30px;
+    Font-size: 28px;
+    Color: #007bff;
+    Margin-bottom: 30px;
 }
-
 .projects-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    Display: flex;
+    Flex-wrap: wrap;
+    Justify-content: center;
+    Gap: 20px;
 }
-
 .project-card {
-    background-color: #e9f5ff;
-    border: 1px solid #cceeff;
-    border-radius: 8px;
-    padding: 20px;
-    width: 100%;
-    max-width: 300px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    text-align: left; /* لجعل محتوى البطاقة محاذيًا لليسار */
-    transition: transform 0.3s ease;
+    Background-color: #e9f5ff;
+    Border: 1px solid #cceeff;
+    Border-radius: 8px;
+    Padding: 20px;
+    Width: 100%;
+    Max-width: 300px;
+    Box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    Text-align: left;
+    Transition: transform 0.3s ease;
 }
-
 .project-card:hover {
-    transform: translateY(-5px);
+    Transform: translateY(-5px);
 }
-
 .project-card h3 {
-    color: #007bff;
-    font-size: 20px;
-    margin-top: 0;
-    margin-bottom: 10px;
+    Color: #007bff;
+    Font-size: 20px;
+    Margin-top: 0;
+    Margin-bottom: 10px;
 }
-
 .project-card p {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 15px;
+    Font-size: 15px;
+    Color: #555;
+    Line-height: 1.6;
+    Margin-bottom: 15px;
 }
-
 .project-icon {
-    font-size: 36px;
-    color: #0056b3;
-    margin-top: 10px;
-    display: block;
-    text-align: center;
+    Font-size: 36px;
+    Color: #0056b3;
+    Margin-top: 10px;
+    Display: block;
+    Text-align: center;
 }
-
-/* تنسيقات قسم التوصيات (المهمة 6) */
 .recommendations-section {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center; /* لتوسيط العنوان */
+    Padding: 40px 20px;
+    Max-width: 800px;
+    Margin: 20px auto;
+    Background-color: #fff;
+    Box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    Border-radius: 8px;
+    Text-align: center;
 }
-
 .recommendations-section h2 {
-    font-size: 28px;
-    color: #007bff;
-    margin-bottom: 30px;
+    Font-size: 28px;
+    Color: #007bff;
+    Margin-bottom: 30px;
 }
-
 .recommendations-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    Display: flex;
+    Flex-wrap: wrap;
+    Justify-content: center;
+    Gap: 20px;
 }
-
 .recommendation-card {
-    background-color: #e9f5ff; /* نفس خلفية بطاقات المشاريع */
-    border: 1px solid #cceeff;
-    border-radius: 8px;
-    padding: 20px;
-    width: 100%;
-    max-width: 300px; /* نفس عرض بطاقات المشاريع */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    text-align: left; /* لجعل محتوى البطاقة محاذيًا لليسار */
-    transition: transform 0.3s ease;
+    Background-color: #e9f5ff;
+    Border: 1px solid #cceeff;
+    Border-radius: 8px;
+    Padding: 20px;
+    Width: 100%;
+    Max-width: 300px;
+    Box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    Text-align: left;
+    Transition: transform 0.3s ease;
 }
-
 .recommendation-card:hover {
-    transform: translateY(-5px); /* نفس تأثير الـ hover للمشاريع */
+    Transform: translateY(-5px);
 }
-
 .recommendation-card p {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    font-style: italic; /* لجعل نص التوصية مائلاً */
+    Font-size: 15px;
+    Color: #555;
+    Line-height: 1.6;
+    Margin-bottom: 15px;
+    Font-style: italic;
 }
-
 .recommendation-card h4 {
-    color: #007bff;
-    font-size: 18px;
-    margin-top: 0;
-    margin-bottom: 5px;
+    Color: #007bff;
+    Font-size: 18px;
+    Margin-top: 0;
+    Margin-bottom: 5px;
 }
-
 .recommendation-card .recommender-title {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 0;
+    Font-size: 14px;
+    Color: #777;
+    Margin-bottom: 0;
 }
-
-/* تنسيقات نموذج إضافة التوصية (للمهام 7 و 9) */
 .add-recommendation-form-container {
-    background-color: #f8f8f8; /* خلفية أفتح للنموذج */
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 30px;
-    margin-top: 40px; /* مسافة بين التوصيات والنموذج */
-    max-width: 600px; /* عرض النموذج */
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left; /* لجعل محتوى النموذج محاذيًا لليسار */
+    Background-color: #f8f8f8;
+    Border: 1px solid #ddd;
+    Border-radius: 8px;
+    Padding: 30px;
+    Margin-top: 40px;
+    Max-width: 600px;
+    Margin-left: auto;
+    Margin-right: auto;
+    Text-align: left;
 }
-
 .add-recommendation-form-container h3 {
-    font-size: 24px;
-    color: #007bff;
-    margin-bottom: 25px;
-    text-align: center; /* توسيط عنوان النموذج */
+    Font-size: 24px;
+    Color: #007bff;
+    Margin-bottom: 25px;
+    Text-align: center;
 }
-
 .form-group {
-    margin-bottom: 20px;
+    Margin-bottom: 20px;
 }
-
 .form-group label {
-    display: block; /* لجعل العنوان يظهر في سطر خاص به */
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 8px;
+    Display: block;
+    Font-weight: bold;
+    Color: #555;
+    Margin-bottom: 8px;
 }
-
 .form-group input[type="text"],
 .form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box; /* لضمان أن الحشوة لا تزيد من العرض */
+    Width: 100%;
+    Padding: 12px;
+    Border: 1px solid #ccc;
+    Border-radius: 5px;
+    Font-size: 16px;
+    Box-sizing: border-box;
 }
-
 .form-group textarea {
-    resize: vertical; /* للسماح بتغيير حجم مربع النص عمودياً */
+    Resize: vertical;
 }
-
 .submit-button {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: block; /* لجعل الزر يأخذ عرضاً كاملاً إذا أردت */
-    margin: 0 auto; /* توسيط الزر */
+    Background-color: #007bff;
+    Color: white;
+    Padding: 12px 25px;
+    Border: none;
+    Border-radius: 5px;
+    Font-size: 18px;
+    Cursor: pointer;
+    Transition: background-color 0.3s ease;
+    Display: block;
+    Margin: 0 auto;
 }
-
 .submit-button:hover {
-    background-color: #0056b3;
+    Background-color: #0056b3;
 }
-
-/* تنسيقات رسالة التنبيه المخصصة (Custom Alert) */
 .custom-alert {
-    display: none; /* هام جداً: مخفية افتراضياً */
-    position: fixed; /* لتظهر فوق كل المحتوى */
-    z-index: 1001; /* يجب أن تكون أعلى من أي عناصر أخرى (مثل الهيدر) */
+    Display: none;
+    Position: fixed;
+    z-index: 1001;
     left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* تمكين التمرير إذا كان المحتوى كبيراً */
-    background-color: rgba(0,0,0,0.4); /* خلفية معتمة */
-    justify-content: center;
-    align-items: center;
+    Top: 0;
+    Width: 100%;
+    Height: 100%;
+    Overflow: auto;
+    Background-color: rgba(0,0,0,0.4);
+    Justify-content: center;
+    Align-items: center;
 }
-
 .custom-alert-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 30px;
-    border: 1px solid #888;
-    border-radius: 10px;
-    width: 80%; /* عرض المربع */
-    max-width: 400px; /* أقصى عرض */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    text-align: center;
-    position: relative; /* لتحديد موقع زر الإغلاق */
+    Background-color: #fefefe;
+    Margin: auto;
+    Padding: 30px;
+    Border: 1px solid #888;
+    Border-radius: 10px;
+    Width: 80%;
+    Max-width: 400px;
+    Box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    Text-align: center;
+    Position: relative;
 }
-
 .custom-alert-content p {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 20px;
+    Font-size: 18px;
+    Color: #333;
+    Margin-bottom: 20px;
 }
-
 .close-button {
-    color: #aaa;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+    Color: #aaa;
+    Position: absolute;
+    Top: 10px;
+    Right: 20px;
+    Font-size: 28px;
+    Font-weight: bold;
+    Cursor: pointer;
 }
-
 .close-button:hover,
 .close-button:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+    Color: #000;
+    Text-decoration: none;
+    Cursor: pointer;
 }
-
 #alert-ok-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    Background-color: #007bff;
+    Color: white;
+    Padding: 10px 20px;
+    Border: none;
+    Border-radius: 5px;
+    Cursor: pointer;
+    Font-size: 16px;
+    Transition: background-color 0.3s ease;
 }
-
 #alert-ok-button:hover {
-    background-color: #0056b3;
+    Background-color: #0056b3;
 }
-
-
 /* Media Queries للتصميم المتجاوب */
 @media (max-width: 768px) {
-    /* قواعد الهيدر لتكون ثابتة ومتقاربة */
     header {
-        flex-direction: row; /* العناصر جنباً إلى جنب */
-        justify-content: space-between; /* توزيع الاسم والتنقل */
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-        padding: 5px 10px; /* تقليل الحشوة للهيدر نفسه */
-        position: fixed; /* يبقى ثابتاً */
+        padding: 5px 10px;
+        position: fixed;
         width: 100%;
         top: 0;
         left: 0;
         box-sizing: border-box;
         z-index: 1000;
-        min-height: 40px; /* ضمان ارتفاع أدنى للهيدر */
+        min-height: 40px;
     }
-
+    .language-switcher {
+        position: relative;
+        top: auto;
+        right: auto;
+        order: 2;
+        margin-right: 10px;
+    }
     .site-title {
-        flex-basis: auto; /* السماح للمحتوى بتحديد العرض الأساسي */
-        flex-grow: 0; /* لا تسمح للنمو */
-        flex-shrink: 1; /* اسمح بالانكماش إذا لزم الأمر */
-        min-width: 0; /* يسمح للعنصر بأن يصبح أصغر من محتواه */
-        padding-right: 5px; /* مسافة بين الاسم والتنقل */
+        order: 1;
+        flex-basis: auto;
+        flex-grow: 0;
+        flex-shrink: 1;
+        min-width: 0;
+        padding-right: 5px;
     }
-
     .site-title h1 {
-        font-size: 14px; /* تصغير خط الاسم أكثر */
+        font-size: 14px;
         margin: 0;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
     nav {
-        flex-grow: 1; /* السماح لشريط التنقل بشغل المساحة المتبقية */
-        flex-shrink: 1; /* السماح بالانكماش */
-        min-width: 0; /* يسمح للعنصر بأن يصبح أصغر من محتواه */
-        overflow-x: auto; /* إضافة شريط تمرير أفقي للتنقل إذا كانت الكلمات كثيرة */
-        -webkit-overflow-scrolling: touch; /* لتحسين التمرير على iOS */
-        padding-left: 5px; /* حشوة من اليسار للتنقل */
+        order: 3;
+        flex-grow: 1;
+        flex-shrink: 1;
+        min-width: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-left: 5px;
     }
-
     nav ul {
-        flex-direction: row; /* عناصر القائمة جنباً إلى جنب */
-        justify-content: flex-end; /* محاذاة لليمين */
+        flex-direction: row;
+        justify-content: flex-end;
         padding: 0;
         margin: 0;
-        flex-wrap: nowrap; /* منع انقسام العناصر لأسطر جديدة */
+        flex-wrap: nowrap;
         align-items: center;
     }
-
     nav ul li {
-        margin: 0 2px; /* تقليل المسافة بين عناصر القائمة */
-        flex-shrink: 0; /* منع عنصر القائمة من الانكماش */
+        margin: 0 2px;
+        flex-shrink: 0;
     }
-
     nav ul li a {
-        padding: 3px 5px; /* تقليل حشوة الروابط أكثر */
-        font-size: 10px; /* تصغير خط الروابط أكثر */
+        padding: 3px 5px;
+        font-size: 10px;
         white-space: nowrap;
         display: flex;
         align-items: center;
-        gap: 1px; /* تقليل المسافة بين الأيقونة والنص */
+        gap: 1px;
     }
-
-    /* تعديل padding-top للأقسام لتجنب التداخل مع الهيدر الثابت */
     .about-section,
     .skills-section,
     .projects-section,
     .recommendations-section {
-        padding-top: 50px; /* زيادة الحشوة العلوية للسماح بظهور الهيدر الثابت بالكامل */
+        padding-top: 50px;
         margin-top: 0;
     }
-
-    /* ضمان أن بطاقات المشاريع والتوصيات تتكيف بشكل جيد */
     .project-card,
     .recommendation-card {
-        max-width: 95%; /* قد تحتاج إلى ضبط هذا الرقم أكثر في بعض الحالات */
+        max-width: 95%;
         margin: 10px auto;
     }
-
-    /* ضبط أقصى عرض للفقرات في About Me لسهولة القراءة */
     .about-content p {
         max-width: 95%;
     }
+    
+    body.lang-ar .language-switcher {
+        right: auto;
+        left: 10px;
+        flex-direction: row-reverse;
+    }
 }
 
-/* إضافة نقطة توقف إضافية للهواتف الأصغر جداً */
 @media (max-width: 480px) {
     header {
-        padding: 5px; /* حشوة أقل جداً للهيدر */
-        min-height: 35px; /* ارتفاع أقل للهيدر */
+        padding: 5px;
+        min-height: 35px;
     }
-
     .site-title h1 {
-        font-size: 12px; /* تصغير خط الاسم لأقصى حد */
+        font-size: 12px;
     }
-
     nav ul li {
-        margin: 0 1px; /* مسافة أقل جداً بين العناصر */
+        margin: 0 1px;
     }
-
     nav ul li a {
-        padding: 2px 3px; /* حشوة أقل جداً للروابط */
-        font-size: 9px; /* تصغير خط الروابط لأقصى حد */
-        gap: 0px; /* إزالة المسافة بين الأيقونة والنص */
+        padding: 2px 3px;
+        font-size: 9px;
+        gap: 0px;
     }
-
     .about-section,
     .skills-section,
     .projects-section,
     .recommendations-section {
-        padding-top: 45px; /* ضبط الحشوة العلوية بناءً على ارتفاع الهيدر الجديد */
+        padding-top: 45px;
+    }
+}
+
+
+/* هذا هو الكود الجديد الذي يجب إضافته في نهاية ملف style.css */
+/* تنسيق أزرار تبديل اللغة */
+.language-switcher {
+    position: absolute;
+    top: 10px; /* اضبط حسب الحاجة ليتناسب مع شريط التنقل */
+    right: 20px; /* اضبط حسب الحاجة */
+    z-index: 1001; /* للتأكد أنها تظهر فوق العناصر الأخرى، أعلى من الهيدر */
+    display: flex;
+    gap: 5px; /* مسافة بين الزرين */
+}
+
+.language-switcher .lang-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.language-switcher .lang-btn.active {
+    background-color: #007bff; /* لون مميز للزر النشط */
+    color: white;
+    border-color: #007bff;
+}
+
+/* تعديلات الاتجاه العام للجسم */
+/* هذا الجزء سيعمل مع `body.classList.add/remove` في JS */
+body.lang-ar {
+    direction: rtl;
+    text-align: right; /* لتوسيط أو محاذاة كل شيء لليمين افتراضياً */
+}
+
+body.lang-en {
+    direction: ltr;
+    text-align: left; /* لتوسيط أو محاذاة كل شيء لليسار افتراضياً */
+}
+
+/* تعديلات محددة للعناصر التي تحتاج لضبط اتجاهاتها يدويًا */
+
+/* الهيدر وعناصره */
+body.lang-ar header {
+    direction: rtl; /* للتأكد من أن الترتيب داخل الهيدر RTL */
+}
+
+body.lang-en header {
+    direction: ltr;
+}
+
+/* محاذاة النصوص داخل الأقسام */
+body.lang-ar .about-content,
+body.lang-ar .skills-section,
+body.lang-ar .projects-section,
+body.lang-ar .recommendations-section,
+body.lang-ar .recommendations-section .add-recommendation-form-container {
+    text-align: right;
+}
+
+body.lang-en .about-content,
+body.lang-en .skills-section,
+body.lang-en .projects-section,
+body.lang-en .recommendations-section,
+body.lang-en .recommendations-section .add-recommendation-form-container {
+    text-align: left;
+}
+
+/* تعديل الهوامش والحشوة للعناصر المتأثرة بالاتجاه (خاصة القوائم) */
+body.lang-ar nav ul {
+    padding-right: 0;
+    padding-left: 0; /* تأكد من عدم وجود حشوة من اليسار */
+}
+
+body.lang-en nav ul {
+    padding-left: 0;
+    padding-right: 0; /* تأكد من عدم وجود حشوة من اليمين */
+}
+
+/* إذا كان لديك margin-left على li في nav ul li */
+body.lang-ar nav ul li {
+    margin-left: 0;
+    margin-right: 20px; /* عكس المارجن ليتناسب مع RTL */
+}
+
+body.lang-en nav ul li {
+    margin-right: 0;
+    margin-left: 20px; /* إعادة المارجن لـ LTR */
+}
+
+/* أيقونات المهارات في الـ li */
+body.lang-ar .skills-category li {
+    flex-direction: row-reverse; /* لجعل الأيقونة بعد النص في العربية */
+    gap: 8px; /* المسافة بين الأيقونة والنص */
+}
+
+body.lang-en .skills-category li {
+    flex-direction: row; /* لجعل الأيقونة قبل النص في الإنجليزية */
+    gap: 8px;
+}
+
+/* حقول النموذج في قسم التوصيات */
+body.lang-ar .form-group label {
+    text-align: right; /* محاذاة Label لليمين */
+}
+
+body.lang-en .form-group label {
+    text-align: left; /* محاذاة Label لليسار */
+}
+
+/* زر الإرسال في النموذج */
+body.lang-ar .submit-button {
+    margin-left: auto; /* توسيط الزر في RTL */
+    margin-right: auto;
+}
+
+body.lang-en .submit-button {
+    margin-left: auto; /* توسيط الزر في LTR */
+    margin-right: auto;
+}
+
+/* تعديلات الـ Media Queries لضمان عمل تبديل اللغة معها */
+@media (max-width: 768px) {
+    .language-switcher {
+        position: relative; /* تغيير الموضع ليتناسب مع flexbox في الهيدر */
+        top: auto;
+        right: auto;
+        order: 2; /* ترتيب أزرار اللغة داخل الهيدر المرن */
+        margin-right: 10px; /* مسافة بسيطة */
+    }
+    body.lang-ar .language-switcher {
+        right: auto; /* إلغاء الـ right الافتراضي */
+        left: 10px; /* تحويلها لليسار */
+        flex-direction: row-reverse; /* ترتيب الزرين بشكل عكسي (الإنجليزية ثم العربية) */
     }
 }
