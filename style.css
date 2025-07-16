@@ -42,7 +42,6 @@ header {
     gap: 5px;
     flex-shrink: 0; /* Prevents shrinking */
     z-index: 1002;
-    /* Order and margin are controlled by body.lang-ar/en below for desktop */
 }
 
 body.lang-ar .language-switcher {
@@ -330,6 +329,7 @@ body.lang-ar .project-card {
     color: #555;
     line-height: 1.6;
     margin-bottom: 15px;
+    font-style: italic;
 }
 
 .project-icon {
@@ -544,7 +544,7 @@ body.lang-ar .add-recommendation-form-container {
         display: flex; /* <--- غيّر 'none' إلى 'flex' */
         position: absolute; /* <--- أضف هذا السطر */
         top: 10px; /* <--- أضف هذا السطر (يمكنك تعديل القيمة) */
-        right: 10px; /* <--- أضف هذا السطر (يمكنك تعديل القيمة) */
+        /* right: 10px; */ /* **أزل هذا السطر: سيتم تحديده بناءً على اللغة** */
         z-index: 1002; /* <--- أضف هذا السطر للتأكد من ظهوره فوق العناصر الأخرى */
         /* لا حاجة لهذه الخصائص بعد استخدام Position: absolute */
         width: auto; /* بدلاً من width: 100%; */
@@ -556,6 +556,16 @@ body.lang-ar .add-recommendation-form-container {
         margin-bottom: 0; /* بدلاً من 10px */
         order: auto; /* بدلاً من 1 */
     }
+    /* **هنا التعديل الجديد: التحكم بموقع زر اللغة داخل حاويته على الجوال (بناءً على اللغة)** */
+    body.lang-ar .language-switcher {
+        left: 10px; /* زر اللغة لليسار في العربية (زر English) */
+        right: auto; /* مهم لتجاهل أي right سابق */
+    }
+    body.lang-en .language-switcher {
+        right: 10px; /* زر اللغة لليمين في الإنجليزية (زر العربية) */
+        left: auto; /* مهم لتجاهل أي left سابق */
+    }
+
 
     /* Navbar on mobile */
     nav {
@@ -612,19 +622,29 @@ body.lang-ar .add-recommendation-form-container {
     .language-switcher { /* السطر 264 */
         display: flex;
         position: absolute;
-        top: 5px;
-        right: 5px;
+        top: 5px; /* Adjust as needed */
+        /* right: 5px; */ /* **أزل هذا السطر: سيتم تحديده بناءً على اللغة** */
         z-index: 1002;
         /* لا حاجة لهذه الخصائص بعد استخدام Position: absolute */
-        /* width: 100%; */
-        /* padding: 0; */
-        /* box-sizing: content-box; */
-        /* min-height: auto; */
-        /* align-items: flex-start; */
-        /* justify-content: flex-start; */
-        /* margin-bottom: 0; */
-        /* order: auto; */
+        width: auto;
+        padding: 0;
+        box-sizing: content-box;
+        min-height: auto;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-bottom: 0;
+        order: auto;
     }
+    /* **هنا التعديل الجديد: التحكم بموقع زر اللغة على الشاشات الأصغر (بناءً على اللغة)** */
+    body.lang-ar .language-switcher {
+        left: 5px; /* زر اللغة لليسار في العربية (زر English) */
+        right: auto;
+    }
+    body.lang-en .language-switcher {
+        right: 5px; /* زر اللغة لليمين في الإنجليزية (زر العربية) */
+        left: auto;
+    }
+
     .language-switcher .lang-btn {
         padding: 3px 6px;
         font-size: 10px;
