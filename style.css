@@ -155,7 +155,7 @@ nav ul li a i {
     padding: 100px 20px 20px; /* Increased top padding */
     max-width: 800px;
     margin: 20px auto;
-    background-color: #fff;
+    background-color: #f4f4f4; /* تم تغيير الخلفية هنا لتتناسب مع الـ body */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
@@ -559,42 +559,42 @@ body.lang-ar .add-recommendation-form-container {
         width: 100%;
         padding: 0 5px;
         margin-bottom: 15px;
-        /* overflow-x: auto;  تم إزالة التمرير الأفقي حسب طلبك */
-        white-space: normal;
+        overflow-x: hidden; /* **هنا التعديل: إخفاء التمرير الأفقي تماماً (بناءً على طلبك)** */
+        white-space: normal; /* السماح بتوزيع المحتوى (ليس له تأثير كبير مع nowrap على flex item) */
         justify-content: center; /* توسيط الروابط */
         display: flex;
-        flex-wrap: nowrap; /* مهم: منع التفاف الروابط إلى سطر جديد */
-        /* gap: 8px 15px; تم تقليل المسافة بشكل أكبر */
-        gap: 0px 5px; /* مسافة أقل جداً لزيادة فرصة ظهورها في سطر واحد */
+        flex-wrap: nowrap; /* **هنا التعديل: منع التفاف الروابط إلى سطر جديد مهما كان الثمن** */
+        gap: 5px; /* **هنا التعديل: مسافة أولية بين الروابط (لتجربتها)** */
         height: auto;
     }
     nav ul {
         justify-content: center;
         display: flex;
-        /* width: 100%; هنا قد نحتاج لضبط العرض أو السماح بالفيضان */
-        flex-wrap: nowrap; /* مهم: منع التفاف الروابط إلى سطر جديد داخل الـ ul */
+        /* width: 100%; تأكد أن الـ ul يأخذ العرض الكامل - قد يكون من الأفضل عدم تحديد عرض لترك الـ flex items تتمدد/تتقلص */
+        flex-wrap: nowrap; /* **هنا التعديل: منع التفاف الروابط إلى سطر جديد داخل الـ ul** */
         padding: 0;
         margin: 0;
         direction: ltr; /* Force LTR direction on ul for consistent behavior */
     }
     nav ul li {
         margin: 0; /* Remove specific margins, rely on gap */
-        flex-shrink: 0; /* مهم: منع الانكماش */
+        flex-shrink: 0; /* **مهم: منع الانكماش لضمان أخذ الحجم المطلوب وعدم الاختفاء** */
         text-align: center;
     }
     nav ul li a {
-        padding: 4px 8px; /* **تعديل:** حشوة أقل */
-        font-size: 12px; /* **تعديل:** خط أصغر لمحاولة احتواء الكل */
-        gap: 3px; /* مسافة أقل بين الأيقونة والنص */
+        padding: 2px 4px; /* **هنا التعديل: حشوة داخل كل رابط (تحكم في عرض الرابط). قيم أولية صغيرة جداً جداً.** */
+        font-size: 10px; /* **هنا التعديل: حجم الخط العام للروابط الإنجليزية (قيم أولية صغيرة جداً).** */
+        gap: 2px; /* مسافة أقل بين الأيقونة والنص */
         white-space: nowrap; /* مهم: منع التفاف النص داخل الرابط */
         line-height: 1.2;
     }
-    /* **تعديل:** حجم خط للعربية أصغر أيضاً ليناسب الشاشات الضيقة */
+    /* **هنا التعديل: حجم خط الروابط العربية على الجوال (قيم أولية صغيرة جداً).** */
     body.lang-ar nav ul li a {
-        font-size: 13px; /* تكبير الخط للعربية قليلاً عن الإنجليزية، لكن أصغر من السابق */
+        font-size: 11px; /* تكبير الخط للعربية قليلاً عن الإنجليزية */
     }
+    /* **هنا التعديل: حجم خط الروابط الإنجليزية على الجوال (قيم أولية صغيرة جداً).** */
     body.lang-en nav ul li a {
-        font-size: 12px; /* حجم افتراضي أصغر للإنجليزية */
+        font-size: 10px; /* حجم افتراضي للإنجليزية */
     }
 
 
@@ -608,15 +608,19 @@ body.lang-ar .add-recommendation-form-container {
 
 @media (max-width: 480px) {
     .language-switcher .lang-btn {
-        padding: 4px 8px; /* أصغر قليلاً */
-        font-size: 11px; /* أصغر قليلاً */
+        padding: 3px 6px; /* أصغر قليلاً */
+        font-size: 10px; /* أصغر قليلاً */
     }
     nav ul li a {
-        padding: 3px 6px; /* حشوة أقل جداً */
-        font-size: 11px; /* أصغر جداً */
+        padding: 1px 2px; /* حشوة أقل جداً */
+        font-size: 9px; /* أصغر جداً */
+        gap: 1px;
     }
     body.lang-ar nav ul li a {
-        font-size: 12px; /* أصغر جداً للعربية أيضاً */
+        font-size: 10px; /* أصغر جداً للعربية أيضاً */
+    }
+    body.lang-en nav ul li a {
+        font-size: 9px; /* أصغر جداً للإنجليزية */
     }
     .about-section {
         padding-top: 110px;
